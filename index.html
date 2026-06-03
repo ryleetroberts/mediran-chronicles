@@ -46,7 +46,7 @@
 
   body {
     background:var(--bg); color:var(--text);
-    font-family:'Lato',sans-serif; font-size:16px; line-height:1.7;
+    font-family:'Lato',sans-serif; font-size:19px; line-height:1.7;
     min-height:100vh; -webkit-font-smoothing:antialiased;
   }
   body::before {
@@ -56,29 +56,33 @@
       radial-gradient(ellipse 50% 60% at 85% 90%, rgba(20,50,100,.06) 0%, transparent 100%);
   }
 
-  .wrap { position:relative; z-index:1; max-width:960px; margin:0 auto; padding:60px 32px 100px; }
+  .wrap { position:relative; z-index:1; max-width:1060px; margin:0 auto; padding:60px 32px 100px; }
 
   /* ── Header ── */
   .site-header { text-align:center; margin-bottom:56px; }
-  .eyebrow { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.3em; color:var(--text-ghost); text-transform:uppercase; margin-bottom:14px; }
-  .site-title { font-family:'Cinzel',serif; font-weight:400; font-size:30px; letter-spacing:.1em; color:var(--text); margin-bottom:20px; }
+  .eyebrow { font-family:'Cinzel',serif; font-size:12px; font-weight:600; letter-spacing:.3em; color:var(--text-ghost); text-transform:uppercase; margin-bottom:14px; }
+  .site-title { font-family:'Cinzel',serif; font-weight:600; font-size:36px; letter-spacing:.1em; color:var(--text); margin-bottom:20px; }
   .ornament { display:flex; align-items:center; gap:14px; max-width:260px; margin:0 auto 18px; }
   .ornament-line { flex:1; height:1px; background:linear-gradient(to var(--d,right), transparent, var(--border-hi)); }
   .ornament-line:last-child { --d:left; }
   .ornament-diamond { width:5px; height:5px; background:#7a5e22; transform:rotate(45deg); }
-  .site-sub { font-size:12px; color:var(--text-ghost); letter-spacing:.14em; font-style:italic; }
+  .site-sub { font-size:14px; color:var(--text-ghost); letter-spacing:.14em; font-style:italic; }
 
   /* ── Tabs ── */
   .tabs-nav { display:flex; border-bottom:1px solid var(--border); margin-bottom:48px; overflow-x:auto; scrollbar-width:none; }
   .tabs-nav::-webkit-scrollbar { display:none; }
   .tab-btn {
     background:none; border:none; border-bottom:2px solid transparent; margin-bottom:-1px;
-    padding:15px 22px; cursor:pointer; font-family:'Cinzel',serif; font-size:12px;
+    padding:15px 22px; cursor:pointer; font-family:'Cinzel',serif; font-size:14px; font-weight:600;
     letter-spacing:.18em; text-transform:uppercase; color:var(--text-ghost); white-space:nowrap;
     transition:color .18s, border-color .18s;
   }
   .tab-btn:hover { color:var(--text-dim); }
   .tab-btn.active { color:var(--char-color,#c49a3c); border-bottom-color:var(--char-color,#c49a3c); }
+
+  /* ── Boon reference tab — visually distinct ── */
+  .tab-sep { width:1px; background:var(--border-hi); margin:10px 8px; flex-shrink:0; }
+  .tab-btn.boon-tab { font-style:italic; letter-spacing:.12em; font-weight:500; }
 
   /* ── Panels ── */
   .tab-panel { display:none; }
@@ -87,21 +91,21 @@
 
   /* ── Character header ── */
   .char-header { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:36px; flex-wrap:wrap; }
-  .char-name { font-family:'Cinzel',serif; font-size:24px; font-weight:600; letter-spacing:.06em; color:var(--char-color,var(--text)); line-height:1.2; margin-bottom:6px; }
-  .char-class { font-size:12px; color:var(--text-ghost); letter-spacing:.14em; text-transform:uppercase; }
+  .char-name { font-family:'Cinzel',serif; font-size:28px; font-weight:600; letter-spacing:.06em; color:var(--char-color,var(--text)); line-height:1.2; margin-bottom:6px; }
+  .char-class { font-size:14px; font-weight:600; color:var(--text-ghost); letter-spacing:.14em; text-transform:uppercase; }
 
   /* ── Attunement tracker ── */
   .attune-tracker { display:flex; flex-direction:column; align-items:flex-end; gap:8px; flex-shrink:0; }
-  .attune-label { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--text-ghost); }
+  .attune-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--text-ghost); }
   .attune-gems { display:flex; gap:10px; }
-  .attune-gem { width:14px; height:14px; transform:rotate(45deg); border-radius:2px; }
+  .attune-gem { width:16px; height:16px; transform:rotate(45deg); border-radius:2px; }
   .attune-gem.on  { background:var(--at-bg); border:1px solid var(--at-bd); box-shadow:0 0 8px rgba(56,217,217,.3); }
   .attune-gem.off { background:transparent; border:1px solid var(--border-hi); }
-  .attune-count { font-size:11px; color:var(--at); letter-spacing:.08em; font-family:'Cinzel',serif; }
+  .attune-count { font-size:13px; color:var(--at); letter-spacing:.08em; font-family:'Cinzel',serif; }
 
   /* ── Section labels ── */
   .section-label { display:flex; align-items:center; gap:14px; margin:36px 0 16px; }
-  .section-label span { font-family:'Cinzel',serif; font-size:9px; letter-spacing:.32em; text-transform:uppercase; color:var(--text-ghost); flex-shrink:0; }
+  .section-label span { font-family:'Cinzel',serif; font-size:11px; letter-spacing:.32em; text-transform:uppercase; color:var(--text-ghost); flex-shrink:0; }
   .section-label::after { content:''; flex:1; height:1px; background:var(--border); }
 
   /* ── Item cards ── */
@@ -130,22 +134,22 @@
 
   /* ── Card internals ── */
   .card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin-bottom:4px; flex-wrap:wrap; }
-  .card-name { font-family:'Cinzel',serif; font-size:17px; font-weight:600; letter-spacing:.04em; line-height:1.3; color:var(--text); }
+  .card-name { font-family:'Cinzel',serif; font-size:20px; font-weight:600; letter-spacing:.04em; line-height:1.3; color:var(--text); }
   .card-badges { display:flex; align-items:center; gap:7px; flex-shrink:0; flex-wrap:wrap; padding-top:2px; }
-  .card-type { font-size:12.5px; color:var(--text-dim); font-style:italic; margin-bottom:14px; letter-spacing:.04em; }
-  .flavor { font-size:13.5px; color:var(--text-dim); font-style:italic; line-height:1.75; padding-bottom:16px; margin-bottom:16px; border-bottom:1px solid var(--border); }
+  .card-type { font-size:15px; color:var(--text-dim); font-style:italic; margin-bottom:14px; letter-spacing:.04em; }
+  .flavor { font-size:16px; color:var(--text-dim); font-style:italic; line-height:1.75; padding-bottom:16px; margin-bottom:16px; border-bottom:1px solid var(--border); }
   .props { display:flex; flex-direction:column; gap:11px; }
-  .prop { font-size:14.5px; line-height:1.7; color:var(--text); }
-  .prop-name { font-family:'Cinzel',serif; font-size:13px; font-weight:700; letter-spacing:.04em; color:var(--char-color,#c49a3c); }
-  .boon-desc { font-size:13px; color:var(--text-dim); font-style:italic; margin:10px 0 14px; line-height:1.65; }
+  .prop { font-size:17px; line-height:1.7; color:var(--text); }
+  .prop-name { font-family:'Cinzel',serif; font-size:16.5px; font-weight:700; letter-spacing:.04em; color:var(--char-color,#c49a3c); }
+  .boon-desc { font-size:15px; color:var(--text-dim); font-style:italic; margin:10px 0 14px; line-height:1.65; }
   .sub-list { list-style:none; margin:10px 0 2px; border-left:2px solid var(--border-hi); padding-left:16px; display:flex; flex-direction:column; gap:9px; }
-  .sub-list li { font-size:14px; line-height:1.68; color:var(--text); }
-  .sub-name { font-family:'Cinzel',serif; font-size:11.5px; font-weight:700; letter-spacing:.05em; color:var(--text-dim); }
+  .sub-list li { font-size:16.5px; line-height:1.68; color:var(--text); }
+  .sub-name { font-family:'Cinzel',serif; font-size:13.5px; font-weight:700; letter-spacing:.05em; color:var(--text-dim); }
 
   /* ── Badges — all glow ── */
   .badge {
-    font-family:'Cinzel',serif; font-size:8.5px; letter-spacing:.18em; text-transform:uppercase;
-    padding:3px 8px; border-radius:2px; border:1px solid; white-space:nowrap;
+    font-family:'Cinzel',serif; font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    padding:3px 9px; border-radius:2px; border:1px solid; white-space:nowrap;
   }
   .badge.uc  { color:var(--uc); border-color:var(--uc-bd); background:var(--uc-bg); box-shadow:0 0 7px rgba(61,186,110,.28); }
   .badge.ra  { color:var(--ra); border-color:var(--ra-bd); background:var(--ra-bg); box-shadow:0 0 7px rgba(64,144,212,.28); }
@@ -158,12 +162,12 @@
 
   @media (max-width:600px) {
     .wrap { padding:36px 18px 80px; }
-    .site-title { font-size:24px; }
-    .tab-btn { padding:14px 14px; font-size:11px; }
-    .char-name { font-size:20px; }
+    .site-title { font-size:28px; }
+    .tab-btn { padding:14px 14px; font-size:12px; }
+    .char-name { font-size:22px; }
     .card, .boon-card { padding:20px 20px; }
-    .card-name { font-size:15px; }
-    .prop { font-size:14px; }
+    .card-name { font-size:17px; }
+    .prop { font-size:16px; }
   }
 </style>
 </head>
@@ -184,6 +188,8 @@
     <button class="tab-btn"        data-tab="jet"     style="--char-color:var(--c-jet)"    >Jet</button>
     <button class="tab-btn"        data-tab="otho"    style="--char-color:var(--c-otho)"   >Otho</button>
     <button class="tab-btn"        data-tab="raiten"  style="--char-color:var(--c-raiten)" >Raiten</button>
+    <div class="tab-sep"></div>
+    <button class="tab-btn boon-tab" data-tab="boons" style="--char-color:var(--br)">Boons of the Nine</button>
   </nav>
 
   <!-- ═══════════════════════════════════
@@ -214,6 +220,18 @@
       </div>
     </div>
 
+    <!-- Marvels Ring of Spell Storing — Rare, Attuned -->
+    <div class="card rare">
+      <div class="card-top"><div class="card-name">Marvels Ring of Spell Storing</div><div class="card-badges"><span class="badge ra">Rare</span><span class="badge at">Attuned</span></div></div>
+      <div class="card-type">Ring</div>
+      <div class="flavor">A band of House Marvels' obsidian-steel, impossibly intricate and delicate. A single ruby sits in a gold bezel, cut in the exclusive Marvels Crown pattern. The flame in the ruby dims as spells are drawn from it and brightens as they are stored.</div>
+      <div class="props">
+        <div class="prop">This ring stores spells cast into it, holding them until the attuned wearer uses them. The ring can store up to 5 levels worth of spells at a time.</div>
+        <div class="prop">Any creature can cast a spell of level 1 through 5 into the ring by touching the ring as the spell is cast. The spell has no effect other than to be stored in the ring. If the ring can't hold the spell, the spell is expended without effect. The level of the slot used to cast the spell determines how much space it uses.</div>
+        <div class="prop">While wearing this ring, you can cast any spell stored in it. The spell uses the slot level, spell save DC, spell attack bonus, and spellcasting ability of the original caster but is otherwise treated as if you cast the spell. The spell cast from the ring is no longer stored in it, freeing up space.</div>
+      </div>
+    </div>
+
     <!-- Ring of Protection — Rare, Attuned -->
     <div class="card rare">
       <div class="card-top"><div class="card-name">Ring of Protection</div><div class="card-badges"><span class="badge ra">Rare</span><span class="badge at">Attuned</span></div></div>
@@ -221,21 +239,15 @@
       <div class="props" style="margin-top:0"><div class="prop">While wearing this ring, you gain a +1 bonus to AC and saving throws.</div></div>
     </div>
 
-    <!-- Ring of Warmth — Uncommon, Attuned -->
+    <!-- Flame-Crowned Herald's Medallion — Uncommon, Unattuned -->
     <div class="card uncommon">
-      <div class="card-top"><div class="card-name">Ring of Warmth</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Ring</div>
-      <div class="props" style="margin-top:0"><div class="prop">While wearing this ring, you have resistance to cold damage. In addition, you and everything you wear and carry are unharmed by temperatures as low as −50 degrees Fahrenheit.</div></div>
-    </div>
-
-    <!-- Marvels Doublet of Protection — Uncommon, Unattuned -->
-    <div class="card uncommon">
-      <div class="card-top"><div class="card-name">Marvels Doublet of Protection</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge unat">Unattuned</span></div></div>
-      <div class="card-type">Armor — Studded Leather</div>
-      <div class="flavor">Rich black leather bears the unmistakable mark of House Marvels craftsmanship. What appear to be decorative studs reveal themselves as polished rubies set in obsidian-steel bezels, their dark grey surfaces catching light to reveal hints of deep purple. Hidden beneath the supple leather lies a mesh of gleaming steel, while gold trim traces clean geometric lines along each piece.</div>
+      <div class="card-top"><div class="card-name">Flame-Crowned Herald's Medallion</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge unat">Unattuned</span></div></div>
+      <div class="card-type">Wondrous Item</div>
+      <div class="flavor">A bronze medallion the size of a silver piece. The face bears the iris-and-flames insignia of the Flame-Crowned Herald, pressed deep enough to read by touch in the dark.</div>
       <div class="props">
-        <div class="prop">While wearing this armor, you gain a +1 bonus to AC.</div>
-        <div class="prop"><span class="prop-name">Defensive Focus.</span> When you take damage from an attack, you can use your reaction to gain resistance to one of the damage types from that attack. Once this property is used, it can't be used again until you finish a short rest.</div>
+        <div class="prop"><span class="prop-name">Marked.</span> While you carry this medallion, anyone else carrying the Flame-Crowned Herald's insignia perceives a faint glow around you, visible up to 600 feet&mdash;even when the medallion is hidden beneath cloth or armor. This effect functions whether or not you have attuned to the medallion.</div>
+        <div class="prop"><span class="prop-name">Seen.</span> While attuned, you perceive a faint glow around others who bear the Flame-Crowned Herald's insignia, visible up to 600 feet&mdash;even when the medallion is hidden beneath cloth or armor.</div>
+        <div class="prop"><span class="prop-name">Spared by Flame.</span> While attuned, you have resistance to fire damage.</div>
       </div>
     </div>
 
@@ -250,23 +262,33 @@
       </div>
     </div>
 
-    <!-- Marvels Ring of Spell Storing — Rare, Attuned -->
-    <div class="card rare">
-      <div class="card-top"><div class="card-name">Marvels Ring of Spell Storing</div><div class="card-badges"><span class="badge ra">Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Ring</div>
-      <div class="flavor">A band of House Marvels' obsidian-steel, impossibly intricate and delicate. A single ruby sits in a gold bezel, cut in the exclusive Marvels Crown pattern. The flame in the ruby dims as spells are drawn from it and brightens as they are stored.</div>
+    <!-- Marvels Doublet of Protection — Uncommon, Unattuned -->
+    <div class="card uncommon">
+      <div class="card-top"><div class="card-name">Marvels Doublet of Protection</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge unat">Unattuned</span></div></div>
+      <div class="card-type">Armor — Studded Leather</div>
+      <div class="flavor">Rich black leather bears the unmistakable mark of House Marvels craftsmanship. What appear to be decorative studs reveal themselves as polished rubies set in obsidian-steel bezels, their dark grey surfaces catching light to reveal hints of deep purple. Hidden beneath the supple leather lies a mesh of gleaming steel, while gold trim traces clean geometric lines along each piece.</div>
       <div class="props">
-        <div class="prop">This ring stores spells cast into it, holding them until the attuned wearer uses them. The ring can store up to 5 levels worth of spells at a time.</div>
-        <div class="prop">Any creature can cast a spell of level 1 through 5 into the ring by touching the ring as the spell is cast. The spell has no effect other than to be stored in the ring. If the ring can't hold the spell, the spell is expended without effect. The level of the slot used to cast the spell determines how much space it uses.</div>
-        <div class="prop">While wearing this ring, you can cast any spell stored in it. The spell uses the slot level, spell save DC, spell attack bonus, and spellcasting ability of the original caster but is otherwise treated as if you cast the spell. The spell cast from the ring is no longer stored in it, freeing up space.</div>
+        <div class="prop">While wearing this armor, you gain a +1 bonus to AC.</div>
+        <div class="prop"><span class="prop-name">Defensive Focus.</span> When you take damage from an attack, you can use your reaction to gain resistance to one of the damage types from that attack. Once this property is used, it can't be used again until you finish a short rest.</div>
       </div>
     </div>
 
+    <!-- Ring of Warmth — Uncommon, Unattuned -->
+    <div class="card uncommon">
+      <div class="card-top"><div class="card-name">Ring of Warmth</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge unat">Unattuned</span></div></div>
+      <div class="card-type">Ring</div>
+      <div class="props" style="margin-top:0"><div class="prop">While wearing this ring, you have resistance to cold damage. In addition, you and everything you wear and carry are unharmed by temperatures as low as −50 degrees Fahrenheit.</div></div>
+    </div>
+
     <div class="section-label"><span>Boons</span></div>
-    <!-- [Forgotten Nine Boon] — t3 (Red) -->
+    <!-- Boon of the Untamed Feral Flame — t3 (Red) -->
     <div class="boon-card t3">
-      <div class="card-top"><div class="card-name">[Forgotten Nine Boon]</div><div class="card-badges"><span class="badge bt">Forgotten Nine</span></div></div>
-      <div class="props" style="margin-top:12px"><div class="prop" style="color:var(--text-dim);font-style:italic">Placeholder</div></div>
+      <div class="card-top"><div class="card-name">Boon of the Untamed Feral Flame</div><div class="card-badges"><span class="badge bt">Forgotten Nine</span></div></div>
+      <div class="props" style="margin-top:12px">
+        <div class="prop"><span class="prop-name">Ability Score Increase.</span> Increase your Strength, Dexterity, or Wisdom score by 1, to a maximum of 20.</div>
+        <div class="prop"><span class="prop-name">Bloodlust.</span> When you reduce a creature to 0 Hit Points, you can make one attack with a weapon or cast a cantrip that requires an attack roll against a target within range. Doing so requires no action. You can use this benefit a number of times equal to the modifier of the ability increased by this feat (minimum of once), and you regain all expended uses when you finish a Long Rest.</div>
+        <div class="prop"><span class="prop-name">Crucible's Fury.</span> As a Bonus Action, you can enter a state of desperate ferocity that lasts for 1 minute or until you have the Incapacitated condition. When you use this Bonus Action, if your current Hit Points are higher than half your Hit Point maximum, your current Hit Points decrease to half your Hit Point maximum. For the duration, you can't regain Hit Points above half your Hit Point maximum, you gain a bonus to attack rolls equal to the modifier of the ability increased by this feat, and whenever you deal damage, you deal an extra 1d6 Fire damage. Once you use this benefit, you can't do so again until 1d6 + 1 days have passed.</div>
+      </div>
     </div>
     <!-- Blessing of Vision — t1 (Yellow) -->
     <div class="boon-card">
@@ -276,7 +298,7 @@
   </div></div><!-- /atticus -->
 
   <!-- ═══════════════════════════════════
-       EVESSA  2 / 3
+       EVESSA  3 / 3
   ═══════════════════════════════════ -->
   <div class="tab-panel" id="tab-evessa">
   <div style="--char-color:var(--c-evessa)">
@@ -284,8 +306,8 @@
       <div><div class="char-name">Evessa Vale</div><div class="char-class">Aasimar &middot; Divination Wizard</div></div>
       <div class="attune-tracker">
         <div class="attune-label">Attunement</div>
-        <div class="attune-gems"><div class="attune-gem on"></div><div class="attune-gem on"></div><div class="attune-gem off"></div></div>
-        <div class="attune-count">2 / 3</div>
+        <div class="attune-gems"><div class="attune-gem on"></div><div class="attune-gem on"></div><div class="attune-gem on"></div></div>
+        <div class="attune-count">3 / 3</div>
       </div>
     </div>
     <div class="section-label"><span>Items</span></div>
@@ -302,6 +324,19 @@
       </div>
     </div>
 
+    <!-- Astral Calamus — Uncommon, Attuned -->
+    <div class="card uncommon">
+      <div class="card-top"><div class="card-name">Astral Calamus</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge at">Attuned</span></div></div>
+      <div class="card-type">Weapon — Simple, Thrown (60/120), 1d6 Piercing</div>
+      <div class="flavor">A quill, or what looks like one&mdash;the shape and proportions of a large barn owl flight feather, pale golden-buff with fine dark speckling. But the shaft is Ironholt Sky-Iron, faintly luminous steel smelted from meteorite ore, and the barbs are metal filaments so precisely worked they flex like real plumage. The tip comes to a lethal point. It writes beautifully.</div>
+      <div class="props">
+        <div class="prop">This weapon deals 1d6 piercing damage and has the Thrown (60/120) property. It can also function as a writing quill.</div>
+        <div class="prop"><span class="prop-name">Spellwright's Edge.</span> This weapon uses your spellcasting ability modifier for attack and damage rolls. When you hit with an attack using this weapon, you can deal Radiant damage instead of the weapon's normal damage type.</div>
+        <div class="prop"><span class="prop-name">Astral Radiance.</span> Whether you deal Radiant damage or the weapon's normal damage type, attacks with this weapon deal extra Radiant damage when you reach certain levels: 1d6 at 5th level, 2d6 at 11th level, and 3d6 at 17th level.</div>
+        <div class="prop"><span class="prop-name">Returning.</span> Immediately after you make a ranged attack with this weapon, it returns to your hand.</div>
+      </div>
+    </div>
+
     <!-- Marvels Diadem of Precision — Uncommon, Attuned -->
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Marvels Diadem of Precision</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge at">Attuned</span></div></div>
@@ -313,38 +348,29 @@
       </div>
     </div>
 
-    <!-- Astral Calamus — Uncommon, no attunement -->
-    <div class="card uncommon">
-      <div class="card-top"><div class="card-name">Astral Calamus</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
-      <div class="card-type">Weapon — Simple, Thrown (60/120), 1d6 Piercing</div>
-      <div class="flavor">A quill, or what looks like one&mdash;the shape and proportions of a large barn owl flight feather, pale golden-buff with fine dark speckling. But the shaft is Ironholt Sky-Iron, faintly luminous steel smelted from meteorite ore, and the barbs are metal filaments so precisely worked they flex like real plumage. The tip comes to a lethal point. It writes beautifully.</div>
-      <div class="props">
-        <div class="prop">This weapon deals 1d6 piercing damage and has the Thrown (60/120) property. It can also function as a writing quill.</div>
-        <div class="prop"><span class="prop-name">Spellwright's Edge.</span> This weapon uses your spellcasting ability modifier for attack and damage rolls. When you hit with an attack using this weapon, you can deal Radiant damage instead of the weapon's normal damage type.</div>
-        <div class="prop"><span class="prop-name">Astral Radiance.</span> Whether you deal Radiant damage or the weapon's normal damage type, attacks with this weapon deal extra Radiant damage when you reach certain levels: 1d6 at 5th level, 2d6 at 11th level, and 3d6 at 17th level.</div>
-        <div class="prop"><span class="prop-name">Returning.</span> Immediately after you make a ranged attack with this weapon, it returns to your hand.</div>
-      </div>
-    </div>
-
     <div class="section-label"><span>Boons</span></div>
-    <!-- [Forgotten Nine Boon] — t3 (Red) -->
+    <!-- Boon of the Infinitely Boundless Pair — t3 (Red) -->
     <div class="boon-card t3">
-      <div class="card-top"><div class="card-name">[Forgotten Nine Boon]</div><div class="card-badges"><span class="badge bt">Forgotten Nine</span></div></div>
-      <div class="props" style="margin-top:12px"><div class="prop" style="color:var(--text-dim);font-style:italic">Placeholder</div></div>
+      <div class="card-top"><div class="card-name">Boon of the Infinitely Boundless Pair</div><div class="card-badges"><span class="badge bt">Forgotten Nine</span></div></div>
+      <div class="props" style="margin-top:12px">
+        <div class="prop"><span class="prop-name">Ability Score Increase.</span> Increase your Strength, Dexterity, or Wisdom score by 1, to a maximum of 20.</div>
+        <div class="prop"><span class="prop-name">Relentless Pursuit.</span> You embody the momentum of the eternal hunt, where neither the driven predator nor the resilient prey ever truly falters. When you miss with an attack roll, you can use your Reaction to reroll and use the higher result. You can use this feature a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.</div>
+        <div class="prop"><span class="prop-name">Equilibrium's Edge.</span> You invite the vulnerability of the prey to fuel the strike of the predator. As a Bonus Action, you can enter a state of extreme focus that lasts for 1 minute or until you have the Incapacitated condition. For the duration, you have a &minus;2 penalty to your Armor Class, but you gain a +2 bonus to attack rolls and damage rolls. Once you use this feature, you can't use it again for 1d6 + 1 days.</div>
+      </div>
     </div>
     <!-- Boon of The Oracle — t2 (Orange) -->
     <div class="boon-card t2">
-      <div class="card-top"><div class="card-name">Boon of The Oracle</div><div class="card-badges"><span class="badge bt">Ascendant</span></div></div>
+      <div class="card-top"><div class="card-name">Boon of The Oracle</div><div class="card-badges"><span class="badge bt">Ascendant's Chosen</span></div></div>
       <div class="boon-desc">The Oracle has acknowledged you as her instrument, granting you enhanced clarity in your prophetic gifts.</div>
       <div class="props">
         <div class="prop"><span class="prop-name">Clarified Vision.</span> When you finish a Long Rest and roll your Portent dice, you can reroll one of those dice and use either result.</div>
         <div class="prop"><span class="prop-name">Oracle's Insight.</span> Whenever you cast Augury, in addition to the omen word (weal, woe, weal and woe, or nothing), you experience a brief sensory impression—a scent, sound, taste, texture, or feeling—that provides context about the nature, timing, or source of the outcome. These impressions may be literal, symbolic, or prophetic.</div>
       </div>
     </div>
-    <!-- Blessing of Vision — t1 (Yellow) -->
+    <!-- Blessing of Valor — t1 (Yellow) -->
     <div class="boon-card">
-      <div class="card-top"><div class="card-name">Blessing of Vision</div><div class="card-badges"><span class="badge bt">Fifteen Trials</span></div></div>
-      <div class="props" style="margin-top:12px"><div class="prop">You gain proficiency in one of the following skills: Religion, History, Insight, Investigation, or Survival.</div></div>
+      <div class="card-top"><div class="card-name">Blessing of Valor</div><div class="card-badges"><span class="badge bt">Fifteen Trials</span></div></div>
+      <div class="props" style="margin-top:12px"><div class="prop">Your Hit Point Maximum increases by 5.</div></div>
     </div>
   </div></div><!-- /evessa -->
 
@@ -354,7 +380,7 @@
   <div class="tab-panel" id="tab-fizz">
   <div style="--char-color:var(--c-fizz)">
     <div class="char-header">
-      <div><div class="char-name">Fizz Thistlewood</div><div class="char-class">Gnome &middot; Wild Magic Sorcerer</div></div>
+      <div><div class="char-name">Fizzwick Thistlewood</div><div class="char-class">Gnome &middot; Wild Magic Sorcerer</div></div>
       <div class="attune-tracker">
         <div class="attune-label">Attunement</div>
         <div class="attune-gems"><div class="attune-gem on"></div><div class="attune-gem on"></div><div class="attune-gem on"></div></div>
@@ -386,6 +412,16 @@
       </div>
     </div>
 
+    <!-- Foxhollow Leaf Charm — Uncommon, Attuned -->
+    <div class="card uncommon">
+      <div class="card-top"><div class="card-name">Foxhollow Leaf Charm</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge at">Attuned</span></div></div>
+      <div class="card-type">Wondrous Item</div>
+      <div class="flavor">Carved from enchanted cherrywood in the shape of a single cherry leaf, so finely crafted it appears translucent with visible veining, yet nearly indestructible. Its color shifts with the turning of the year&mdash;pale pink in spring, deep green in summer, warm gold in autumn, near-white in winter. Can be attached to any spellcasting focus.</div>
+      <div class="props">
+        <div class="prop"><span class="prop-name">Quadraplicity.</span> When you cast Mirror Image, the spell creates four duplicates instead of three.</div>
+      </div>
+    </div>
+
     <!-- Marvels Bracer of Warding — Uncommon, Attuned -->
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Marvels Bracer of Warding</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge at">Attuned</span></div></div>
@@ -397,21 +433,15 @@
       </div>
     </div>
 
-    <!-- Foxhollow Leaf Charm — Uncommon, Attuned -->
-    <div class="card uncommon">
-      <div class="card-top"><div class="card-name">Foxhollow Leaf Charm</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
-      <div class="flavor">Carved from enchanted cherrywood in the shape of a single cherry leaf, so finely crafted it appears translucent with visible veining, yet nearly indestructible. Its color shifts with the turning of the year&mdash;pale pink in spring, deep green in summer, warm gold in autumn, near-white in winter. Can be attached to any spellcasting focus.</div>
-      <div class="props">
-        <div class="prop"><span class="prop-name">Quadraplicity.</span> When you cast Mirror Image, the spell creates four duplicates instead of three.</div>
-      </div>
-    </div>
-
     <div class="section-label"><span>Boons</span></div>
-    <!-- [Forgotten Nine Boon] — t3 (Red) -->
+    <!-- Boon of the Untamed Feral Flame — t3 (Red) -->
     <div class="boon-card t3">
-      <div class="card-top"><div class="card-name">[Forgotten Nine Boon]</div><div class="card-badges"><span class="badge bt">Forgotten Nine</span></div></div>
-      <div class="props" style="margin-top:12px"><div class="prop" style="color:var(--text-dim);font-style:italic">Placeholder</div></div>
+      <div class="card-top"><div class="card-name">Boon of the Untamed Feral Flame</div><div class="card-badges"><span class="badge bt">Forgotten Nine</span></div></div>
+      <div class="props" style="margin-top:12px">
+        <div class="prop"><span class="prop-name">Ability Score Increase.</span> Increase your Strength, Dexterity, or Wisdom score by 1, to a maximum of 20.</div>
+        <div class="prop"><span class="prop-name">Bloodlust.</span> When you reduce a creature to 0 Hit Points, you can make one attack with a weapon or cast a cantrip that requires an attack roll against a target within range. Doing so requires no action. You can use this benefit a number of times equal to the modifier of the ability increased by this feat (minimum of once), and you regain all expended uses when you finish a Long Rest.</div>
+        <div class="prop"><span class="prop-name">Crucible's Fury.</span> As a Bonus Action, you can enter a state of desperate ferocity that lasts for 1 minute or until you have the Incapacitated condition. When you use this Bonus Action, if your current Hit Points are higher than half your Hit Point maximum, your current Hit Points decrease to half your Hit Point maximum. For the duration, you can't regain Hit Points above half your Hit Point maximum, you gain a bonus to attack rolls equal to the modifier of the ability increased by this feat, and whenever you deal damage, you deal an extra 1d6 Fire damage. Once you use this benefit, you can't do so again until 1d6 + 1 days have passed.</div>
+      </div>
     </div>
     <!-- Blessing of Virtue — t1 (Yellow) -->
     <div class="boon-card">
@@ -435,6 +465,19 @@
     </div>
     <div class="section-label"><span>Items</span></div>
 
+    <!-- Marvels Heirloom: Dawnstrike — Very Rare, Attuned -->
+    <div class="card very-rare">
+      <div class="card-top"><div class="card-name">Marvels Heirloom: Dawnstrike</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
+      <div class="card-type">Weapon — Longsword</div>
+      <div class="flavor">This breathtaking longsword represents the pinnacle of House Marvels artistry. The obsidian-steel blade reveals rippling patterns that dance like captured lightning, its dark grey surface shifting to show deep purple undertones as light plays across it. Gold inlay highlights these patterns with inner warmth, while the crossguard's graceful curves frame the blade perfectly. The pommel's crowning ruby blazes with deep fire, cut in the exclusive Marvels pattern that fragments light into dancing sparks and licking tongues of flame.</div>
+      <div class="props">
+        <div class="prop">You gain a +1 bonus to attack and damage rolls made with this magic weapon.</div>
+        <div class="prop"><span class="prop-name">Dawnstrike.</span> When you hit with an attack using this weapon, you can cause brilliant light and flame to erupt along the blade. The target takes an additional 1d8 fire or radiant damage (your choice). Once this property is used, it can't be used again until you finish a short or long rest.</div>
+        <div class="prop"><span class="prop-name">Heritage Flame.</span> When you cast a spell or use a class feature that deals radiant damage, you can choose to have it deal fire damage instead. You can use this property a number of times equal to your Charisma modifier (minimum of once), and you regain all expended uses when you finish a long rest.</div>
+        <div class="prop"><span class="prop-name">Forge-Rite Strike.</span> Once per turn, when you hit a creature with a melee weapon attack, you can expend a spell slot to deal Divine Smite damage. This does not require your Bonus Action.</div>
+      </div>
+    </div>
+
     <!-- Sovereign's Aegis — Very Rare, Attuned -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Sovereign's Aegis</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
@@ -453,28 +496,6 @@
       </div>
     </div>
 
-    <!-- Marvels Heirloom: Dawnstrike — Rare, Attuned -->
-    <div class="card rare">
-      <div class="card-top"><div class="card-name">Marvels Heirloom: Dawnstrike</div><div class="card-badges"><span class="badge ra">Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Weapon — Longsword</div>
-      <div class="flavor">This breathtaking longsword represents the pinnacle of House Marvels artistry. The obsidian-steel blade reveals rippling patterns that dance like captured lightning, its dark grey surface shifting to show deep purple undertones as light plays across it. Gold inlay highlights these patterns with inner warmth, while the crossguard's graceful curves frame the blade perfectly. The pommel's crowning ruby blazes with deep fire, cut in the exclusive Marvels pattern that fragments light into dancing sparks and licking tongues of flame.</div>
-      <div class="props">
-        <div class="prop">You gain a +1 bonus to attack and damage rolls made with this magic weapon.</div>
-        <div class="prop"><span class="prop-name">Dawnstrike.</span> When you hit with an attack using this weapon, you can cause brilliant light and flame to erupt along the blade. The target takes an additional 1d8 fire or radiant damage (your choice). Once this property is used, it can't be used again until you finish a short or long rest.</div>
-        <div class="prop"><span class="prop-name">Heritage Flame.</span> When you cast a spell or use a class feature that deals radiant damage, you can choose to have it deal fire damage instead. You can use this property a number of times equal to your Charisma modifier (minimum of once), and you regain all expended uses when you finish a long rest.</div>
-        <div class="prop"><span class="prop-name">Forge-Rite Strike.</span> Once per turn, when you hit a creature with a melee weapon attack, you can expend a spell slot to deal Divine Smite damage. This does not require your Bonus Action.</div>
-      </div>
-    </div>
-
-    <!-- Candle of the Guiding Light — Uncommon, no attunement -->
-    <div class="card uncommon">
-      <div class="card-top"><div class="card-name">Candle of the Guiding Light</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge unat">3 Charges</span></div></div>
-      <div class="card-type">Wondrous Item</div>
-      <div class="props" style="margin-top:0">
-        <div class="prop">As an action, you can light the candle and speak aloud a specific destination that you're familiar with. The flame leans gently in the direction of the most direct safe path to that location, provided the destination lies within 100 miles. The candle burns for 1 hour, during which time the flame continues to indicate direction. If the destination is unreachable or doesn't exist, the flame burns straight and still. Once lit, the candle can't be extinguished by nonmagical wind or water. After the candle has been used three times, it becomes a nonmagical candle.</div>
-      </div>
-    </div>
-
     <!-- Marvels Greaves of Alacrity — Rare, Attuned -->
     <div class="card rare">
       <div class="card-top"><div class="card-name">Marvels Greaves of Alacrity</div><div class="card-badges"><span class="badge ra">Rare</span><span class="badge at">Attuned</span></div></div>
@@ -488,6 +509,22 @@
           </ul>
         </div>
       </div>
+    </div>
+
+    <!-- Candle of the Guiding Light — Uncommon, no attunement -->
+    <div class="card uncommon">
+      <div class="card-top"><div class="card-name">Candle of the Guiding Light</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge unat">3 Charges</span></div></div>
+      <div class="card-type">Wondrous Item</div>
+      <div class="props" style="margin-top:0">
+        <div class="prop">As an action, you can light the candle and speak aloud a specific destination that you're familiar with. The flame leans gently in the direction of the most direct safe path to that location, provided the destination lies within 100 miles. The candle burns for 1 hour, during which time the flame continues to indicate direction. If the destination is unreachable or doesn't exist, the flame burns straight and still. Once lit, the candle can't be extinguished by nonmagical wind or water. After the candle has been used three times, it becomes a nonmagical candle.</div>
+      </div>
+    </div>
+
+    <!-- Ring of Water Walking — Uncommon, no attunement -->
+    <div class="card uncommon">
+      <div class="card-top"><div class="card-name">Ring of Water Walking</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
+      <div class="card-type">Ring</div>
+      <div class="props" style="margin-top:0"><div class="prop">While wearing this ring, you can cast <em>Water Walk</em> from it, targeting only yourself.</div></div>
     </div>
 
     <!-- Wind-Silk of the Unaikei — Uncommon, no attunement -->
@@ -532,6 +569,16 @@
     </div>
     <div class="section-label"><span>Items</span></div>
 
+    <!-- Arrows of Vel'asha'rin — Very Rare, no attunement -->
+    <div class="card very-rare">
+      <div class="card-top"><div class="card-name">Arrows of Vel'asha'rin</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge unat">9 / 10 Arrows</span></div></div>
+      <div class="card-type">Weapon — Ammunition (Arrow)</div>
+      <div class="flavor">These arrows are crafted from hand-smoothed cypress wood. Their fletching is of golden feathers that emit a faint, steady glow, and the arrowheads are carved from antler bone that sparkles as though it contains starlight itself.</div>
+      <div class="props">
+        <div class="prop"><span class="prop-name">Purge the Profane.</span> When you hit an Aberration or a Monstrosity with one of these arrows, the target must make a Constitution saving throw. The DC is equal to 8 + your Proficiency Bonus + your Dexterity modifier + your Wisdom modifier. On a failed save, the target takes an extra 10d10 Radiant damage. On a successful save, the target takes half as much extra damage. Once an arrow hits a target, the arrow is destroyed.</div>
+      </div>
+    </div>
+
     <!-- Covenant Hunter's Bow — Very Rare, Attuned -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Covenant Hunter's Bow and Quiver</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
@@ -563,31 +610,6 @@
       </div>
     </div>
 
-    <!-- Arrows of Vel'asha'rin — Very Rare, no attunement -->
-    <div class="card very-rare">
-      <div class="card-top"><div class="card-name">Arrows of Vel'asha'rin</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge unat">9 / 10 Arrows</span></div></div>
-      <div class="card-type">Weapon — Ammunition (Arrow)</div>
-      <div class="flavor">These arrows are crafted from hand-smoothed cypress wood. Their fletching is of golden feathers that emit a faint, steady glow, and the arrowheads are carved from antler bone that sparkles as though it contains starlight itself.</div>
-      <div class="props">
-        <div class="prop"><span class="prop-name">Purge the Profane.</span> When you hit an Aberration or a Monstrosity with one of these arrows, the target must make a Constitution saving throw. The DC is equal to 8 + your Proficiency Bonus + your Dexterity modifier + your Wisdom modifier. On a failed save, the target takes an extra 10d10 Radiant damage. On a successful save, the target takes half as much extra damage. Once an arrow hits a target, the arrow is destroyed.</div>
-      </div>
-    </div>
-
-    <!-- Boots of Elvenkind — Uncommon, no attunement -->
-    <div class="card uncommon">
-      <div class="card-top"><div class="card-name">Boots of Elvenkind</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
-      <div class="card-type">Wondrous Item — Boots</div>
-      <div class="props" style="margin-top:0"><div class="prop">While you wear these boots, your steps make no sound, regardless of the surface you are moving across. You also have advantage on Dexterity (Stealth) checks that involve moving quietly.</div></div>
-    </div>
-
-    <!-- Dreadfen Wyrm Ouroboros Charm — Uncommon, no attunement -->
-    <div class="card uncommon">
-      <div class="card-top"><div class="card-name">Dreadfen Wyrm Ouroboros Charm</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
-      <div class="card-type">Wondrous Item</div>
-      <div class="flavor">Carved from the vertebra of a Dreadfen Wyrm into an ouroboros&mdash;the serpent consuming its own tail, death feeding life, the cycle unbroken.</div>
-      <div class="props"><div class="prop">While wearing this necklace, once per long rest when you reduce a creature to 0 hit points with a weapon attack, you may speak a prayer of respect over its body as part of the same action. If you do, you gain advantage on your next attack roll before the end of your next turn, as the spirit of the hunt guides your strike.</div></div>
-    </div>
-
     <!-- Aurora Talisman — Rare, Attuned -->
     <div class="card rare">
       <div class="card-top"><div class="card-name">Aurora Talisman</div><div class="card-badges"><span class="badge ra">Rare</span><span class="badge at">Attuned</span></div></div>
@@ -609,6 +631,21 @@
         <div class="prop"><span class="prop-name">Desert's Kiss.</span> When you hit a creature with this weapon, the attack deals an additional 1d6 fire damage.</div>
         <div class="prop"><span class="prop-name">Desert's Bite.</span> Once per turn, when you hit a creature with this weapon, you can unleash a crescent of slashing force from the swing. The target takes additional damage, depending on your distance from the target: 3d6 if within 5 feet, 2d6 if within 10 feet, or 1d6 if within 20 feet. You can choose between slashing or fire damage.</div>
       </div>
+    </div>
+
+    <!-- Boots of Elvenkind — Uncommon, no attunement -->
+    <div class="card uncommon">
+      <div class="card-top"><div class="card-name">Boots of Elvenkind</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
+      <div class="card-type">Wondrous Item — Boots</div>
+      <div class="props" style="margin-top:0"><div class="prop">While you wear these boots, your steps make no sound, regardless of the surface you are moving across. You also have advantage on Dexterity (Stealth) checks that involve moving quietly.</div></div>
+    </div>
+
+    <!-- Dreadfen Wyrm Ouroboros Charm — Uncommon, no attunement -->
+    <div class="card uncommon">
+      <div class="card-top"><div class="card-name">Dreadfen Wyrm Ouroboros Charm</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
+      <div class="card-type">Wondrous Item</div>
+      <div class="flavor">Carved from the vertebra of a Dreadfen Wyrm into an ouroboros&mdash;the serpent consuming its own tail, death feeding life, the cycle unbroken.</div>
+      <div class="props"><div class="prop">While wearing this necklace, once per long rest when you reduce a creature to 0 hit points with a weapon attack, you may speak a prayer of respect over its body as part of the same action. If you do, you gain advantage on your next attack roll before the end of your next turn, as the spirit of the hunt guides your strike.</div></div>
     </div>
 
     <div class="section-label"><span>Boons</span></div>
@@ -657,6 +694,17 @@
     </div>
     <div class="section-label"><span>Items</span></div>
 
+    <!-- Marvels Bracers of Verve — Very Rare, Attuned -->
+    <div class="card very-rare">
+      <div class="card-top"><div class="card-name">Marvels Bracers of Verve</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
+      <div class="card-type">Wondrous Item</div>
+      <div class="flavor">Obsidian-steel bracers in House Marvels' signature dark grey, their surfaces revealing deep purple undertones in shifting light. Gold tracery traces dynamic arcs and vectors along each plate&mdash;not the static protective circles of the original design, but kinetic pathways that pulse faintly on impact. The rubies have been repositioned from wrist-top to wrist-underside, aligned with the tendons of a closed fist.</div>
+      <div class="props">
+        <div class="prop">While wearing these bracers and not wearing armor or using a shield, you gain a +1 bonus to AC.</div>
+        <div class="prop"><span class="prop-name">Tempered Precision.</span> While wearing these bracers, you gain a +1 bonus to attack rolls and damage rolls you make with unarmed strikes and monk weapons, and to the saving throw DCs of your monk features.</div>
+      </div>
+    </div>
+
     <!-- Storm-Touched Wraps — Very Rare, Attuned -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Storm-Touched Wraps</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
@@ -683,17 +731,6 @@
       <div class="props" style="margin-top:0"><div class="prop">While wearing this cloak, you gain a +1 bonus to AC and saving throws.</div></div>
     </div>
 
-    <!-- Marvels Bracers of Verve — Very Rare, Attuned -->
-    <div class="card very-rare">
-      <div class="card-top"><div class="card-name">Marvels Bracers of Verve</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
-      <div class="flavor">Obsidian-steel bracers in House Marvels' signature dark grey, their surfaces revealing deep purple undertones in shifting light. Gold tracery traces dynamic arcs and vectors along each plate&mdash;not the static protective circles of the original design, but kinetic pathways that pulse faintly on impact. The rubies have been repositioned from wrist-top to wrist-underside, aligned with the tendons of a closed fist.</div>
-      <div class="props">
-        <div class="prop">While wearing these bracers and not wearing armor or using a shield, you gain a +1 bonus to AC.</div>
-        <div class="prop"><span class="prop-name">Tempered Precision.</span> While wearing these bracers, you gain a +1 bonus to attack rolls and damage rolls you make with unarmed strikes and monk weapons, and to the saving throw DCs of your monk features.</div>
-      </div>
-    </div>
-
     <!-- Tea Set of the Tiger Clan — Uncommon, no attunement -->
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Tea Set of the Tiger Clan</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
@@ -703,10 +740,14 @@
     </div>
 
     <div class="section-label"><span>Boons</span></div>
-    <!-- [Forgotten Nine Boon] — t3 (Red) -->
+    <!-- Boon of the Untamed Feral Flame — t3 (Red) -->
     <div class="boon-card t3">
-      <div class="card-top"><div class="card-name">[Forgotten Nine Boon]</div><div class="card-badges"><span class="badge bt">Forgotten Nine</span></div></div>
-      <div class="props" style="margin-top:12px"><div class="prop" style="color:var(--text-dim);font-style:italic">Placeholder</div></div>
+      <div class="card-top"><div class="card-name">Boon of the Untamed Feral Flame</div><div class="card-badges"><span class="badge bt">Forgotten Nine</span></div></div>
+      <div class="props" style="margin-top:12px">
+        <div class="prop"><span class="prop-name">Ability Score Increase.</span> Increase your Strength, Dexterity, or Wisdom score by 1, to a maximum of 20.</div>
+        <div class="prop"><span class="prop-name">Bloodlust.</span> When you reduce a creature to 0 Hit Points, you can make one attack with a weapon or cast a cantrip that requires an attack roll against a target within range. Doing so requires no action. You can use this benefit a number of times equal to the modifier of the ability increased by this feat (minimum of once), and you regain all expended uses when you finish a Long Rest.</div>
+        <div class="prop"><span class="prop-name">Crucible's Fury.</span> As a Bonus Action, you can enter a state of desperate ferocity that lasts for 1 minute or until you have the Incapacitated condition. When you use this Bonus Action, if your current Hit Points are higher than half your Hit Point maximum, your current Hit Points decrease to half your Hit Point maximum. For the duration, you can't regain Hit Points above half your Hit Point maximum, you gain a bonus to attack rolls equal to the modifier of the ability increased by this feat, and whenever you deal damage, you deal an extra 1d6 Fire damage. Once you use this benefit, you can't do so again until 1d6 + 1 days have passed.</div>
+      </div>
     </div>
     <!-- Blessing of Valor — t1 (Yellow) -->
     <div class="boon-card">
@@ -714,6 +755,38 @@
       <div class="props" style="margin-top:12px"><div class="prop">Your Hit Point Maximum increases by 5.</div></div>
     </div>
   </div></div><!-- /raiten -->
+
+  <!-- ═══════════════════════════════════
+       FORGOTTEN NINE BOONS — Reference
+  ═══════════════════════════════════ -->
+  <div class="tab-panel" id="tab-boons">
+  <div style="--char-color:var(--br)">
+    <div style="margin-bottom:36px">
+      <div class="char-name" style="color:var(--br)">Forgotten Nine Boons</div>
+      <div class="char-class">Boon Reference &middot; Swappable Once Per Week</div>
+    </div>
+
+    <!-- Boon of the Infinitely Boundless Pair -->
+    <div class="boon-card t3">
+      <div class="card-top"><div class="card-name">Boon of the Infinitely Boundless Pair</div></div>
+      <div class="props" style="margin-top:12px">
+        <div class="prop"><span class="prop-name">Ability Score Increase.</span> Increase your Strength, Dexterity, or Wisdom score by 1, to a maximum of 20.</div>
+        <div class="prop"><span class="prop-name">Relentless Pursuit.</span> You embody the momentum of the eternal hunt, where neither the driven predator nor the resilient prey ever truly falters. When you miss with an attack roll, you can use your Reaction to reroll and use the higher result. You can use this feature a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.</div>
+        <div class="prop"><span class="prop-name">Equilibrium's Edge.</span> You invite the vulnerability of the prey to fuel the strike of the predator. As a Bonus Action, you can enter a state of extreme focus that lasts for 1 minute or until you have the Incapacitated condition. For the duration, you have a &minus;2 penalty to your Armor Class, but you gain a +2 bonus to attack rolls and damage rolls. Once you use this feature, you can't use it again for 1d6 + 1 days.</div>
+      </div>
+    </div>
+
+    <!-- Boon of the Untamed Feral Flame -->
+    <div class="boon-card t3">
+      <div class="card-top"><div class="card-name">Boon of the Untamed Feral Flame</div></div>
+      <div class="props" style="margin-top:12px">
+        <div class="prop"><span class="prop-name">Ability Score Increase.</span> Increase your Strength, Dexterity, or Wisdom score by 1, to a maximum of 20.</div>
+        <div class="prop"><span class="prop-name">Bloodlust.</span> When you reduce a creature to 0 Hit Points, you can make one attack with a weapon or cast a cantrip that requires an attack roll against a target within range. Doing so requires no action. You can use this benefit a number of times equal to the modifier of the ability increased by this feat (minimum of once), and you regain all expended uses when you finish a Long Rest.</div>
+        <div class="prop"><span class="prop-name">Crucible's Fury.</span> As a Bonus Action, you can enter a state of desperate ferocity that lasts for 1 minute or until you have the Incapacitated condition. When you use this Bonus Action, if your current Hit Points are higher than half your Hit Point maximum, your current Hit Points decrease to half your Hit Point maximum. For the duration, you can't regain Hit Points above half your Hit Point maximum, you gain a bonus to attack rolls equal to the modifier of the ability increased by this feat, and whenever you deal damage, you deal an extra 1d6 Fire damage. Once you use this benefit, you can't do so again until 1d6 + 1 days have passed.</div>
+      </div>
+    </div>
+
+  </div></div><!-- /boons -->
 
 </div>
 <script>
