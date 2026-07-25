@@ -21,7 +21,7 @@
     --uc:    #3dba6e; --uc-bg: rgba(61,186,110,.09);   --uc-bd: rgba(61,186,110,.32);
     --ra:    #4090d4; --ra-bg: rgba(64,144,212,.09);   --ra-bd: rgba(64,144,212,.32);
     --vr:    #8060d0; --vr-bg: rgba(128,96,208,.09);   --vr-bd: rgba(128,96,208,.32);
-    --lg:    #b840b8; --lg-bg: rgba(184,64,184,.09);   --lg-bd: rgba(184,64,184,.32); /* future */
+    --lg:    #b840b8; --lg-bg: rgba(184,64,184,.09);   --lg-bd: rgba(184,64,184,.32);
     /* white/legendary: #d8d4f8 — reserved */
 
     /* ── Attunement (cyan) ── */
@@ -118,7 +118,7 @@
   .card.very-rare { --card-accent:var(--vr); }
   .card.rare      { --card-accent:var(--ra); }
   .card.uncommon  { --card-accent:var(--uc); }
-  .card.legendary { --card-accent:var(--lg); } /* future */
+  .card.legendary { --card-accent:var(--lg); }
 
   /* ── Boon cards: 3 tiers ── */
   /* t1 = yellow (default), t2 = orange, t3 = red */
@@ -145,6 +145,21 @@
   .sub-list { list-style:none; margin:10px 0 2px; border-left:2px solid var(--border-hi); padding-left:16px; display:flex; flex-direction:column; gap:9px; }
   .sub-list li { font-size:16.5px; line-height:1.68; color:var(--text); }
   .sub-name { font-family:'Cinzel',serif; font-size:13.5px; font-weight:700; letter-spacing:.05em; color:var(--text-dim); }
+
+  .card-sub { font-family:'Lato',sans-serif; font-size:13.5px; font-style:italic; letter-spacing:.09em; color:var(--text-ghost); margin-top:4px; }
+  .card-sub .kanji { font-style:normal; color:var(--text-ghost); }
+
+  /* ── Kanji — falls back off Cinzel to a mincho face ── */
+  .kanji { font-family:'Noto Serif JP','Hiragino Mincho ProN','Yu Mincho','MS Mincho',serif; font-weight:400; color:var(--text-dim); }
+
+  /* ── Lore block ── */
+  .lore {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:2px 4px 4px 2px; border-left:3px solid var(--lg);
+    padding:24px 30px; margin-bottom:10px;
+  }
+  .lore p { font-size:16.5px; line-height:1.8; color:var(--text-dim); margin-bottom:15px; }
+  .lore p:last-child { margin-bottom:0; }
 
   /* ── Badges — all glow ── */
   .badge {
@@ -207,16 +222,34 @@
     </div>
     <div class="section-label"><span>Items</span></div>
 
+    <!-- The Face of Dawn (Akegao) — Legendary -->
+<div class="card legendary">
+      <div class="card-top">
+        <div>
+          <div class="card-name">The Face of Dawn</div>
+          <div class="card-sub">Akegao &middot; <span class="kanji">明け顔</span></div>
+        </div>
+        <div class="card-badges"><span class="badge lg">Legendary</span></div>
+      </div>
+      <div class="card-type">Wondrous Item &mdash; Mirror</div>
+      <div class="flavor">A round mirror of ancient bronze, its back chased in gold with intricate folded wings that meet at the grip. The polished side holds no tarnish and gives a truer reflection than even glass&mdash;true enough to entice a goddess out of the earth.</div>
+      <div class="props">
+        <div class="prop"><span class="prop-name">Gift of Radiance.</span> While the mirror is on your person, you have a +1 bonus to your spell attack rolls and spell save DC.</div>
+        <div class="prop"><span class="prop-name">Borrowed Visage.</span> While you can see your reflection in the mirror, you can cast <em>Disguise Self</em> from it, requiring no spell slot or components.</div>
+        <div class="prop"><span class="prop-name">Come and See.</span> As a Magic action, you turn the polished face outward. Each creature of your choice in a 30-foot Cone originating from you that can see the mirror makes a Charisma saving throw against your spell save DC. On a failed save, a creature has the Charmed condition for 1 minute. While Charmed this way, a creature's Speed is halved, and it must use its movement on each of its turns to move toward you by the most direct route available. At the end of each of its turns, the creature repeats the save, ending the condition on itself on a success. The condition also ends on a creature if it takes any damage. This property can't be used again until you finish a Long Rest.</div>
+      </div>
+    </div>
+
     <!-- Consilium Memoriae — Very Rare, Attuned -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Consilium Memoriae</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Crystal</div>
       <div class="flavor">A multifaceted crystal cylinder containing swirling wisps of golden memory-smoke that shift like trapped thoughts. Its surface is perfectly clear yet seems to hold infinite depth, and flashes of scenes occasionally play out within—courtrooms, deliberations, moments of profound decision. The crystal can be affixed to any item to serve as a spellcasting focus, glowing brighter when channeling magic.</div>
       <div class="props">
-        <div class="prop"><span class="prop-name">Magic Focus.</span> This crystal can be attached to any item you carry, allowing that item to serve as your spellcasting focus. While using this crystal as your focus, you gain a +1 bonus to spell attack rolls and to your spell save DC.</div>
-        <div class="prop"><span class="prop-name">Healing Authority.</span> When you cast a spell that causes a creature to regain hit points, choose one creature affected by the spell. That creature regains additional hit points equal to your Charisma modifier (minimum of 1).</div>
-        <div class="prop"><span class="prop-name">Inspiring Recovery.</span> When you give a creature a Bardic Inspiration die, that creature regains hit points equal to your Charisma modifier (minimum of 1).</div>
-        <div class="prop"><span class="prop-name">Damning Indictment.</span> Your Vicious Mockery deals one additional die of damage. Additionally, when a creature fails its saving throw against your Vicious Mockery, you can expend one use of your Bardic Inspiration to extend the disadvantage until the beginning of the creature's next turn, rather than applying only to its next attack roll.</div>
+        <div class="prop">This crystal can be attached to any item you carry, allowing that item to serve as your spellcasting focus. While using this crystal as your focus, you have a +1 bonus to spell attack rolls and to your spell save DC.</div>
+        <div class="prop"><span class="prop-name">Healing Authority.</span> When you cast a spell that causes a creature to regain Hit Points, choose one creature affected by the spell. That creature regains additional hit points equal to your Charisma modifier (minimum of 1).</div>
+        <div class="prop"><span class="prop-name">Inspiring Recovery.</span> When you give a creature a Bardic Inspiration die, that creature regains Hit Points equal to your Charisma modifier (minimum of 1).</div>
+        <div class="prop"><span class="prop-name">Damning Indictment.</span> Your Vicious Mockery deals one additional die of damage. Additionally, when a creature fails its saving throw against your Vicious Mockery, you can expend one use of your Bardic Inspiration to extend the Disadvantage until the beginning of the creature's next turn, rather than applying only to its next attack roll.</div>
       </div>
     </div>
 
@@ -236,13 +269,13 @@
     <div class="card rare">
       <div class="card-top"><div class="card-name">Ring of Protection</div><div class="card-badges"><span class="badge ra">Rare</span><span class="badge at">Attuned</span></div></div>
       <div class="card-type">Ring</div>
-      <div class="props" style="margin-top:0"><div class="prop">While wearing this ring, you gain a +1 bonus to AC and saving throws.</div></div>
+      <div class="props" style="margin-top:0"><div class="prop">While wearing this ring, you have a +1 bonus to AC and saving throws.</div></div>
     </div>
 
     <!-- Flame-Crowned Herald's Medallion — Uncommon, Unattuned -->
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Flame-Crowned Herald's Medallion</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge unat">Unattuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Medallion</div>
       <div class="flavor">A bronze medallion the size of a silver piece. The face bears the iris-and-flames insignia of the Flame-Crowned Herald, pressed deep enough to read by touch in the dark.</div>
       <div class="props">
         <div class="prop"><span class="prop-name">Marked.</span> While you carry this medallion, anyone else carrying the Flame-Crowned Herald's insignia perceives a faint glow around you, visible up to 600 feet&mdash;even when the medallion is hidden beneath cloth or armor. This effect functions whether or not you have attuned to the medallion.</div>
@@ -254,11 +287,11 @@
     <!-- Goldfinch's Rebuttal — Uncommon, no attunement -->
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Goldfinch's Rebuttal</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
-      <div class="card-type">Shield — Buckler</div>
+      <div class="card-type">Armor &mdash; Buckler</div>
       <div class="flavor">A small round buckler of hammered bronze with platinum filigree, its face embossed with the crest of House Goldfinch. Around the rim, three phrases are engraved in the Old Arborwynian (Elvish), of Mediran legal tradition: <em>Vael'ira solanthi</em> — Mercy, not weakness; <em>Caer'ira anduris</em> — Retribution, not wrath; <em>Aethos dorn vaelas</em> — Wisdom wields both.</div>
       <div class="props">
-        <div class="prop">While wielding this shield, you gain a +1 bonus to AC.</div>
-        <div class="prop"><span class="prop-name">Parry.</span> When another creature hits you with a melee attack, you can use your reaction to add your Dexterity modifier to your AC for that attack, potentially causing it to miss.</div>
+        <div class="prop">While wielding this shield, you have a +1 bonus to AC.</div>
+        <div class="prop"><span class="prop-name">Parry.</span> When another creature hits you with a melee attack, you can take a Reaction to add your Dexterity modifier to your AC for that attack, potentially causing it to miss.</div>
       </div>
     </div>
 
@@ -268,8 +301,8 @@
       <div class="card-type">Armor — Studded Leather</div>
       <div class="flavor">Rich black leather bears the unmistakable mark of House Marvels craftsmanship. What appear to be decorative studs reveal themselves as polished rubies set in obsidian-steel bezels, their dark grey surfaces catching light to reveal hints of deep purple. Hidden beneath the supple leather lies a mesh of gleaming steel, while gold trim traces clean geometric lines along each piece.</div>
       <div class="props">
-        <div class="prop">While wearing this armor, you gain a +1 bonus to AC.</div>
-        <div class="prop"><span class="prop-name">Defensive Focus.</span> When you take damage from an attack, you can use your reaction to gain resistance to one of the damage types from that attack. Once this property is used, it can't be used again until you finish a Short Rest.</div>
+        <div class="prop">While wearing this armor, you have a +1 bonus to AC.</div>
+        <div class="prop"><span class="prop-name">Defensive Focus.</span> When you take damage from an attack, you can take a Reaction to gain resistance to one of the damage types from that attack. Once this property is used, it can't be used again until you finish a Short Rest.</div>
       </div>
     </div>
 
@@ -302,7 +335,7 @@
       <div class="props" style="margin-top:0">
         <div class="prop"><span class="prop-name">Additional Language.</span> You can speak, read, and write one additional language of your choice.</div>
         <div class="prop"><span class="prop-name">Skill Proficiency.</span> You have proficiency in your choice of one of the following skills: History, Intimidation, or Persuasion.</div>
-        <div class="prop"><span class="prop-name">Political Fortitude.</span> You have advantage on saving throws against being charmed by humanoids.</div>
+        <div class="prop"><span class="prop-name">Political Fortitude.</span> You have Advantage on saving throws against being charmed by humanoids.</div>
       </div>
     </div>
   </div></div><!-- /atticus -->
@@ -322,15 +355,34 @@
     </div>
     <div class="section-label"><span>Items</span></div>
 
+    <!-- Garland of the Heavens (Seishin-no-Yōraku) — Legendary -->
+<div class="card legendary">
+      <div class="card-top">
+        <div>
+          <div class="card-name">Garland of the Heavens</div>
+          <div class="card-sub">Seishin-no-Yōraku &middot; <span class="kanji">星辰の瓔珞</span></div>
+        </div>
+        <div class="card-badges"><span class="badge lg">Legendary</span></div>
+      </div>
+      <div class="card-type">Wondrous Item &mdash; Necklace</div>
+      <div class="flavor">A cord of curved jewels cut from black stone in the old Kurōyokei manner, each bead flecked with white gems that hold a faint light, as if plucked from the night sky itself. In the dark of the world's long night, it hung beside the mirror, and dazzled She-Who-Illuminates into emerging.</div>
+      <div class="props">
+        <div class="prop"><span class="prop-name">Gift of Brilliance.</span> While you wear the strand, you have a +1 bonus to your spell save DC.</div>
+        <div class="prop"><span class="prop-name">Kurōyokei Discretion.</span> While you wear the strand, magic can't read your thoughts or determine whether you are telling the truth, and such magic gives no sign that it has failed; a creature using it perceives you as affected. The creature can read only the thoughts you choose to present, and anything you say registers as the truth unless you decide otherwise.</div>
+        <div class="prop"><span class="prop-name">Owl's Discernment.</span> While you wear the strand, you have Advantage on Wisdom (Insight) checks.</div>
+        <div class="prop"><span class="prop-name">Whispers of the Godai.</span> As a Magic action, you close a hand around the strand and reach across the Veil of Whispers to one of the five essences of the Godai&mdash;Chi, Sui, Ka, Fu, or Ku. The essence perceives the world through its own domains and answers accordingly. You can ask it up to five questions, and it answers each with a single word, such as &ldquo;yes,&rdquo; &ldquo;no,&rdquo; &ldquo;maybe,&rdquo; &ldquo;never,&rdquo; &ldquo;irrelevant,&rdquo; or &ldquo;unclear.&rdquo; If a one-word answer would be misleading, the DM can give a short phrase instead. This property can't be used again until the next dawn.</div>
+      </div>
+    </div>
+
     <!-- Oracle's Mantle — Very Rare, Attuned -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Oracle's Mantle</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Cloak</div>
+      <div class="card-type">Wondrous Item &mdash; Cloak</div>
       <div class="flavor">Woven from captured starlight and crystallized possibility, this cloak shifts between midnight blue and silver like a clear night sky. Constellations drift across its surface, forming and dissolving in patterns that seem to foretell coming events. The hood is lined with soft white fur like cloud-stuff, and the clasp is a silver brooch shaped like an eye that seems to blink when not looking directly at it. When the wind catches it, the mantle moves with an otherworldly grace, as though it exists slightly outside of normal time.</div>
       <div class="props">
-        <div class="prop"><span class="prop-name">Divinance.</span> While wearing this cloak, you gain a +1 bonus to spell attack rolls and to your spell save DC.</div>
-        <div class="prop"><span class="prop-name">Forebrace.</span> Attack rolls against you have disadvantage. If you fail a saving throw against a spell or magical effect, this property ceases to function until the end of your next turn.</div>
-        <div class="prop"><span class="prop-name">Presentiment.</span> While wearing this cloak, when a creature you can see within 60 feet of you takes damage from an attack, you can use your reaction to reduce the damage by an amount equal to your Proficiency Bonus + your Intelligence Modifier (minimum reduction of 1). You can use this property a number of times equal to the number of Portent dice you gain at the start of each day, and you regain all expended uses when you finish a Long Rest.</div>
+        <div class="prop"><span class="prop-name">Divinance.</span> While wearing this cloak, you have a +1 bonus to spell attack rolls and to your spell save DC.</div>
+        <div class="prop"><span class="prop-name">Forebrace.</span> Attack rolls against you have Disadvantage. If you fail a saving throw against a spell or magical effect, this property ceases to function until the end of your next turn.</div>
+        <div class="prop"><span class="prop-name">Presentiment.</span> While wearing this cloak, when a creature you can see within 60 feet of you takes damage from an attack, you can take a Reaction to reduce the damage by an amount equal to your Proficiency Bonus + your Intelligence Modifier (minimum reduction of 1). You can use this property a number of times equal to the number of Portent dice you gain at the start of each day, and you regain all expended uses when you finish a Long Rest.</div>
       </div>
     </div>
 
@@ -350,10 +402,10 @@
     <!-- Marvels Diadem of Precision — Uncommon, Attuned -->
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Marvels Diadem of Precision</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Diadem</div>
       <div class="flavor">This elegant circlet is forged from House Marvels' signature obsidian-steel, its dark grey surface seeming to flow like liquid metal around the wearer's brow. A lustrous pearl sits centered in a polished steel setting, flanked by smaller rubies that catch the light at the temples. The obsidian-steel band reveals subtle purple undertones that shift and shimmer in changing light, creating an almost ethereal quality. Despite its delicate appearance, the diadem feels substantial and perfectly balanced.</div>
       <div class="props">
-        <div class="prop">While wearing this diadem, you gain a +1 bonus to spell attack rolls.</div>
+        <div class="prop">While wearing this diadem, you have a +1 bonus to spell attack rolls.</div>
         <div class="prop"><span class="prop-name">Guided Strike.</span> When you make a spell attack roll, you can reroll the d20 and use the higher result. Once this property is used, it can't be used again until you finish a Short or Long Rest.</div>
       </div>
     </div>
@@ -409,15 +461,34 @@
     </div>
     <div class="section-label"><span>Items</span></div>
 
+    <!-- The Heavensong Bells (Tenkyō-no-Suzu) — Legendary -->
+<div class="card legendary">
+      <div class="card-top">
+        <div>
+          <div class="card-name">The Heavensong Bells</div>
+          <div class="card-sub">Tenkyō-no-Suzu &middot; <span class="kanji">天響の鈴</span></div>
+        </div>
+        <div class="card-badges"><span class="badge lg">Legendary</span></div>
+      </div>
+      <div class="card-type">Wondrous Item &mdash; Bracelet</div>
+      <div class="flavor">Two bells of bright bronze on a bracelet of the same metal, voiced by the best Unaikei instrument-makers had to offer. Each gives a single clean note, and the two notes agree; they rang before the sealed cave, causing the whole host of heaven to cry out in wonder.</div>
+      <div class="props">
+        <div class="prop"><span class="prop-name">Unaikei Tuning.</span> While you wear the bracelet, you have a +1 bonus to your spell attack rolls and spell save DC.</div>
+        <div class="prop"><span class="prop-name">Wrist and Heel.</span> While you wear the bracelet, you have Advantage on Charisma (Performance) checks.</div>
+        <div class="prop"><span class="prop-name">Steady Cadence.</span> The bells mark an unerring rhythm, causing you and your allies in a 15-foot Emanation originating from you to have Advantage on Constitution saving throws made to maintain Concentration.</div>
+        <div class="prop"><span class="prop-name">Peal of Wonder.</span> As a Bonus Action, you ring the bells. Each creature of your choice that can hear them in a 30-foot Emanation originating from you (including you) gains Heroic Inspiration. A creature that already has Heroic Inspiration or otherwise can't gain it gains 15 Temporary Hit Points. This property can't be used again until you finish a Long Rest.</div>
+      </div>
+    </div>
+
     <!-- Eldera's Scepter — Very Rare, Attuned -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Eldera's Scepter</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
       <div class="card-type">Wand</div>
       <div class="flavor">A scepter of polished hazelwood wound with fine copper wire in intricate patterns resembling musical staves, though the 'notes' are actually tiny copper hummingbirds frozen mid-flight. The grip is worn smooth by generations of use, and where fingers would naturally rest, the wood has taken on an almost pearl-like iridescence. The scepter tapers gracefully to a point and seems to hum faintly with melodies that leave your ear just as they enter.</div>
       <div class="props">
-        <div class="prop"><span class="prop-name">Magic Focus.</span> You can use this scepter as a spellcasting focus. You gain a +1 bonus to spell attack rolls and spell save DCs while wielding this scepter.</div>
+        <div class="prop">You can use this scepter as a spellcasting focus. You have a +1 bonus to spell attack rolls and spell save DCs while wielding this scepter.</div>
         <div class="prop"><span class="prop-name">Charm Thread.</span> You can attach any number of magical charms to the wand. One attached charm that requires attunement can be attuned to you as part of the scepter's attunement, rather than requiring a separate attunement slot. You can change which attached charm is attuned during a Long Rest.</div>
-        <div class="prop"><span class="prop-name">Chaotic Resonance.</span> When you hit a creature with a cantrip that requires a spell attack roll while holding this scepter, you gain temporary hit points equal to 1d8. If you roll an 8, you can roll another d8 and add it to the temporary hit points gained. The maximum number of additional d8s you can add in this way equals half your spellcasting modifier rounded down (minimum of 1).</div>
+        <div class="prop"><span class="prop-name">Chaotic Resonance.</span> When you hit a creature with a cantrip that requires a spell attack roll while holding this scepter, you gain Temporary Hit Points equal to 1d8. If you roll an 8, you can roll another d8 and add it to the Temporary Hit Points gained. The maximum number of additional d8s you can add in this way equals half your spellcasting modifier rounded down (minimum of 1).</div>
         <div class="prop"><span class="prop-name">Sympathetic Resonance.</span> When you cast a spell that targets only one creature and deals damage, you can spend a number of Sorcery Points equal to half the spell slot's level (rounded up, minimum 1) to cause the spell's energy to resonate outward. One additional creature of your choice within 30 feet of the primary target takes Force damage equal to half the damage dealt to the primary target. The secondary target is not affected by any conditions or non-damaging effects of the spell. This feature is considered Metamagic.</div>
       </div>
     </div>
@@ -425,7 +496,7 @@
     <!-- Ashgrove Petal Charm — Rare, Attuned -->
     <div class="card rare">
       <div class="card-top"><div class="card-name">Ashgrove Petal Charm</div><div class="card-badges"><span class="badge ra">Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Charm</div>
       <div class="flavor">Carved from enchanted ashwood in the shape of a single rose petal, so finely crafted it appears translucent like an actual petal yet nearly indestructible. Can be attached to any spellcasting focus.</div>
       <div class="props">
         <div class="prop"><span class="prop-name">Evocation Bloom.</span> Once per Long Rest when you cast an Evocation spell of level 1 or higher that deals damage, you can add 2 extra dice of the spell's damage type to one damage roll of that spell against one target of your choice.</div>
@@ -435,7 +506,7 @@
     <!-- Foxhollow Leaf Charm — Uncommon, Attuned -->
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Foxhollow Leaf Charm</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Charm</div>
       <div class="flavor">Carved from enchanted cherrywood in the shape of a single cherry leaf, so finely crafted it appears translucent with visible veining, yet nearly indestructible. Its color shifts with the turning of the year&mdash;pale pink in spring, deep green in summer, warm gold in autumn, near-white in winter. Can be attached to any spellcasting focus.</div>
       <div class="props">
         <div class="prop"><span class="prop-name">Quadraplicity.</span> When you cast Mirror Image, the spell creates four duplicates instead of three.</div>
@@ -445,10 +516,10 @@
     <!-- Marvels Bracer of Warding — Uncommon, Attuned -->
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Marvels Bracer of Warding</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Bracer</div>
       <div class="flavor">Forged from House Marvels' signature obsidian-steel, this bracer gleams with understated power, its dark grey surface revealing deep purple hues in shifting light. Seven rubies of varying sizes march along its length, each cradled in gold that seems to glow against the unique metal. Silver tracery weaves between the gems in protective patterns, while the interior reveals luxurious gold mesh padding. The overall effect is both elegant and intimidating—a piece that commands respect.</div>
       <div class="props">
-        <div class="prop">While wearing this bracer and not wearing armor or using a shield, you gain a +1 bonus to AC.</div>
+        <div class="prop">While wearing this bracer and not wearing armor or using a shield, you have a +1 bonus to AC.</div>
         <div class="prop"><span class="prop-name">Arcane Surge.</span> When you cast a spell of 2nd level or lower, you can cast it without expending a spell slot. Once this property is used, it can't be used again until you finish a Long Rest.</div>
       </div>
     </div>
@@ -474,7 +545,7 @@
       <div class="boon-desc">In every village, hearth, and marketplace, a kind word and honest work earn trust faster than coin. The golden fields have taught patience and insight to those who tend them.</div>
       <div class="props" style="margin-top:0">
         <div class="prop"><span class="prop-name">Skill Proficiency.</span> You have proficiency in your choice of one of the following skills: Animal Handling, Insight, or Persuasion.</div>
-        <div class="prop"><span class="prop-name">Hardy Folk.</span> You have advantage on saving throws against Diseases and the Poisoned condition.</div>
+        <div class="prop"><span class="prop-name">Hardy Folk.</span> You have Advantage on saving throws against Diseases and the Poisoned condition.</div>
         <div class="prop"><span class="prop-name">Rustic Hospitality.</span> Among common folk who are not hostile towards you, you can typically find simple lodging, food, and accurate local information, provided you offer a kind word and don't abuse their generosity. This usually requires spending about an hour making inquiries within a settlement or populated area.</div>
       </div>
     </div>
@@ -495,32 +566,51 @@
     </div>
     <div class="section-label"><span>Items</span></div>
 
+    <!-- Cindersteel (Enkō) — Legendary -->
+<div class="card legendary">
+      <div class="card-top">
+        <div>
+          <div class="card-name">Cindersteel</div>
+          <div class="card-sub">Enkō &middot; <span class="kanji">炎鋼</span></div>
+        </div>
+        <div class="card-badges"><span class="badge lg">Legendary</span></div>
+      </div>
+      <div class="card-type">Weapon &mdash; Longsword</div>
+      <div class="flavor">A tachi of black folded steel, beaten and beaten again in the Torakei forges until the metal drank the fire that made it. Held still it is dark as a moonless sea; turned in the light, the grain of the blade glows in bands of ember and blood-orange. It parted the eight necks of He-Who-Sunders in a single clean motion, and he did not rise again.</div>
+      <div class="props">
+        <div class="prop">You have a +2 bonus to attack rolls and damage rolls made with this magic weapon.</div>
+        <div class="prop"><span class="prop-name">Eiketsu's Resolve.</span> While you hold this weapon, you have a +1 bonus to the spell attack rolls and spell save DC of your Paladin spells.</div>
+        <div class="prop"><span class="prop-name">Torakei Tempering.</span> Whenever you roll Fire or Radiant damage for an attack made with this weapon, you can reroll any 1 or 2 on a damage die, and you must use the new roll.</div>
+        <div class="prop"><span class="prop-name">One Clean Cut.</span> As a Magic action, you sweep the blade in a single burning arc. Make one attack roll with this weapon against each creature of your choice in a 15-foot Emanation originating from you (up to eight creatures). On a hit, a target takes the weapon's damage plus 3d10 Slashing or Fire damage (your choice), and until the end of its next turn its Speed is halved and it can't take Reactions. This property can't be used again until you finish a Long Rest.</div>
+      </div>
+    </div>
+
     <!-- Marvels Heirloom: Dawnstrike — Very Rare, Attuned -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Marvels Heirloom: Dawnstrike</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
       <div class="card-type">Weapon — Longsword</div>
       <div class="flavor">This breathtaking longsword represents the pinnacle of House Marvels artistry. The obsidian-steel blade reveals rippling patterns that dance like captured lightning, its dark grey surface shifting to show deep purple undertones as light plays across it. Gold inlay highlights these patterns with inner warmth, while the crossguard's graceful curves frame the blade perfectly. The pommel's crowning ruby blazes with deep fire, cut in the exclusive Marvels pattern that fragments light into dancing sparks and licking tongues of flame.</div>
       <div class="props">
-        <div class="prop">You gain a +1 bonus to attack and damage rolls made with this magic weapon.</div>
+        <div class="prop">You have a +1 bonus to attack rolls and damage rolls made with this magic weapon.</div>
         <div class="prop"><span class="prop-name">Dawnstrike.</span> When you hit with an attack using this weapon, you can cause brilliant light and flame to erupt along the blade. The target takes an additional 1d8 Fire or Radiant damage (your choice). Once this property is used, it can't be used again until you finish a Short or Long Rest.</div>
         <div class="prop"><span class="prop-name">Heritage Flame.</span> When you cast a spell or use a class feature that deals Radiant damage, you can choose to have it deal Fire damage instead. You can use this property a number of times equal to your Charisma modifier (minimum of once), and you regain all expended uses when you finish a Long Rest.</div>
-        <div class="prop"><span class="prop-name">Forge-Rite Strike.</span> Once per turn, when you hit a creature with a melee weapon attack, you can expend a spell slot to deal Divine Smite damage. This does not require your Bonus Action.</div>
+        <div class="prop"><span class="prop-name">Forge-Rite Strike.</span> Once per turn, when you hit a creature with a Melee weapon attack, you can cast <em>Divine Smite</em> without expending a Bonus Action. You must still expend a spell slot as normal.</div>
       </div>
     </div>
 
     <!-- Sovereign's Aegis — Very Rare, Attuned -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Sovereign's Aegis</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Shield</div>
+      <div class="card-type">Armor &mdash; Shield</div>
       <div class="flavor">A large, hauntingly beautiful funeral mask forged from alternating bands of pure gold and polished obsidian that flow together like metal still molten and liquid shadow. The face depicts a serene visage caught at the moment between triumph and peaceful rest, its features so perfectly rendered they seem almost alive. The entire piece radiates an otherworldly beauty that speaks of noble sacrifice and eternal glory.</div>
       <div class="props">
-        <div class="prop"><span class="prop-name">Magic Shield.</span> While wielding this shield, you gain a +1 bonus to AC.</div>
-        <div class="prop"><span class="prop-name">Sovereign's Respite.</span> When you are reduced to 0 hit points while wielding this shield, you can expend a use of your Channel Divinity to use your reaction to make one weapon attack with advantage. If that attack reduces a creature to 0 hit points, you instead drop to 1 hit point and remain conscious.</div>
-        <div class="prop"><span class="prop-name">Sovereign's Mettle.</span> While wielding this shield, you have advantage on death saving throws.</div>
-        <div class="prop"><span class="prop-name">Tallied Souls.</span> When a creature you can see drops to 0 hit points, you gain one Tally (maximum 3). Tallies fade at the end of combat. You can expend all your Tallies in one of the following ways:
+        <div class="prop">While wielding this shield, you have a +1 bonus to AC.</div>
+        <div class="prop"><span class="prop-name">Sovereign's Respite.</span> When you are reduced to 0 Hit Points while wielding this shield, you can expend a use of your Channel Divinity to take a Reaction to make one weapon attack with Advantage. If that attack reduces a creature to 0 Hit Points, you instead drop to 1 Hit Point and remain conscious.</div>
+        <div class="prop"><span class="prop-name">Sovereign's Mettle.</span> While wielding this shield, you have Advantage on death saving throws.</div>
+        <div class="prop"><span class="prop-name">Tallied Souls.</span> When a creature you can see drops to 0 Hit Points, you gain one Tally (maximum 3). Tallies fade at the end of combat. You can expend all your Tallies in one of the following ways:
           <ul class="sub-list">
-            <li>When you are targeted by an attack, as a reaction you can increase your AC by the number of Tallies expended until the end of the attacker's turn.</li>
-            <li>When you make a saving throw, as a reaction you can add the number of Tallies expended to the roll.</li>
+            <li>When you are targeted by an attack, as a Reaction you can increase your AC by the number of Tallies expended until the end of the attacker's turn.</li>
+            <li>When you make a saving throw, as a Reaction you can add the number of Tallies expended to the roll.</li>
           </ul>
         </div>
       </div>
@@ -529,7 +619,7 @@
     <!-- Marvels Greaves of Alacrity — Rare, Attuned -->
     <div class="card rare">
       <div class="card-top"><div class="card-name">Marvels Greaves of Alacrity</div><div class="card-badges"><span class="badge ra">Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Greaves</div>
       <div class="flavor">Obsidian-steel greaves forged in House Marvels' signature style&mdash;rubies inlaid at the ankle and knee joints in polished gold bezels, gold filigree tracing geometric acceleration patterns along the shin plates. The metal seems to compress and spring with each stride, storing and releasing kinetic energy in rhythm with the wearer's movement.</div>
       <div class="props">
         <div class="prop"><span class="prop-name">Surge of Alacrity.</span> These greaves have a number of charges equal to your Proficiency Bonus. As a Bonus Action, you can expend charges to activate one of the following effects. Each effect lasts until the beginning of your next turn. You regain all expended charges when you finish a Long Rest.
@@ -543,10 +633,10 @@
 
     <!-- Candle of the Guiding Light — Uncommon, no attunement -->
     <div class="card uncommon">
-      <div class="card-top"><div class="card-name">Candle of the Guiding Light</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge unat">3 Charges</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-top"><div class="card-name">Candle of the Guiding Light</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge unat">3 / 3 Uses</span></div></div>
+      <div class="card-type">Wondrous Item &mdash; Candle</div>
       <div class="props" style="margin-top:0">
-        <div class="prop">As an action, you can light the candle and speak aloud a specific destination that you're familiar with. The flame leans gently in the direction of the most direct safe path to that location, provided the destination lies within 100 miles. The candle burns for 1 hour, during which time the flame continues to indicate direction. If the destination is unreachable or doesn't exist, the flame burns straight and still. Once lit, the candle can't be extinguished by nonmagical wind or water. After the candle has been used three times, it becomes a nonmagical candle.</div>
+        <div class="prop">As a Magic action, you can light the candle and speak aloud a specific destination that you're familiar with. The flame leans gently in the direction of the most direct safe path to that location, provided the destination lies within 100 miles. The candle burns for 1 hour, during which time the flame continues to indicate direction. If the destination is unreachable or doesn't exist, the flame burns straight and still. Once lit, the candle can't be extinguished by nonmagical wind or water. After the candle has been used three times, it becomes a nonmagical candle.</div>
       </div>
     </div>
 
@@ -560,10 +650,10 @@
     <!-- Wind-Silk of the Unaikei — Uncommon, no attunement -->
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Wind-Silk of the Unaikei</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Scarf</div>
       <div class="flavor">Woven by Cheetah Clan artisans of Kazeyama, this scarf bears the flowing wind-current patterns of the clan of Fu.</div>
       <div class="props">
-        <div class="prop"><span class="prop-name">Breath of Fu.</span> Whenever you finish a Short or Long Rest while wearing this scarf, you regain additional hit points equal to your Constitution modifier.</div>
+        <div class="prop"><span class="prop-name">Breath of Fu.</span> Whenever you finish a Short or Long Rest while wearing this scarf, you regain additional Hit Points equal to your Constitution modifier.</div>
       </div>
     </div>
 
@@ -589,7 +679,7 @@
       <div class="props" style="margin-top:0">
         <div class="prop"><span class="prop-name">Skill Proficiency.</span> You have proficiency in your choice of one of the following skills: Insight, Performance, or Persuasion.</div>
         <div class="prop"><span class="prop-name">Tool Proficiency.</span> You have proficiency with one type of artisan's tools of your choice.</div>
-        <div class="prop"><span class="prop-name">Luxurious Impression.</span> When interacting with nobles, wealthy merchants, or other individuals who overtly value wealth and status, you have advantage on Charisma checks directed at them, provided you are wearing fine clothing or displaying visible signs of luxury (such as significant jewelry or high-quality accessories).</div>
+        <div class="prop"><span class="prop-name">Luxurious Impression.</span> When interacting with nobles, wealthy merchants, or other individuals who overtly value wealth and status, you have Advantage on Charisma checks directed at them, provided you are wearing fine clothing or displaying visible signs of luxury (such as significant jewelry or high-quality accessories).</div>
       </div>
     </div>
   </div></div><!-- /jet -->
@@ -609,6 +699,30 @@
     </div>
     <div class="section-label"><span>Items</span></div>
 
+    <!-- The Book of the Badger (Anaguma-no-Sho) — Legendary -->
+<div class="card legendary">
+      <div class="card-top">
+        <div>
+          <div class="card-name">The Book of the Badger</div>
+          <div class="card-sub">Anaguma-no-Sho &middot; <span class="kanji">貛の書</span></div>
+        </div>
+        <div class="card-badges"><span class="badge lg">Legendary</span></div>
+      </div>
+      <div class="card-type">Wondrous Item &mdash; Book</div>
+      <div class="flavor">A small leather-bound book, its boards soft at the corners, with only a faded badger branded onto the cover. Its lessons take root only while the book remains in your keeping; set it aside, and every technique it taught you fades like a dream upon waking. What it teaches turns any arrow into the stock that forever closed the sixteen eyes of He-Who-Sunders.</div>
+      <div class="props">
+        <div class="prop"><span class="prop-name">Teachings of the Badger.</span> While the book is on your person, your Wisdom score increases by 1.</div>
+        <div class="prop"><span class="prop-name">Scale-Piercing.</span> Once per turn, when you hit a creature with a weapon, the attack deals extra damage equal to one roll of the weapon's damage die.</div>
+        <div class="prop"><span class="prop-name">Hyōkei Secrets.</span> Once daily, you can spend 10 minutes preparing a number of arrows equal to your Proficiency Bonus in the fashion the book teaches. Until the next dawn, those arrows have the following properties:
+          <ul class="sub-list">
+            <li>An attack roll made with the arrow ignores the bonus to Armor Class granted by Half Cover and Three-Quarters Cover.</li>
+            <li>Damage dealt by the attack ignores Resistance.</li>
+            <li>If the attack deals Poison damage, it deals an extra 2d8 Poison damage.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <!-- Arrows of Vel'asha'rin — Very Rare, no attunement -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Arrows of Vel'asha'rin</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge unat">9 / 10 Arrows</span></div></div>
@@ -625,14 +739,14 @@
       <div class="card-type">Weapon — Longbow</div>
       <div class="flavor">Carved from sacred white antler and yew that gleams like polished bone, this longbow bears intricate hunting scenes carved along the length. Its bowstring is woven from silver threads and eagle sinew. The accompanying quiver, crafted from the darkest leather, produces its own arrows—each fletched with pristine eagle feathers that glint in the light, their arrowheads carved from the same sacred antler as the bow.</div>
       <div class="props">
-        <div class="prop"><span class="prop-name">Magic Weapon.</span> You gain a +1 bonus to attack and damage rolls made with this magic weapon.</div>
+        <div class="prop">You have a +1 bonus to attack rolls and damage rolls made with this magic weapon.</div>
         <div class="prop"><span class="prop-name">Endless Quiver.</span> The quiver magically produces arrows as needed, providing an unlimited supply.</div>
-        <div class="prop"><span class="prop-name">Prey's Patience.</span> If you haven't moved since the start of your turn, you have advantage on the next ranged attack roll you make with this bow before the end of the turn. You can benefit from this property a number of times equal to the number of uses of your Favored Enemy feature, and you regain all expended uses when you finish a Long Rest.</div>
-        <div class="prop"><span class="prop-name">Predator's Shroud.</span> Attacks made with this bow don't make sound, and creatures have disadvantage on Perception checks to locate you based on your ranged attacks.</div>
+        <div class="prop"><span class="prop-name">Prey's Patience.</span> If you haven't moved since the start of your turn, you have Advantage on the next ranged attack roll you make with this bow before the end of the turn. You can benefit from this property a number of times equal to the number of uses of your Favored Enemy feature, and you regain all expended uses when you finish a Long Rest.</div>
+        <div class="prop"><span class="prop-name">Predator's Shroud.</span> Attacks made with this bow don't make sound, and creatures have Disadvantage on Perception checks to locate you based on your ranged attacks.</div>
         <div class="prop"><span class="prop-name">Sacred Arrows.</span> When you make an attack with this bow, you can choose to fire a Sacred Arrow, invoking the blessing of the Infinitely Boundless Pair. You can use Sacred Arrows a number of times equal to your Wisdom modifier (minimum 1), and regain all uses when you finish a Long Rest.
           <ul class="sub-list">
             <li><span class="sub-name">Aureate Arrow.</span> Target a creature you can see. Make a normal attack roll&mdash;on a hit, the attack deals an additional 1d8 Radiant damage, the light of the Eagle's favor burning through the target.</li>
-            <li><span class="sub-name">Argent Arrow.</span> Target a willing ally you can see within the bow's normal range. The arrow transforms before impact, dealing no damage. The ally regains hit points equal to 2d8 + your Wisdom modifier, the Stag's vigor flowing into them.</li>
+            <li><span class="sub-name">Argent Arrow.</span> Target a willing ally you can see within the bow's normal range. The arrow transforms before impact, dealing no damage. The ally regains Hit Points equal to 2d8 + your Wisdom modifier, the Stag's vigor flowing into them.</li>
           </ul>
         </div>
       </div>
@@ -644,7 +758,7 @@
       <div class="card-type">Weapon — Handaxe</div>
       <div class="flavor">The obsidian-steel head is unchanged from the original design&mdash;same dark brilliance, same purple undertones, same watching ruby in the eye. The gold wire spiral around the grip has been reworked into something less geometric, more organic, and the ruby now pulses faintly in time with the wielder's heartbeat. It feels like it responds easier in your hand.</div>
       <div class="props">
-        <div class="prop">You gain a +1 bonus to attack rolls and damage rolls made with this magic weapon.</div>
+        <div class="prop">You have a +1 bonus to attack rolls and damage rolls made with this magic weapon.</div>
         <div class="prop"><span class="prop-name">Coup de Gr&acirc;ce.</span> While you are attuned to this weapon, when you deal damage to a creature and the damage would reduce the target to a number of Hit Points equal to or less than 5 + your Wisdom modifier + your Dexterity modifier, the target is reduced to 0 Hit Points instead. If you chose to deal nonlethal damage, the target falls Unconscious instead.</div>
         <div class="prop"><span class="prop-name">Twinned Edge.</span> You can attune to one additional magic item alongside this weapon. That item shares this weapon's attunement slot rather than requiring a separate one. If you unattune to this weapon, the other item also becomes unattuned.</div>
       </div>
@@ -653,11 +767,11 @@
     <!-- Aurora Talisman — Rare, Attuned -->
     <div class="card rare">
       <div class="card-top"><div class="card-name">Aurora Talisman</div><div class="card-badges"><span class="badge ra">Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Talisman</div>
       <div class="flavor">A pendant carved from frost-hardened juniper heartwood, dark and dense, polished smooth by centuries of handling until it shines like wet stone. At its center sits a gem that refracts with the colors of the aurora. Druidic script spirals along the wood grain&mdash;prayers in a tradition older than the Fifteen, worn nearly smooth but still legible to those who know the language.</div>
       <div class="props">
-        <div class="prop"><span class="prop-name">Fury of the &Iacute;sbj&ouml;rn.</span> While wearing this talisman, you gain a +1 bonus to attack rolls and damage rolls you make with weapons.</div>
-        <div class="prop"><span class="prop-name">Gaze of the Hv&iacute;tugla.</span> While wearing this talisman, you gain a +1 bonus to spell attack rolls and to your spell save DC.</div>
+        <div class="prop"><span class="prop-name">Fury of the &Iacute;sbj&ouml;rn.</span> While wearing this talisman, you have a +1 bonus to attack rolls and damage rolls you make with weapons.</div>
+        <div class="prop"><span class="prop-name">Gaze of the Hv&iacute;tugla.</span> While wearing this talisman, you have a +1 bonus to spell attack rolls and to your spell save DC.</div>
         <div class="prop"><span class="prop-name">Balm of the Hreind&yacute;ri.</span> When you cast a spell that restores Hit Points to a creature, one creature that regains Hit Points from the spell regains additional Hit Points equal to your Wisdom modifier (minimum 1).</div>
       </div>
     </div>
@@ -677,18 +791,18 @@
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Boots of Elvenkind</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
       <div class="card-type">Wondrous Item — Boots</div>
-      <div class="props" style="margin-top:0"><div class="prop">While you wear these boots, your steps make no sound, regardless of the surface you are moving across. You also have advantage on Dexterity (Stealth) checks that involve moving quietly.</div></div>
+      <div class="props" style="margin-top:0"><div class="prop">While you wear these boots, your steps make no sound, regardless of the surface you are moving across. You also have Advantage on Dexterity (Stealth) checks that involve moving quietly.</div></div>
     </div>
 
     <!-- Dreadfen Wyrm Ouroboros Charm — Uncommon, no attunement -->
     <div class="card uncommon">
-      <div class="card-top"><div class="card-name">Dreadfen Wyrm Ouroboros Charm</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-top"><div class="card-name">Dreadfen Wyrm Ouroboros Charm</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge unat">Unattuned</span></div></div>
+      <div class="card-type">Wondrous Item &mdash; Necklace</div>
       <div class="flavor">Carved from the vertebra of a Dreadfen Wyrm into an ouroboros&mdash;the serpent consuming its own tail, death feeding life, the cycle unbroken.</div>
       <div class="props">
-        <div class="prop">While wearing this necklace, once per Long Rest when you reduce a creature to 0 Hit Points with a weapon attack, you may speak a prayer of respect as part of the same action, invoking one of the following benefits of your choice, as the spirit of the hunt guides your next strike:</div>
-        <div class="prop"><span class="prop-name">Serpent's Guidance.</span> You gain advantage on your next attack roll before the end of your next turn.</div>
-        <div class="prop"><span class="prop-name">Serpent's Fang.</span> If you already have advantage on your next attack roll before the end of your next turn, you instead gain a +2 bonus to that attack roll.</div>
+        <div class="prop">While wearing this necklace, when you reduce a creature to 0 Hit Points with a weapon attack, you may speak a prayer of respect as part of the same action, invoking one of the following benefits of your choice, as the spirit of the hunt guides your next strike:</div>
+        <div class="prop"><span class="prop-name">Serpent's Guidance.</span> You gain Advantage on your next attack roll before the end of your next turn.</div>
+        <div class="prop"><span class="prop-name">Serpent's Fang.</span> If you already have Advantage on your next attack roll before the end of your next turn, you instead gain a +2 bonus to that attack roll.</div>
       </div>
     </div>
 
@@ -748,30 +862,49 @@
     </div>
     <div class="section-label"><span>Items</span></div>
 
+    <!-- Tether of the Deep (Kaisen-no-Obi) — Legendary -->
+<div class="card legendary">
+      <div class="card-top">
+        <div>
+          <div class="card-name">Tether of the Deep</div>
+          <div class="card-sub">Kaisen-no-Obi &middot; <span class="kanji">海拴の帯</span></div>
+        </div>
+        <div class="card-badges"><span class="badge lg">Legendary</span></div>
+      </div>
+      <div class="card-type">Wondrous Item &mdash; Belt</div>
+      <div class="flavor">A broad obi of sea-silk plaited in the netting-knots of the Jagakei, dyed teal and deep indigo in the traditional pattern of high waves under a storm sky. The cords are thin as bowstring, yet will not part under even the sharpest knife. It bound the eight necks of He-Who-Sunders as one in the hands of the Eiketsu.</div>
+      <div class="props">
+        <div class="prop"><span class="prop-name">Jagakei Strength.</span> While you wear the belt, your Strength score increases by 2, to a maximum of 22.</div>
+        <div class="prop"><span class="prop-name">Stillwater Mind.</span> While you wear the belt, you have a +1 bonus to Wisdom saving throws. In addition, no effect can sever your awareness of your own body: while another creature or entity possesses you or otherwise inhabits your body, you remain aware of your surroundings, you can speak normally, and the entity can speak through you only if you allow it, if it is able to speak at all.</div>
+        <div class="prop"><span class="prop-name">The Snaring Tide.</span> The belt has 3 charges and regains all expended charges when you finish a Long Rest. As a Magic action, you can expend 1 or more charges to lash out with tethers of woven current, one tether per charge, each at a different creature you can see within 30 feet of yourself. Each target makes a Strength saving throw (DC equals 8 + your Proficiency Bonus + your Wisdom modifier). On a failed save, a target has the Restrained condition for 1 minute. A creature Restrained this way can take an action to make a Strength (Athletics) check against the same DC, ending the condition on itself on a success.</div>
+        <div class="prop"><span class="prop-name">Bound as One.</span> Once per turn, when you deal damage to a creature Restrained by the belt, each other creature Restrained by the belt takes Cold damage equal to half that damage.</div>
+      </div>
+    </div>
+
     <!-- Marvels Bracers of Verve — Very Rare, Attuned -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Marvels Bracers of Verve</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Bracers</div>
       <div class="flavor">Obsidian-steel bracers in House Marvels' signature dark grey, their surfaces revealing deep purple undertones in shifting light. Gold tracery traces dynamic arcs and vectors along each plate&mdash;not the static protective circles of the original design, but kinetic pathways that pulse faintly on impact. The rubies have been repositioned from wrist-top to wrist-underside, aligned with the tendons of a closed fist.</div>
       <div class="props">
-        <div class="prop">While wearing these bracers and not wearing armor or using a shield, you gain a +1 bonus to AC.</div>
-        <div class="prop"><span class="prop-name">Tempered Precision.</span> While wearing these bracers, you gain a +1 bonus to attack rolls and damage rolls you make with unarmed strikes and monk weapons, and to the saving throw DCs of your monk features.</div>
+        <div class="prop">While wearing these bracers and not wearing armor or using a shield, you have a +1 bonus to AC.</div>
+        <div class="prop"><span class="prop-name">Tempered Precision.</span> While wearing these bracers, you have a +1 bonus to attack rolls and damage rolls you make with unarmed strikes and monk weapons, and to the saving throw DCs of your monk features.</div>
       </div>
     </div>
 
     <!-- Storm-Touched Wraps — Very Rare, Attuned -->
     <div class="card very-rare">
       <div class="card-top"><div class="card-name">Storm-Touched Wraps</div><div class="card-badges"><span class="badge vr">Very Rare</span><span class="badge at">Attuned</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Hand Wraps</div>
       <div class="flavor">These hand wraps appear to be woven from solidified cloud and contained lightning, their deep gray fabric crackling softly with static. Tiny sparks dance between your fingers when you move, and when you clench your fists, electricity arcs between the wraps and your skin. The silver-wire binding cords never tarnish and hum with barely contained elemental energy.</div>
       <div class="props">
-        <div class="prop"><span class="prop-name">Elemental Fists.</span> Your unarmed strikes and monk weapons gain a +1 bonus to attack and damage rolls, and they count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.</div>
+        <div class="prop">While wearing these wraps and not wearing armor or using a shield, you have a +1 bonus to attack rolls and damage rolls made with your unarmed strikes and monk weapons.</div>
         <div class="prop"><span class="prop-name">Storm Attunement.</span> While in your Elemental Attunement stance, you can choose Thunder as a damage type for any of your subclass elemental abilities.</div>
         <div class="prop"><span class="prop-name">Lightning Reflexes.</span> When you deal Lightning damage with your Elemental Strikes feature, you gain 1 Storm Charge (maximum 5). Storm Charges vanish at the end of combat. You can expend Storm Charges as follows:
           <ul class="sub-list">
-            <li><span class="sub-name">1 Charge — Surge.</span> As a bonus action, your next attack roll before the end of your turn gains a bonus equal to half your Wisdom modifier (rounded up, minimum +1). On a hit, the attack deals additional Lightning damage equal to your Wisdom modifier.</li>
-            <li><span class="sub-name">2 Charges — Thunderstrike.</span> When you hit a creature with an Elemental Strike, you can use your reaction to make one additional Elemental Strike against a different creature within reach. Both the triggering hit and the additional strike deal additional Lightning damage equal to your Wisdom modifier.</li>
-            <li><span class="sub-name">3 Charges — Windstep.</span> As a bonus action, you teleport to an unoccupied space you can see within a distance equal to your movement speed. The first attack you make before the end of your turn deals additional Lightning damage equal to your Wisdom modifier.</li>
+            <li><span class="sub-name">1 Charge — Surge.</span> As a Bonus Action, your next attack roll before the end of your turn gains a bonus equal to half your Wisdom modifier (rounded up, minimum +1). On a hit, the attack deals additional Lightning damage equal to your Wisdom modifier.</li>
+            <li><span class="sub-name">2 Charges — Thunderstrike.</span> When you hit a creature with an Elemental Strike, you can take a Reaction to make one additional Elemental Strike against a different creature within reach. Both the triggering hit and the additional strike deal additional Lightning damage equal to your Wisdom modifier.</li>
+            <li><span class="sub-name">3 Charges — Windstep.</span> As a Bonus Action, you teleport to an unoccupied space you can see within a distance equal to your Speed. The first attack you make before the end of your turn deals additional Lightning damage equal to your Wisdom modifier.</li>
             <li><span class="sub-name">4 Charges — Storm's Fury.</span> When you hit a creature with an Elemental Strike, lightning arcs to up to 3 other creatures of your choice within 30 feet of the target, dealing Lightning damage equal to one roll of your Martial Arts die + your Wisdom modifier to each.</li>
           </ul>
         </div>
@@ -782,13 +915,13 @@
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Cloak of Protection</div><div class="card-badges"><span class="badge uc">Uncommon</span><span class="badge at">Attuned</span></div></div>
       <div class="card-type">Wondrous Item — Cloak</div>
-      <div class="props" style="margin-top:0"><div class="prop">While wearing this cloak, you gain a +1 bonus to AC and saving throws.</div></div>
+      <div class="props" style="margin-top:0"><div class="prop">While wearing this cloak, you have a +1 bonus to AC and saving throws.</div></div>
     </div>
 
     <!-- Tea Set of the Tiger Clan — Uncommon, no attunement -->
     <div class="card uncommon">
       <div class="card-top"><div class="card-name">Tea Set of the Tiger Clan</div><div class="card-badges"><span class="badge uc">Uncommon</span></div></div>
-      <div class="card-type">Wondrous Item</div>
+      <div class="card-type">Wondrous Item &mdash; Tea Set</div>
       <div class="flavor">This traditional Jade Provinces tea set bears the crimson and bronze colors of the Tiger Clan, painted with their signature tiger-stripe patterns.</div>
       <div class="props"><div class="prop">When any creature spends at least 10 minutes preparing and drinking tea from this set during a Short Rest, they may reroll one Hit Die spent during that rest and use either result.</div></div>
     </div>
@@ -850,7 +983,7 @@
     </div>
 
   </div></div><!-- /boons -->
-
+  
 </div>
 <script>
   const btns   = document.querySelectorAll('.tab-btn');
