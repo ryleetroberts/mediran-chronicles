@@ -39,6 +39,7 @@
     --c-jet:      #cc5f5f;
     --c-otho:     #68b074;
     --c-raiten:   #5ca4dc;
+    --c-party:    #8f9aa8;
   }
 
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -83,6 +84,7 @@
   /* ── Boon reference tab — visually distinct ── */
   .tab-sep { width:1px; background:var(--border-hi); margin:10px 8px; flex-shrink:0; }
   .tab-btn.boon-tab { font-style:italic; letter-spacing:.12em; font-weight:500; }
+  .tab-btn.cache-tab { letter-spacing:.12em; font-weight:500; }
 
   /* ── Panels ── */
   .tab-panel { display:none; }
@@ -203,6 +205,8 @@
     <button class="tab-btn"        data-tab="jet"     style="--char-color:var(--c-jet)"    >Jet</button>
     <button class="tab-btn"        data-tab="otho"    style="--char-color:var(--c-otho)"   >Otho</button>
     <button class="tab-btn"        data-tab="raiten"  style="--char-color:var(--c-raiten)" >Raiten</button>
+    <div class="tab-sep"></div>
+    <button class="tab-btn cache-tab" data-tab="party" style="--char-color:var(--c-party)">Party Cache</button>
     <div class="tab-sep"></div>
     <button class="tab-btn boon-tab" data-tab="boons" style="--char-color:var(--br)">Boons of the Nine</button>
   </nav>
@@ -951,6 +955,54 @@
       </div>
     </div>
   </div></div><!-- /raiten -->
+
+
+  <!-- ═══════════════════════════════════
+       PARTY CACHE — Communal Items
+  ═══════════════════════════════════ -->
+  <div class="tab-panel" id="tab-party">
+  <div style="--char-color:var(--c-party)">
+    <div style="margin-bottom:36px">
+      <div class="char-name" style="color:var(--c-party)">Party Cache</div>
+      <div class="char-class">Communal Items &middot; Held by Whoever Carries Them</div>
+    </div>
+    <div class="section-label"><span>Items</span></div>
+
+    <!-- Ring of the Burning Sky -->
+    <div class="card rare">
+      <div class="card-top">
+        <div>
+          <div class="card-name">Ring of the Burning Sky</div>
+          <div class="card-sub">Y&#363;yake-no-Yubiwa &middot; <span class="kanji">夕焼けの指輪</span></div>
+        </div>
+        <div class="card-badges"><span class="badge ra">Rare</span></div>
+      </div>
+      <div class="card-type">Ring</div>
+      <div class="flavor">A band of gold, its face channel-set with a single row of gemstones: golden yellow, then a grey-violet that turns blue when tilted, pale rose, deep purple, dark red, and grey-violet again before the pattern repeats. One place in the row is left bare, and there a petal-sun is inlaid. Together the stones hold the colors of a sky at sunset.</div>
+      <div class="props">
+        <div class="prop">While wearing this ring, you can take a Magic action and speak its command word, <em>Hikari</em>, to cause a door of gray stone to appear on a flat, vertical surface within 5 feet of you. The door swings open, revealing an extradimensional space.</div>
+        <div class="prop">The space is a still, dry chamber of worked stone, 20 feet across and 10 feet high, roofed by a low dome and lit by a faint sourceless glow. The door remains open for 1 hour or until you take a Magic action to close it. While the door is open, it is plainly visible, and any creature can pass through it in either direction.</div>
+        <div class="prop">Objects left in the chamber remain there. When the door closes, any creature still inside the chamber appears in the nearest unoccupied space outside the door.</div>
+        <div class="prop">Once this property is used, it can't be used again until you finish a Long Rest.</div>
+      </div>
+    </div>
+
+    <!-- Quiet Office Relay Stone -->
+    <div class="card uncommon">
+      <div class="card-top">
+        <div class="card-name">Quiet Office Relay Stone</div>
+        <div class="card-badges"><span class="badge uc">Uncommon</span></div>
+      </div>
+      <div class="card-type">Wondrous Item &mdash; Stone</div>
+      <div class="flavor">A smooth palm-sized obsidian stone, cut with runes so shallow they can be found only by touch. To most, it is a handsome piece of polished rock. To anyone who has served in an office that keeps one, it is a badge of rank&mdash;proof that someone above you considers you worth reaching.</div>
+      <div class="props">
+        <div class="prop">This stone receives messages; it cannot send them.</div>
+        <div class="prop"><span class="prop-name">Receive Message.</span> When a message is sent to the stone, it grows warm and pulses with dim light, then speaks the message aloud in a clear, level voice. A message can be up to 25 words long and is audible to any creature within 10 feet of the stone.</div>
+        <div class="prop">A message can be sent to the stone from any distance, provided the sender is on the same plane of existence as the stone.</div>
+      </div>
+    </div>
+
+  </div></div><!-- /party -->
 
   <!-- ═══════════════════════════════════
        FORGOTTEN NINE BOONS — Reference
