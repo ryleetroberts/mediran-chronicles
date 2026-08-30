@@ -59,6 +59,13 @@
   .marr{width:14px;align-self:center;height:6px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
   .solo .marr{display:none;}
 
+  /* Stacked Kin Group for a narrower tree */
+  .kin-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
   .card{background:var(--surface);border:1px solid var(--border);padding:6px 8px;text-align:left;
     box-shadow:0 1px 0 rgba(255,252,242,.7) inset,0 1px 5px rgba(90,70,35,.09);}
   .card.sov{width:158px;border-left:3px solid var(--blue-mid);border-radius:2px 4px 4px 2px;}
@@ -123,17 +130,29 @@
 <ul>
 <li><div class="couple"><div class="card sov"><span class="ord">Second of the Line</span><span class="nm">Maelor I</span><span class="epi">the Lettered</span><span class="dt">b. 12 AU &middot; d. 148</span><span class="rg">r. 71 – 160 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Lyrielle</span><span class="ch">House Verdayne</span></div></div>
 <ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Adrian</span><span class="dt">b. 110 AU</span><span class="dt">d. 149 AU (38)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Aemar</span><span class="dt">b. 117 AU</span><span class="dt">d. 156 AU (38)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Prince Adrian</span><span class="dt">b. 110 AU</span><span class="dt">d. 149 AU (38)</span></div>
+    <div class="card kin"><span class="nm sm">Prince Aemar</span><span class="dt">b. 117 AU</span><span class="dt">d. 156 AU (38)</span></div>
+  </div>
+</li>
 <li><div class="couple"><div class="card sov"><span class="ord">Third of the Line</span><span class="nm">Corwin I</span><span class="epi">the Autumn King</span><span class="dt">b. 128 AU &middot; d. 77</span><span class="rg">r. 160 – 205 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Ryssa</span><span class="ch">House Dreymoor</span></div></div>
 <ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Alden</span><span class="dt">b. 164 AU</span><span class="dt">d. 193 AU (29)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Prince Alden</span><span class="dt">b. 164 AU</span><span class="dt">d. 193 AU (29)</span></div>
+  </div>
+</li>
 <li><div class="couple"><div class="card sov"><span class="ord">Fourth of the Line</span><span class="nm">Aemrys I</span><span class="epi">the Unlucky</span><span class="dt">b. 165 AU &middot; d. 84</span><span class="rg">r. 205 – 249 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Adira</span><span class="ch">House Zalhemir</span></div></div>
 <ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Valera</span><span class="dt">b. 198 AU</span><span class="dt">d. 266 AU (68)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Iseult</span><span class="dt">b. 202 AU</span><span class="dt">d. 279 AU (76)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Rhiannon</span><span class="dt">b. 207 AU</span><span class="dt">d. 287 AU (79)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Vespera</span><span class="dt">b. 209 AU</span><span class="dt">d. 294 AU (85)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Valera</span><span class="dt">b. 198 AU</span><span class="dt">d. 266 AU (68)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Iseult</span><span class="dt">b. 202 AU</span><span class="dt">d. 279 AU (76)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Rhiannon</span><span class="dt">b. 207 AU</span><span class="dt">d. 287 AU (79)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Vespera</span><span class="dt">b. 209 AU</span><span class="dt">d. 294 AU (85)</span></div>
+  </div>
+</li>
 <li><div class="couple"><div class="card sov"><span class="ord">Fifth of the Line</span><span class="nm">Lucan I</span><span class="epi">the Copper King</span><span class="dt">b. 213 AU &middot; d. 68</span><span class="rg">r. 249 – 281 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Vaelene</span><span class="ch">House Maridane</span></div></div>
 <ul>
 <li><div class="couple"><div class="card sov"><span class="ord">Sixth of the Line</span><span class="nm">Aenor</span><span class="epi">the Beleaguered</span><span class="dt">b. 249 AU &middot; d. 36</span><span class="rg">r. 281 – 285 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Hedda</span><span class="ch">House Varrengard</span></div></div>
@@ -144,8 +163,12 @@
 <ul>
 <li><div class="couple"><div class="card sov"><span class="ord">Tenth of the Line</span><span class="nm">Rylan I</span><span class="epi">the Long-Summer King</span><span class="dt">b. 335 AU &middot; d. 141</span><span class="rg">r. 390 – 476 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Elsbeth</span><span class="ch">House Fairweather</span></div></div>
 <ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Rhosyn</span><span class="dt">b. 430 AU</span><span class="dt">d. 502 AU (72)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Livia</span><span class="dt">b. 434 AU</span><span class="dt">d. 514 AU (80)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Rhosyn</span><span class="dt">b. 430 AU</span><span class="dt">d. 502 AU (72)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Livia</span><span class="dt">b. 434 AU</span><span class="dt">d. 514 AU (80)</span></div>
+  </div>
+</li>
 <li><div class="couple"><div class="card sov"><span class="ord">Eleventh of the Line</span><span class="nm">Corwin II</span><span class="epi">the All-Patron</span><span class="dt">b. 440 AU &middot; d. 76</span><span class="rg">r. 476 – 516 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Anariel</span><span class="ch">House Sylvaris</span></div></div>
 <ul>
 <li><div class="couple"><div class="card sov"><span class="ord">Twelfth of the Line</span><span class="nm">Aemrys II</span><span class="epi">the Forum Father</span><span class="dt">b. 492 AU &middot; d. 170</span><span class="rg">r. 516 – 662 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Sable</span><span class="ch">House Dreymoor</span></div></div>
@@ -158,8 +181,12 @@
 <ul>
 <li><div class="couple"><div class="card sov"><span class="ord">Nineteenth of the Line</span><span class="nm">Queen Serica</span><span class="epi">the Undoubted</span><span class="dt">b. 696 AU &middot; d. 35</span><span class="rg">r. 729 – 731 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Lord Gareth</span><span class="ch">House Merewyn</span></div></div>
 <ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Crown Prince Soryn</span><span class="dt">b. 713 AU</span><span class="dt">d. 731 AU (18)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Darian</span><span class="dt">b. 715 AU</span><span class="dt">d. 731 AU (16)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Crown Prince Soryn</span><span class="dt">b. 713 AU</span><span class="dt">d. 731 AU (18)</span></div>
+    <div class="card kin"><span class="nm sm">Prince Darian</span><span class="dt">b. 715 AU</span><span class="dt">d. 731 AU (16)</span></div>
+  </div>
+</li>
 <li><div class="couple"><div class="card sov"><span class="ord">Twenty-Second of the Line</span><span class="nm">Orrin III</span><span class="epi">the Winged Lion</span><span class="dt">b. 722 AU &middot; d. 60</span><span class="rg">r. 737 – 782 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Soraya</span><span class="ch">House Almerra</span></div></div>
 <ul>
 <li><div class="couple"><div class="card sov"><span class="ord">Twenty-Third of the Line</span><span class="nm">Soryn II</span><span class="epi">the Second Sire</span><span class="dt">b. 748 AU &middot; d. 126</span><span class="rg">r. 782 – 874 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Marisol</span><span class="ch">House Calvessar</span></div></div>
@@ -171,18 +198,27 @@
 <li><div class="couple"><div class="card sov"><span class="ord">Twenty-Fifth of the Line</span><span class="nm">Rylan III</span><span class="epi">the Quiet</span><span class="dt">b. 895 AU &middot; d. 131</span><span class="rg">r. 939 – 1026 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Eydis</span><span class="ch">House Vyrskald</span></div></div>
 <ul>
 <li><div class="couple"><div class="card sov"><span class="ord">Twenty-Sixth of the Line</span><span class="nm">Tavian</span><span class="epi">the Pathbuilder</span><span class="dt">b. 985 AU &middot; d. 76</span><span class="rg">r. 1026 – 1061 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Kasumi</span><span class="ch">of the Noble Crane Clan</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Talwyn</span><span class="dt">b. 998 AU</span><span class="dt">d. 1070 AU (72)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Talwyn</span><span class="dt">b. 998 AU</span><span class="dt">d. 1070 AU (72)</span></div>
+  </div>
+</li>
 <li><div class="couple"><div class="card sov"><span class="ord">Twenty-Seventh of the Line</span><span class="nm">Aemrys III</span><span class="epi">the Enduring</span><span class="dt">b. 1020 AU &middot; d. 53</span><span class="rg">r. 1061 – 1073 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Camilla</span><span class="ch">House Rubellis</span></div></div>
 <ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Cerys</span><span class="dt">b. 1052 AU</span><span class="dt">d. 1063 AU (11)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Corinne</span><span class="dt">b. 1055 AU</span><span class="dt">d. 1064 AU (9)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Evanthe</span><span class="dt">b. 1057 AU</span><span class="dt">d. 1062 AU (4)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Aemar</span><span class="dt">b. 1062 AU</span><span class="dt">d. 1062 AU (0)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Cerys</span><span class="dt">b. 1052 AU</span><span class="dt">d. 1063 AU (11)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Corinne</span><span class="dt">b. 1055 AU</span><span class="dt">d. 1064 AU (9)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Evanthe</span><span class="dt">b. 1057 AU</span><span class="dt">d. 1062 AU (4)</span></div>
+  </div>
+</li>
 <li><div class="couple"><div class="card sov"><span class="ord">Twenty-Eighth of the Line</span><span class="nm">Maelor III</span><span class="epi">the Sunrise King</span><span class="dt">b. 1060 AU &middot; d. 103</span><span class="rg">r. 1073 – 1163 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Rosamund</span><span class="ch">House Fairweather</span></div></div>
 <ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Berwyn</span><span class="dt">b. 1123 AU</span><span class="dt">d. 1158 AU (35)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Danae</span><span class="dt">b. 1132 AU</span><span class="dt">d. 1196 AU (63)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Rhiannon</span><span class="dt">b. 1137 AU</span><span class="dt">d. 1210 AU (73)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Prince Berwyn</span><span class="dt">b. 1123 AU</span><span class="dt">d. 1158 AU (35)</span></div>
+  </div>
+</li>
 <li><div class="couple"><div class="card sov"><span class="ord">Twenty-Ninth of the Line</span><span class="nm">Theron</span><span class="epi">the Pleasant</span><span class="dt">b. 1128 AU &middot; d. 80</span><span class="rg">r. 1163 – 1208 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Elowen</span><span class="ch">House Aldermere</span></div></div>
 <ul>
 <li><div class="couple"><div class="card sov"><span class="ord">Thirtieth of the Line</span><span class="nm">Corwin III</span><span class="epi">the Warden</span><span class="dt">b. 1173 AU &middot; d. 80</span><span class="rg">r. 1208 – 1253 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Maerwen</span><span class="ch">House Dreymoor</span></div></div>
@@ -199,38 +235,104 @@
 <ul>
 <li><div class="couple"><div class="card sov"><span class="ord">Thirty-Sixth of the Line</span><span class="nm">Aldred</span><span class="dt">b. 1417 AU &middot; age 56</span><span class="rg">r. 1443 AU –</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Isabelle</span><span class="ch">House Paverelle</span></div></div>
 <ul>
-<li><div class="couple solo"><div class="card kin live"><span class="nm sm">Crown Prince Darian</span><span class="dt">b. 1444 AU</span><span class="dt">age 29</span></div></div></li>
-<li><div class="couple solo"><div class="card kin live"><span class="nm sm">Princess Lyanna</span><span class="dt">b. 1446 AU</span><span class="dt">age 27</span></div></div></li>
-<li><div class="couple solo"><div class="card kin live"><span class="nm sm">Prince Corwin</span><span class="dt">b. 1450 AU</span><span class="dt">age 23</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin live"><span class="nm sm">Crown Prince Darian</span><span class="dt">b. 1444 AU</span><span class="dt">age 29</span></div>
+    <div class="card kin live"><span class="nm sm">Princess Lyanna</span><span class="dt">b. 1446 AU</span><span class="dt">age 27</span></div>
+    <div class="card kin live"><span class="nm sm">Prince Corwin</span><span class="dt">b. 1450 AU</span><span class="dt">age 23</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Valera</span><span class="dt">b. 1420 AU</span><span class="dt">d. 1441 AU (20)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Valera</span><span class="dt">b. 1420 AU</span><span class="dt">d. 1441 AU (20)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Corinne</span><span class="dt">b. 1380 AU</span><span class="dt">d. 1432 AU (52)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Corinne</span><span class="dt">b. 1380 AU</span><span class="dt">d. 1432 AU (52)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Merryn</span><span class="dt">b. 1342 AU</span><span class="dt">d. 1400 AU (57)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Merryn</span><span class="dt">b. 1342 AU</span><span class="dt">d. 1400 AU (57)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Saeryn</span><span class="dt">b. 1320 AU</span><span class="dt">d. 1390 AU (70)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Saeryn</span><span class="dt">b. 1320 AU</span><span class="dt">d. 1390 AU (70)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Vespera</span><span class="dt">b. 1272 AU</span><span class="dt">d. 1331 AU (58)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Vespera</span><span class="dt">b. 1272 AU</span><span class="dt">d. 1331 AU (58)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Alyra</span><span class="dt">b. 1221 AU</span><span class="dt">d. 1289 AU (68)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Alyra</span><span class="dt">b. 1221 AU</span><span class="dt">d. 1289 AU (68)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Cerys</span><span class="dt">b. 1177 AU</span><span class="dt">d. 1244 AU (67)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Renard</span><span class="dt">b. 1182 AU</span><span class="dt">d. 1205 AU (22)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Cerys</span><span class="dt">b. 1177 AU</span><span class="dt">d. 1244 AU (67)</span></div>
+    <div class="card kin"><span class="nm sm">Prince Renard</span><span class="dt">b. 1182 AU</span><span class="dt">d. 1205 AU (22)</span></div>
+  </div>
+</li>
+</ul></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Danae</span><span class="dt">b. 1132 AU</span><span class="dt">d. 1196 AU (63)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Rhiannon</span><span class="dt">b. 1137 AU</span><span class="dt">d. 1210 AU (73)</span></div>
+  </div>
+</li>
+</ul></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Prince Aemar</span><span class="dt">b. 1062 AU</span><span class="dt">d. 1062 AU (0)</span></div>
+  </div>
+</li>
 </ul></li>
 </ul></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Orrelle</span><span class="dt">b. 902 AU</span><span class="dt">d. 967 AU (64)</span></div>
+  </div>
+</li>
 </ul></li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Orrelle</span><span class="dt">b. 902 AU</span><span class="dt">d. 967 AU (64)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Lysara</span><span class="dt">b. 798 AU</span><span class="dt">d. 873 AU (74)</span></div>
+  </div>
+</li>
 </ul></li>
-</ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Lysara</span><span class="dt">b. 798 AU</span><span class="dt">d. 873 AU (74)</span></div></div></li>
-</ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Nerissa</span><span class="dt">b. 752 AU</span><span class="dt">d. 820 AU (67)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Maerus</span><span class="dt">b. 756 AU</span><span class="dt">d. 770 AU (13)</span></div></div></li>
-</ul></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Nerissa</span><span class="dt">b. 752 AU</span><span class="dt">d. 820 AU (67)</span></div>
+    <div class="card kin"><span class="nm sm">Prince Maerus</span><span class="dt">b. 756 AU</span><span class="dt">d. 770 AU (13)</span></div>
+  </div>
+</li>
 </ul></li>
 <li><div class="couple"><div class="card sov"><span class="ord">Fifteenth of the Line</span><span class="nm">Soryn I</span><span class="epi">the Boy King</span><span class="dt">b. 707 AU &middot; d. 12</span><span class="rg">r. 716 – 720 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Greta</span><span class="ch">House Granholm</span></div></div></li>
+</ul></li>
+<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Edrys</span><span class="dt">b. 671 AU</span><span class="dt">d. 715 AU (44)</span></div></div>
+<ul>
+<li><div class="couple"><div class="card sov"><span class="ord">Twentieth of the Line</span><span class="nm">Lucan III</span><span class="epi">the Honeytongued</span><span class="dt">b. 690 AU &middot; d. 46</span><span class="rg">r. 731 – 736 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Ceridwen</span><span class="ch">House Aldermere</span></div></div>
+<ul>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Prince Aemar</span><span class="dt">b. 723 AU</span><span class="dt">d. 736 AU (12)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Vespera</span><span class="dt">b. 726 AU</span><span class="dt">d. 736 AU (10)</span></div>
+  </div>
+</li>
+</ul></li>
 </ul></li>
 <li><div class="couple"><div class="card sov"><span class="ord">Sixteenth of the Line</span><span class="nm">Daric II</span><span class="epi">the Unseen</span><span class="dt">b. 673 AU &middot; d. 49</span><span class="rg">r. 720 – 722 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Ylva</span><span class="ch">House Hallenskar</span></div></div>
 <ul>
@@ -241,49 +343,91 @@
 <ul>
 <li><div class="couple"><div class="card sov"><span class="ord">Twenty-First of the Line</span><span class="nm">Wyllem</span><span class="epi">the Bastard</span><span class="dt">b. 717 AU &middot; d. 20</span><span class="rg">r. 736 – 737 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Brya</span><span class="ch">of Redwatch</span></div></div></li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Crown Prince Severin</span><span class="dt">b. 714 AU</span><span class="dt">d. 731 AU (17)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Selwyn</span><span class="dt">b. 715 AU</span><span class="dt">d. 731 AU (16)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Verena</span><span class="dt">b. 722 AU</span><span class="dt">d. 784 AU (62)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Crown Prince Severin</span><span class="dt">b. 714 AU</span><span class="dt">d. 731 AU (17)</span></div>
+    <div class="card kin"><span class="nm sm">Prince Selwyn</span><span class="dt">b. 715 AU</span><span class="dt">d. 731 AU (16)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Verena</span><span class="dt">b. 722 AU</span><span class="dt">d. 784 AU (62)</span></div>
+  </div>
+</li>
 </ul></li>
 </ul></li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Edrys</span><span class="dt">b. 671 AU</span><span class="dt">d. 715 AU (44)</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Twentieth of the Line</span><span class="nm">Lucan III</span><span class="epi">the Honeytongued</span><span class="dt">b. 690 AU &middot; d. 46</span><span class="rg">r. 731 – 736 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Ceridwen</span><span class="ch">House Aldermere</span></div></div>
-<ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Aemar</span><span class="dt">b. 723 AU</span><span class="dt">d. 736 AU (12)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Vespera</span><span class="dt">b. 726 AU</span><span class="dt">d. 736 AU (10)</span></div></div></li>
 </ul></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Prince Anselm</span><span class="dt">b. 545 AU</span><span class="dt">d. 641 AU (96)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Corinne</span><span class="dt">b. 550 AU</span><span class="dt">d. 665 AU (115)</span></div>
+  </div>
+</li>
 </ul></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Elyra</span><span class="dt">b. 495 AU</span><span class="dt">d. 560 AU (64)</span></div>
+    <div class="card kin"><span class="nm sm">Prince Alveryn</span><span class="dt">b. 499 AU</span><span class="dt">d. 550 AU (51)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Anselm</span><span class="dt">b. 545 AU</span><span class="dt">d. 641 AU (96)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Corinne</span><span class="dt">b. 550 AU</span><span class="dt">d. 665 AU (115)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Yssara</span><span class="dt">b. 446 AU</span><span class="dt">d. 527 AU (81)</span></div>
+    <div class="card kin"><span class="nm sm">Prince Wystan</span><span class="dt">b. 451 AU</span><span class="dt">d. 519 AU (67)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Elyra</span><span class="dt">b. 495 AU</span><span class="dt">d. 560 AU (64)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Alveryn</span><span class="dt">b. 499 AU</span><span class="dt">d. 550 AU (51)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Evanthe</span><span class="dt">b. 340 AU</span><span class="dt">d. 420 AU (80)</span></div>
+    <div class="card kin"><span class="nm sm">Prince Torrin</span><span class="dt">b. 344 AU</span><span class="dt">d. 388 AU (44)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Yssara</span><span class="dt">b. 446 AU</span><span class="dt">d. 527 AU (81)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Wystan</span><span class="dt">b. 451 AU</span><span class="dt">d. 519 AU (67)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Saeryn</span><span class="dt">b. 300 AU</span><span class="dt">d. 367 AU (66)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Danae</span><span class="dt">b. 303 AU</span><span class="dt">d. 372 AU (68)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Evanthe</span><span class="dt">b. 340 AU</span><span class="dt">d. 420 AU (80)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Torrin</span><span class="dt">b. 344 AU</span><span class="dt">d. 388 AU (44)</span></div></div></li>
-</ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Saeryn</span><span class="dt">b. 300 AU</span><span class="dt">d. 367 AU (66)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Danae</span><span class="dt">b. 303 AU</span><span class="dt">d. 372 AU (68)</span></div></div></li>
-</ul></li>
-</ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Merryn</span><span class="dt">b. 253 AU</span><span class="dt">d. 320 AU (66)</span></div></div></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Nerissa</span><span class="dt">b. 267 AU</span><span class="dt">d. 331 AU (63)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Merryn</span><span class="dt">b. 253 AU</span><span class="dt">d. 320 AU (66)</span></div>
+  </div>
+</li>
 <li><div class="couple"><div class="card sov"><span class="ord">Seventh of the Line</span><span class="nm">Daric I</span><span class="epi">the Open-Handed</span><span class="dt">b. 265 AU &middot; d. 23</span><span class="rg">r. 285 – 288 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Sygrid</span><span class="ch">House Hallenskar</span></div></div>
 <ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Alyra</span><span class="dt">b. 287 AU</span><span class="dt">d. 348 AU (60)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Alyra</span><span class="dt">b. 287 AU</span><span class="dt">d. 348 AU (60)</span></div>
+  </div>
+</li>
+</ul></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Nerissa</span><span class="dt">b. 267 AU</span><span class="dt">d. 331 AU (63)</span></div>
+  </div>
+</li>
 </ul></li>
 </ul></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Cerys</span><span class="dt">b. 168 AU</span><span class="dt">d. 236 AU (67)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Cerys</span><span class="dt">b. 168 AU</span><span class="dt">d. 236 AU (67)</span></div></div></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Orrelle</span><span class="dt">b. 132 AU</span><span class="dt">d. 201 AU (68)</span></div>
+  </div>
+</li>
 </ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Princess Orrelle</span><span class="dt">b. 132 AU</span><span class="dt">d. 201 AU (68)</span></div></div></li>
-</ul></li>
+<li>
+  <div class="kin-group">
+    <div class="card kin"><span class="nm sm">Princess Alessa</span><span class="dt">b. 15 AU</span><span class="dt">d. 84 AU (69)</span></div>
+    <div class="card kin"><span class="nm sm">Prince Oswyn</span><span class="dt">b. 18 AU</span><span class="dt">d. 93 AU (74)</span></div>
+    <div class="card kin"><span class="nm sm">Princess Elyn</span><span class="dt">b. 22 AU</span><span class="dt">d. 101 AU (79)</span></div>
+  </div>
+</li>
 </ul></li>
 </ul>
 </div></div></div></div>
