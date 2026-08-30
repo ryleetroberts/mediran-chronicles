@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Mediran Chronicles &middot; House Caelric, the Full Line</title>
+<title>House Caelric, the Full Line</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -24,10 +24,7 @@
       radial-gradient(ellipse 90% 40% at 50% 100%, rgba(150,120,70,.16) 0%, transparent 70%);}
 
   header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding:10px 24px 9px;}
-  .eyebrow{font-family:'Cinzel',serif;font-size:12px;font-weight:600;letter-spacing:.34em;color:var(--ghost);text-transform:uppercase;}
   h1{font-family:'Cinzel',serif;font-weight:600;font-size:22px;letter-spacing:.10em;color:var(--blue-deep);margin:3px 0 1px;}
-  h1 small{display:block;font-size:11px;font-weight:400;letter-spacing:.30em;color:var(--maroon);margin-bottom:2px;}
-  .sub{font-size:12px;color:var(--dim);font-style:italic;letter-spacing:.06em;}
   .bar{margin-top:8px;font-size:13px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
   .bar button{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.1em;padding:4px 12px;background:var(--surface);
     border:1px solid var(--border);color:var(--text);cursor:pointer;}
@@ -71,7 +68,6 @@
   .card.sov{width:158px;border-left:3px solid var(--blue-mid);border-radius:2px 4px 4px 2px;}
   .card.con{width:118px;background:var(--maroon-bg);border:1px solid var(--maroon-bd);border-left:3px solid var(--maroon-bd);}
   .card.kin{width:118px;background:#efe9da;border-left:3px solid #c3b391;}
-  .card.kin.live{background:#eef4f6;border-left-color:#3a6a7a;}
   .card.kin.base{border-left-style:dashed;}
   .card.kin.couch{border-left-color:#2f5d3a;}
   .card.kin.ramp{border-left-color:#8a2a2a;}
@@ -97,19 +93,12 @@
   .ch{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
   .rl{display:block;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--ghost);margin-top:3px;}
-
-  footer{position:relative;z-index:1;padding:0 44px 36px;max-width:1000px;font-size:14px;color:var(--dim);line-height:1.65;}
-  footer h2{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--blue-deep);margin:16px 0 6px;}
-  footer strong{color:var(--text);}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="eyebrow">The Mediran Chronicles</div>
-  <h1><small>The Royal House</small>Caelric &middot; The Full Line</h1>
-  <div class="sub">Thirty-six sovereigns and the kin between them, from the Oathwood to the present day</div>
+  <h1>House Caelric &middot; The Full Line</h1>
   <div class="bar">
     <button onclick="zoom(-.1)">&minus;</button>
     <button onclick="zoom(.1)">+</button>
@@ -118,8 +107,8 @@
     <span id="zl" style="font-family:Cinzel,serif;font-size:12px;color:#5a4c38">100%</span>
     <span class="key">
       <span><i style="background:#2f4f8c"></i>Sovereign</span>
-      <span><i style="background:#c3b391"></i>Never reigned</span>
-      <span><i style="background:#3a6a7a"></i>Living</span>
+      <span><i style="background:#96334a"></i>Consort</span>
+      <span><i style="background:#c3b391"></i>Non-Sovereign</span>
     </span>
   </div>
 </header>
@@ -237,9 +226,9 @@
 <ul>
 <li>
   <div class="kin-group">
-    <div class="card kin live"><span class="nm sm">Crown Prince Darian</span><span class="dt">b. 1444 AU</span><span class="dt">age 29</span></div>
-    <div class="card kin live"><span class="nm sm">Princess Lyanna</span><span class="dt">b. 1446 AU</span><span class="dt">age 27</span></div>
-    <div class="card kin live"><span class="nm sm">Prince Corwin</span><span class="dt">b. 1450 AU</span><span class="dt">age 23</span></div>
+    <div class="card kin"><span class="nm sm">Crown Prince Darian</span><span class="dt">b. 1444 AU</span><span class="dt">age 29</span></div>
+    <div class="card kin"><span class="nm sm">Princess Lyanna</span><span class="dt">b. 1446 AU</span><span class="dt">age 27</span></div>
+    <div class="card kin"><span class="nm sm">Prince Corwin</span><span class="dt">b. 1450 AU</span><span class="dt">age 23</span></div>
   </div>
 </li>
 </ul></li>
@@ -432,13 +421,6 @@
 </ul>
 </div></div></div></div>
 
-<footer>
-  <h2>Reading the tree</h2>
-  <p>Each sovereign is shown with the name history gave them, their years, and the length of their reign. Consorts sit to the right, joined by the marriage bar. Caelrics who never wore the crown appear on the plainer plates, and those living today are marked in blue.</p>
-  <p>Sovereigns are numbered by coronation rather than by birth, which is why <strong>Queen Serica</strong> and <strong>Orrin III</strong> stand above <strong>Soryn I</strong> on the page, and why <strong>Orrin II</strong> stands below his uncle <strong>Daric I</strong>. Wyllem's descent runs through <strong>Mara Pell</strong>, honoring his maternal history.</p>
-  <p>The line forks twice. The first fork closes almost at once: Daric I left only the infant Alyra, and the crown returned to his nephew. The second opens at <strong>Lucan II</strong> and stays open for the whole of the War of Lions, until four young Caelrics of nearly the same age met one another outside Wainsford in 731 and none of them came back. Everything from Soryn II the Second Sire down to the present day descends from the one son of Queen Serica who was not there.</p>
-</footer>
-
 <script>
 var z=1,
     st=document.getElementById('stage'),
@@ -449,7 +431,6 @@ var z=1,
 function ap(recentre){
   st.style.transform='scale('+z+')';
   zl.textContent=Math.round(z*100)+'%';
-  // reserve only the space the scaled tree actually occupies
   cv.style.width =(st.offsetWidth *z)+'px';
   cv.style.height=(st.offsetHeight*z)+'px';
   if(recentre!==false) centre();
