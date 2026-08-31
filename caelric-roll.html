@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mediran Chronicles &middot; The Royal House Caelric</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Parchment ground */
+    --bg:         #e8dcc0;
+    --bg-deep:    #ddcfae;
+    --surface:    #f3ebd8;
+    --surface-2:  #f8f2e4;
+    --border:     #cbb994;
+    --border-hi:  #b8a279;
+
+    --text:       #241d14;
+    --text-dim:   #5a4c38;
+    --text-ghost: #877253;
+
+    /* Royal Blue */
+    --blue:       #1f3a70;
+    --blue-mid:   #2f4f8c;
+    --blue-deep:  #16294f;
+    --blue-bd:    rgba(31,58,112,.34);
+
+    /* Maroon */
+    --maroon:     #7d2437;
+    --maroon-mid: #96334a;
+    --maroon-bg:  rgba(125,36,55,.05);
+    --maroon-bd:  rgba(125,36,55,.30);
+
+    --mauve:      #6c4a63;
+    --spine-w:    3px;
+  }
+  :root { --text-ghost: #877253; }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background:var(--bg); color:var(--text);
+    font-family:'Lato',sans-serif; font-size:22px; line-height:1.7;
+    min-height:100vh; -webkit-font-smoothing:antialiased;
+  }
+  /* parchment grain and aging */
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%,   rgba(255,250,235,.55) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 55% at 8% 60%,   rgba(150,51,74,.06)  0%, transparent 70%),
+      radial-gradient(ellipse 60% 55% at 92% 90%,  rgba(31,58,112,.07)  0%, transparent 70%),
+      radial-gradient(ellipse 90% 40% at 50% 100%, rgba(150,120,70,.16) 0%, transparent 70%);
+  }
+  body::after {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:2;
+    background:linear-gradient(to right, rgba(150,120,70,.30) 0%, transparent 12%, transparent 88%, rgba(150,120,70,.30) 100%);
+  }
+
+  .wrap { position:relative; z-index:1; max-width:1480px; margin:0 auto; padding:88px 40px 140px; }
+
+  .site-header { text-align:center; margin-bottom:24px; }
+  .eyebrow { font-family:'Cinzel',serif; font-size:15px; font-weight:600; letter-spacing:.34em; color:var(--text-ghost); text-transform:uppercase; margin-bottom:22px; }
+  .site-title {
+    font-family:'Cinzel',serif; font-weight:600; font-size:66px; line-height:1.12;
+    letter-spacing:.12em; color:var(--blue-deep); margin-bottom:26px;
+  }
+  .site-title .lede { display:block; font-size:26px; font-weight:400; letter-spacing:.42em; color:var(--maroon); margin-bottom:14px; }
+  .ornament { display:flex; align-items:center; gap:16px; max-width:380px; margin:0 auto 22px; }
+  .ornament-line { flex:1; height:1px; background:linear-gradient(to var(--d,right), transparent, var(--blue-bd)); }
+  .ornament-line:last-child { --d:left; }
+  .ornament-diamond { width:7px; height:7px; background:var(--maroon); transform:rotate(45deg); }
+  .site-sub { font-size:20px; color:var(--text-dim); letter-spacing:.16em; font-style:italic; }
+
+  .legend { display:flex; justify-content:center; gap:36px; flex-wrap:wrap; margin:44px auto 0; }
+  .legend-item { display:flex; align-items:center; gap:12px; font-size:15px; letter-spacing:.2em; text-transform:uppercase; color:var(--text-dim); font-family:'Cinzel',serif; }
+  .swatch { width:28px; height:3px; border-radius:2px; }
+  .swatch.line { background:var(--blue-mid); }
+  .swatch.dispute { background:repeating-linear-gradient(to right, var(--maroon) 0 5px, transparent 5px 10px); }
+
+  .tree { margin-top:80px; position:relative; }
+
+  .node { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; }
+
+  .card {
+    grid-column:2; position:relative;
+    width:620px; background:var(--surface);
+    border:1px solid var(--border); border-radius:3px 6px 6px 3px;
+    border-left:4px solid var(--blue-mid);
+    padding:26px 34px 24px; text-align:left;
+    box-shadow:0 1px 0 rgba(255,252,242,.7) inset, 0 2px 10px rgba(90,70,35,.10);
+    transition:background .18s, border-color .18s;
+  }
+  .card:hover { background:var(--surface-2); border-color:var(--border-hi); }
+
+  .ord { font-family:'Cinzel',serif; font-size:14px; font-weight:700; letter-spacing:.3em; color:var(--maroon); text-transform:uppercase; margin-bottom:8px; }
+  .name { font-family:'Cinzel',serif; font-size:40px; font-weight:600; letter-spacing:.05em; line-height:1.18; color:var(--blue-deep); }
+  .epithet { font-family:'Cinzel',serif; font-size:22px; font-weight:400; font-style:italic; letter-spacing:.06em; color:var(--mauve); margin-top:4px; }
+  .relation { font-family:'Cinzel',serif; font-size:19px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); margin-top:10px; }
+  .reign { font-size:21px; color:var(--text-dim); letter-spacing:.05em; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); }
+
+  .spouse-wrap { grid-column:3; display:flex; align-items:center; justify-self:start; min-width:0; }
+  .tie { width:52px; height:1px; background:linear-gradient(to right, var(--blue-bd), var(--maroon-bd)); flex-shrink:0; }
+  .tie::after { content:''; display:block; width:7px; height:7px; margin:-3px auto 0; background:var(--maroon-mid); transform:rotate(45deg); }
+  .spouse { background:var(--maroon-bg); border:1px solid var(--maroon-bd); border-radius:3px; padding:16px 24px; max-width:400px; }
+  .wed { display:block; font-family:'Cinzel',serif; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:var(--text-ghost); margin-bottom:5px; }
+  .cname { font-family:'Cinzel',serif; font-size:24px; font-weight:500; letter-spacing:.04em; color:var(--maroon); line-height:1.35; }
+
+  .link { height:74px; position:relative; }
+  .link::before {
+    content:''; position:absolute; top:0; bottom:0; left:50%;
+    width:var(--spine-w); margin-left:calc(var(--spine-w) / -2);
+    background:var(--blue-mid);
+  }
+  .link.disputed::before { background:repeating-linear-gradient(to bottom, var(--maroon) 0 7px, transparent 7px 14px); }
+
+  #lineage { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible; }
+  #lineage path { fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  #lineage path.descent { stroke:var(--blue-mid); stroke-width:3; }
+  #lineage path.descent.contested { stroke:var(--maroon); stroke-width:3; stroke-dasharray:7 7; }
+  #lineage circle { fill:var(--bg); stroke-width:3; }
+  #lineage circle.descent { stroke:var(--blue-mid); }
+  #lineage circle.contested { stroke:var(--maroon); }
+  body.arcs-on .link.detached::before { display:none; }
+
+  .node.current .card { border-left-color:var(--maroon); box-shadow:0 0 0 1px rgba(125,36,55,.18), 0 4px 22px rgba(125,36,55,.14); }
+  .node.current .name { color:var(--maroon); }
+
+  .tail { text-align:center; margin-top:70px; }
+  .tail .ornament { margin-bottom:20px; }
+  .tail p { font-family:'Cinzel',serif; font-size:19px; font-style:italic; letter-spacing:.18em; color:var(--text-dim); }
+
+  @media (max-width:1080px) {
+    body { font-size:19px; }
+    .wrap { padding:56px 22px 100px; }
+    .site-title { font-size:44px; }
+    .node { display:block; text-align:center; }
+    .card { width:100%; max-width:640px; margin:0 auto; }
+    .spouse-wrap { justify-content:center; margin:0 auto; flex-direction:column; }
+    .tie { width:1px; height:26px; background:linear-gradient(to bottom, var(--blue-bd), var(--maroon-bd)); }
+    .tie::after { margin:0 auto; }
+    .spouse { max-width:640px; width:100%; text-align:center; }
+    .name { font-size:30px; }
+    .link { height:60px; }
+  }
+  @media (prefers-reduced-motion:reduce) { * { transition:none !important; animation:none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-header">
+    <div class="eyebrow">The Mediran Chronicles</div>
+    <h1 class="site-title"><span class="lede">The Royal House</span>Caelric</h1>
+    <div class="ornament"><div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div></div>
+    <div class="site-sub">The Line of Kings, from the Unification to the present day</div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="swatch line"></span>Line of succession</div>
+      <div class="legend-item"><span class="swatch dispute"></span>Succession disputed</div>
+    </div>
+  </header>
+
+  <main class="tree">
+    <svg id="lineage" aria-hidden="true"></svg>
+
+    <div data-r="1" class="node">
+      <div class="card">
+        <div class="ord">First of the Line &middot; Founder</div>
+        <div class="name">King Orrin I</div>
+        <div class="epithet">the Unifier</div>
+        <div class="relation">First of the Caelric Line</div>
+        <div class="reign">Frostreach, 1 AU &mdash; Harvestgold, 71 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Maerys of Bramblefold</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="2" class="node">
+      <div class="card">
+        <div class="ord">Second of the Line</div>
+        <div class="name">King Maelor I</div>
+        <div class="epithet">the Lettered</div>
+        <div class="relation">First Son of Orrin I</div>
+        <div class="reign">Harvestgold, 71 AU &mdash; Crownglow, 160 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Lyrielle of House Verdayne</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="3" class="node">
+      <div class="card">
+        <div class="ord">Third of the Line</div>
+        <div class="name">King Corwin I</div>
+        <div class="relation">Third Son of Maelor I</div>
+        <div class="reign">Crownglow, 160 AU &mdash; Solargold, 205 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Ryssa of House Dreymoor</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="4" class="node">
+      <div class="card">
+        <div class="ord">Fourth of the Line</div>
+        <div class="name">King Aemrys I</div>
+        <div class="relation">Second Son of Corwin I</div>
+        <div class="reign">Solargold, 205 AU &mdash; Mistcloak, 249 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Adira of House Zalhemir</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="5" class="node">
+      <div class="card">
+        <div class="ord">Fifth of the Line</div>
+        <div class="name">King Lucan I</div>
+        <div class="epithet">the Coinwright</div>
+        <div class="relation">First Son of Aemrys I</div>
+        <div class="reign">Mistcloak, 249 AU &mdash; Bloomtide, 281 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Vaelene of House Maridane</span></div></div>
+    </div>
+    <div class="link disputed"></div>
+    <div data-r="6" class="node">
+      <div class="card">
+        <div class="ord">Sixth of the Line</div>
+        <div class="name">King Soryn I</div>
+        <div class="relation">First Son of Lucan I</div>
+        <div class="reign">Bloomtide, 281 AU &mdash; Deepveil, 285 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Hedda of House Varrengard</span></div></div>
+    </div>
+    <div class="link disputed detached"></div>
+    <div data-r="7" class="node">
+      <div class="card">
+        <div class="ord">Seventh of the Line</div>
+        <div class="name">King Daric I</div>
+        <div class="relation">Brother of Soryn I</div>
+        <div class="reign">Deepveil, 285 AU &mdash; Emberfall, 288 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Sygrid of House Hallenskar</span></div></div>
+    </div>
+    <div class="link disputed detached"></div>
+    <div data-r="8" class="node">
+      <div class="card">
+        <div class="ord">Eighth of the Line</div>
+        <div class="name">King Orrin II</div>
+        <div class="epithet">the True</div>
+        <div class="relation">First Son of Soryn I</div>
+        <div class="reign">Emberfall, 288 AU &mdash; Thawrise, 326 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Wenna of Greyquay</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="9" class="node">
+      <div class="card">
+        <div class="ord">Ninth of the Line</div>
+        <div class="name">King Maelor II</div>
+        <div class="epithet">the Lawgiver</div>
+        <div class="relation">First Son of Orrin II</div>
+        <div class="reign">Thawrise, 326 AU &mdash; Frostreach, 390 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Cassia of House Carmivelle</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="10" class="node">
+      <div class="card">
+        <div class="ord">Tenth of the Line</div>
+        <div class="name">King Rylan I</div>
+        <div class="relation">First Son of Maelor II</div>
+        <div class="reign">Frostreach, 390 AU &mdash; Highgreen, 476 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Elsbeth of House Fairweather</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="11" class="node">
+      <div class="card">
+        <div class="ord">Eleventh of the Line</div>
+        <div class="name">King Corwin II</div>
+        <div class="relation">First Son of Rylan I</div>
+        <div class="reign">Highgreen, 476 AU &mdash; Harvestgold, 516 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Anariel of House Sylvaris</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="12" class="node">
+      <div class="card">
+        <div class="ord">Twelfth of the Line</div>
+        <div class="name">King Aemrys II</div>
+        <div class="epithet">the Enduring</div>
+        <div class="relation">First Son of Corwin II</div>
+        <div class="reign">Harvestgold, 516 AU &mdash; Mistcloak, 662 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Sable of House Dreymoor</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="13" class="node">
+      <div class="card">
+        <div class="ord">Thirteenth of the Line</div>
+        <div class="name">King Lucan II</div>
+        <div class="relation">Grandson of Aemrys II</div>
+        <div class="reign">Mistcloak, 662 AU &mdash; Ambertide, 701 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Sahrine of House Anmarid</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="14" class="node">
+      <div class="card">
+        <div class="ord">Fourteenth of the Line</div>
+        <div class="name">King Darian I</div>
+        <div class="epithet">the Sea-Taken</div>
+        <div class="relation">First Son of Lucan II</div>
+        <div class="reign">Ambertide, 701 AU &mdash; Stormcrest, 716 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Corysande of House Maridane</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="15" class="node">
+      <div class="card">
+        <div class="ord">Fifteenth of the Line</div>
+        <div class="name">King Soryn II</div>
+        <div class="epithet">the Boy King</div>
+        <div class="relation">First Son of Darian I</div>
+        <div class="reign">Stormcrest, 716 AU &mdash; Bloomtide, 720 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Greta of House Granholm</span></div></div>
+    </div>
+    <div class="link disputed detached"></div>
+    <div data-r="16" class="node">
+      <div class="card">
+        <div class="ord">Sixteenth of the Line</div>
+        <div class="name">King Daric II</div>
+        <div class="epithet">the Unseen</div>
+        <div class="relation">Uncle of Soryn II</div>
+        <div class="reign">Bloomtide, 720 AU &mdash; Deepveil, 722 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Ylva of House Hallenskar</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="17" class="node">
+      <div class="card">
+        <div class="ord">Seventeenth of the Line</div>
+        <div class="name">King Rylan II</div>
+        <div class="epithet">the Eloper</div>
+        <div class="relation">First Son of Daric II</div>
+        <div class="reign">Deepveil, 722 AU &mdash; Highgreen, 725 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Nami of Isokaze</span></div></div>
+    </div>
+    <div class="link disputed detached"></div>
+    <div data-r="18" class="node">
+      <div class="card">
+        <div class="ord">Eighteenth of the Line</div>
+        <div class="name">King Aldric I</div>
+        <div class="relation">Brother of Rylan II</div>
+        <div class="reign">Highgreen, 725 AU &mdash; Crownglow, 729 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Vittoria of House Carmivelle</span></div></div>
+    </div>
+    <div class="link disputed detached"></div>
+    <div data-r="19" class="node">
+      <div class="card">
+        <div class="ord">Nineteenth of the Line</div>
+        <div class="name">Queen Serica</div>
+        <div class="epithet">the Undoubted</div>
+        <div class="relation">First Daughter of Darian I</div>
+        <div class="reign">Crownglow, 729 AU &mdash; Solargold, 731 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Harwin of Hayhollow</span></div></div>
+    </div>
+    <div class="link disputed detached"></div>
+    <div data-r="20" class="node">
+      <div class="card">
+        <div class="ord">Twentieth of the Line</div>
+        <div class="name">King Lucan III</div>
+        <div class="epithet">the Honeytongued</div>
+        <div class="relation">Cousin of Queen Serica</div>
+        <div class="reign">Solargold, 731 AU &mdash; Emberfall, 736 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Ceridwen of House Aldermere</span></div></div>
+    </div>
+    <div class="link disputed detached"></div>
+    <div data-r="21" class="node">
+      <div class="card">
+        <div class="ord">Twenty-First of the Line</div>
+        <div class="name">King Wyllem</div>
+        <div class="epithet">the Bastard</div>
+        <div class="relation">Baseborn Son of Aldric I</div>
+        <div class="reign">Emberfall, 736 AU &mdash; Stormcrest, 737 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Brya of Redwatch</span></div></div>
+    </div>
+    <div class="link disputed detached"></div>
+    <div data-r="22" class="node">
+      <div class="card">
+        <div class="ord">Twenty-Second of the Line</div>
+        <div class="name">King Orrin III</div>
+        <div class="epithet">the Winged Lion</div>
+        <div class="relation">Third Son of Queen Serica</div>
+        <div class="reign">Stormcrest, 737 AU &mdash; Highgreen, 782 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Soraya of House Almerra</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="23" class="node">
+      <div class="card">
+        <div class="ord">Twenty-Third of the Line</div>
+        <div class="name">King Soryn III</div>
+        <div class="relation">First Son of Orrin III</div>
+        <div class="reign">Highgreen, 782 AU &mdash; Crownglow, 874 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Marisol of House Calvessar</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="24" class="node">
+      <div class="card">
+        <div class="ord">Twenty-Fourth of the Line</div>
+        <div class="name">King Aldric II</div>
+        <div class="epithet">the Chronicler</div>
+        <div class="relation">Grandson of Soryn III</div>
+        <div class="reign">Crownglow, 874 AU &mdash; Thawrise, 939 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Edda of House Granholm</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="25" class="node">
+      <div class="card">
+        <div class="ord">Twenty-Fifth of the Line</div>
+        <div class="name">King Rylan III</div>
+        <div class="epithet">the Quiet</div>
+        <div class="relation">First Son of Aldric II</div>
+        <div class="reign">Thawrise, 939 AU &mdash; Mistcloak, 1026 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Eydis of House Vyrskald</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="26" class="node">
+      <div class="card">
+        <div class="ord">Twenty-Sixth of the Line</div>
+        <div class="name">King Tavian</div>
+        <div class="relation">First Son of Rylan III</div>
+        <div class="reign">Mistcloak, 1026 AU &mdash; Ambertide, 1061 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Kasumi of the Noble Crane Clan</span></div></div>
+    </div>
+    <div class="link detached"></div>
+    <div data-r="27" class="node">
+      <div class="card">
+        <div class="ord">Twenty-Seventh of the Line</div>
+        <div class="name">King Aemrys III</div>
+        <div class="relation">Brother of Tavian</div>
+        <div class="reign">Ambertide, 1061 AU &mdash; Deepveil, 1073 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Camilla of House Rubellis</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="28" class="node">
+      <div class="card">
+        <div class="ord">Twenty-Eighth of the Line</div>
+        <div class="name">King Maelor III</div>
+        <div class="relation">First Son of Aemrys III</div>
+        <div class="reign">Deepveil, 1073 AU &mdash; Harvestgold, 1163 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Rosamund of House Fairweather</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="29" class="node">
+      <div class="card">
+        <div class="ord">Twenty-Ninth of the Line</div>
+        <div class="name">King Theron</div>
+        <div class="relation">Second Son of Maelor III</div>
+        <div class="reign">Harvestgold, 1163 AU &mdash; Bloomtide, 1208 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Elowen of House Aldermere</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="30" class="node">
+      <div class="card">
+        <div class="ord">Thirtieth of the Line</div>
+        <div class="name">King Corwin III</div>
+        <div class="epithet">the Warden</div>
+        <div class="relation">First Son of Theron</div>
+        <div class="reign">Bloomtide, 1208 AU &mdash; Mistcloak, 1253 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Maerwen of House Dreymoor</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="31" class="node">
+      <div class="card">
+        <div class="ord">Thirty-First of the Line</div>
+        <div class="name">King Hallard</div>
+        <div class="relation">First Son of Corwin III</div>
+        <div class="reign">Mistcloak, 1253 AU &mdash; Solargold, 1297 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Nadira of House Zalhemir</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="32" class="node">
+      <div class="card">
+        <div class="ord">Thirty-Second of the Line</div>
+        <div class="name">King Darian II</div>
+        <div class="relation">First Son of Hallard</div>
+        <div class="reign">Solargold, 1297 AU &mdash; Emberfall, 1340 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Isaure of House Vaelorin</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="33" class="node">
+      <div class="card">
+        <div class="ord">Thirty-Third of the Line</div>
+        <div class="name">Queen Rynelle</div>
+        <div class="relation">First Daughter of Darian II</div>
+        <div class="reign">Emberfall, 1340 AU &mdash; Deepveil, 1356 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Bran of House Granholm</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="34" class="node">
+      <div class="card">
+        <div class="ord">Thirty-Fourth of the Line</div>
+        <div class="name">King Aldric III</div>
+        <div class="relation">First Son of Queen Rynelle</div>
+        <div class="reign">Deepveil, 1356 AU &mdash; Highgreen, 1404 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Sigrun of House Halvorren</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="35" class="node">
+      <div class="card">
+        <div class="ord">Thirty-Fifth of the Line</div>
+        <div class="name">King Aemrys IV</div>
+        <div class="epithet">the Mercurial</div>
+        <div class="relation">First Son of Aldric III</div>
+        <div class="reign">Highgreen, 1404 AU &mdash; Crownglow, 1443 AU</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Liriene of House Maravest</span></div></div>
+    </div>
+    <div class="link"></div>
+    <div data-r="36" class="node current">
+      <div class="card">
+        <div class="ord">Thirty-Sixth of the Line</div>
+        <div class="name">King Aldred</div>
+        <div class="relation">First Son of Aemrys IV</div>
+        <div class="reign">Crownglow, 1443 AU &mdash;</div>
+      </div>
+      <div class="spouse-wrap"><div class="tie"></div><div class="spouse"><span class="wed">Wedded</span><span class="cname">Isabelle of House Rubellis</span></div></div>
+    </div>
+
+  </main>
+
+  <div class="tail">
+    <div class="ornament"><div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div></div>
+    <p>Loyalty, Unity, and Ambition</p>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var ARCS = [[5,7],[6,8],[13,16],[16,18],[14,19],[18,21],[19,22],[25,27]];
+  var FADE = [20];
+  var CONTESTED = {7:1,8:1,16:1,18:1,19:1,20:1,21:1,22:1};
+  var LANE_GAP = 46, LANE_ONE = 54, R = 14, DROP = 30, SVGNS = 'http://www.w3.org/2000/svg';
+
+  var tree = document.querySelector('.tree');
+  var svg  = document.getElementById('lineage');
+
+  function card(n) {
+    var node = tree.querySelector('[data-r="' + n + '"]');
+    return node ? node.querySelector('.card') : null;
+  }
+  function el(tag, attrs) {
+    var e = document.createElementNS(SVGNS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function assignLanes(arcs) {
+    var lanes = [];
+    return arcs.map(function (a) {
+      var top = a[0], bottom = a[1], lane = 0;
+      while (lanes[lane] !== undefined && lanes[lane] >= top) lane++;
+      lanes[lane] = bottom;
+      return lane;
+    });
+  }
+  function draw() {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    if (window.innerWidth < 1200) { document.body.classList.remove('arcs-on'); return; }
+    document.body.classList.add('arcs-on');
+
+    var base = tree.getBoundingClientRect();
+    var sorted = ARCS.slice().sort(function (a, b) { return a[0] - b[0]; });
+    var lanes = assignLanes(sorted);
+    var minX = 0;
+    var forks = {};
+
+    sorted.forEach(function (arc, idx) {
+      var from = card(arc[0]), to = card(arc[1]);
+      if (!from || !to) return;
+      var f = from.getBoundingClientRect(), t = to.getBoundingClientRect();
+
+      // Branch leaves the parent from the SAME point the main spine does:
+      // the bottom edge, centred. Siblings therefore visibly fork.
+      var sx = f.left - base.left + f.width / 2;
+      var sy = f.bottom - base.top;
+      var fx = f.left - base.left;
+
+      var tx = t.left - base.left;
+      var ty = t.top - base.top + t.height / 2;
+
+      var dropY = sy + DROP + lanes[idx] * 10;          // stagger stubs so siblings don't overlap
+      var lx = fx - LANE_ONE - lanes[idx] * LANE_GAP;   // vertical lane, left of the cards
+      if (lx < minX) minX = lx;
+
+      var cls = 'descent' + (CONTESTED[arc[1]] ? ' contested' : '');
+
+      var d = 'M ' + sx + ' ' + sy +
+              ' L ' + sx + ' ' + (dropY - R) +
+              ' Q ' + sx + ' ' + dropY + ' ' + (sx - R) + ' ' + dropY +
+              ' L ' + (lx + R) + ' ' + dropY +
+              ' Q ' + lx + ' ' + dropY + ' ' + lx + ' ' + (dropY + R) +
+              ' L ' + lx + ' ' + (ty - R) +
+              ' Q ' + lx + ' ' + ty + ' ' + (lx + R) + ' ' + ty +
+              ' L ' + tx + ' ' + ty;
+
+      svg.appendChild(el('path', { d: d, 'class': cls }));
+      svg.appendChild(el('circle', { cx: tx, cy: ty, r: 5, 'class': cls }));
+
+      // remember the fork point on the parent so we can mark it once
+      var key = arc[0];
+      if (!forks[key]) forks[key] = { x: sx, y: sy, cls: cls };
+    });
+
+    // one node dot per parent that branches, sitting on the descent itself
+    Object.keys(forks).forEach(function (k) {
+      var p = forks[k];
+      svg.appendChild(el('circle', { cx: p.x, cy: p.y, r: 5, 'class': p.cls }));
+    });
+
+    FADE.forEach(function (n) {
+      var to = card(n);
+      if (!to) return;
+      var t = to.getBoundingClientRect();
+      var tx = t.left - base.left, ty = t.top - base.top + t.height / 2;
+      var startX = tx - 300;
+      var gid = 'fade' + n;
+      var defs = el('defs', {});
+      var g = el('linearGradient', { id: gid, gradientUnits: 'userSpaceOnUse', x1: startX, y1: ty, x2: tx, y2: ty });
+      var s0 = el('stop', { offset: '0%',   'stop-color': '#7d2437', 'stop-opacity': '0' });
+      var s1 = el('stop', { offset: '100%', 'stop-color': '#7d2437', 'stop-opacity': '1' });
+      g.appendChild(s0); g.appendChild(s1); defs.appendChild(g); svg.appendChild(defs);
+      svg.appendChild(el('path', {
+        d: 'M ' + startX + ' ' + ty + ' L ' + tx + ' ' + ty,
+        stroke: 'url(#' + gid + ')', 'stroke-width': 3, 'stroke-dasharray': '7 7', fill: 'none'
+      }));
+      svg.appendChild(el('circle', { cx: tx, cy: ty, r: 5, 'class': 'contested' }));
+      if (startX < minX) minX = startX;
+    });
+
+    svg.setAttribute('viewBox', minX + ' 0 ' + (tree.offsetWidth - minX) + ' ' + tree.offsetHeight);
+    svg.style.left = minX + 'px';
+    svg.style.width = (tree.offsetWidth - minX) + 'px';
+  }
+
+  var t;
+  function schedule() { clearTimeout(t); t = setTimeout(draw, 120); }
+  window.addEventListener('resize', schedule);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  window.addEventListener('load', draw);
+  draw();
+})();
+</script>
+</body>
+</html>
