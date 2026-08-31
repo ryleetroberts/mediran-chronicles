@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>House Caelric, the Full Line</title>
+<title>The Mediran Chronicles &middot; House Caelric, the Full Line</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -13,6 +13,11 @@
     --blue:#1f3a70; --blue-mid:#2f4f8c; --blue-deep:#16294f;
     --maroon:#7d2437; --maroon-mid:#96334a; --maroon-bd:rgba(125,36,55,.30); --maroon-bg:rgba(125,36,55,.05);
     --mauve:#6c4a63; --line:#b09a72;
+
+    /* layout metrics — the spine column is exactly --couple wide on every row,
+       which is what lets the connector lines be pure CSS */
+    --kin:138px; --sov:154px; --con:154px; --couple:322px; --sh:161px;
+    --gap:12px; --drop:16px; --stub:18px;
   }
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;}
@@ -23,76 +28,103 @@
       radial-gradient(ellipse 60% 55% at 92% 90%, rgba(31,58,112,.07) 0%, transparent 70%),
       radial-gradient(ellipse 90% 40% at 50% 100%, rgba(150,120,70,.16) 0%, transparent 70%);}
 
-  header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);padding:10px 24px 9px;}
-  h1{font-family:'Cinzel',serif;font-weight:600;font-size:22px;letter-spacing:.10em;color:var(--blue-deep);margin:3px 0 1px;}
-  .bar{margin-top:8px;font-size:13px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+  header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--border);
+    padding:9px 24px 8px;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 20px;}
+  h1{font-family:'Cinzel',serif;font-weight:600;font-size:19px;letter-spacing:.09em;color:var(--blue-deep);}
+  .bar{font-size:13px;display:flex;flex-wrap:wrap;align-items:center;gap:9px;}
+  #zl{font-family:'Cinzel',serif;font-size:12px;color:var(--dim);}
   .bar button{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.1em;padding:4px 12px;background:var(--surface);
     border:1px solid var(--border);color:var(--text);cursor:pointer;}
   .bar button:hover{background:var(--surface2);border-color:var(--border-hi);}
-  .key{display:flex;gap:16px;flex-wrap:wrap;margin-left:8px;font-family:'Cinzel',serif;font-size:11px;
+  .bar button:focus-visible{outline:2px solid var(--blue-mid);outline-offset:1px;}
+  .key{display:flex;gap:14px;flex-wrap:wrap;margin-left:8px;font-family:'Cinzel',serif;font-size:11px;
     letter-spacing:.14em;text-transform:uppercase;color:var(--dim);}
   .key i{display:inline-block;width:22px;height:3px;vertical-align:2px;margin-right:5px;}
 
-  .viewport{position:relative;z-index:1;overflow:auto;padding:22px 28px 22px;}
+  .viewport{position:relative;z-index:1;overflow:auto;padding:26px 28px 30px;}
   .canvas{position:relative;}
   .stage{position:absolute;top:0;left:0;transform-origin:top left;display:inline-block;}
 
-  .tree ul{display:flex;justify-content:center;padding:20px 0 0;margin:0;list-style:none;position:relative;}
-  .tree li{position:relative;padding:20px 5px 0;list-style:none;display:flex;flex-direction:column;align-items:center;}
-  .tree li::before,.tree li::after{content:'';position:absolute;top:0;right:50%;
-    border-top:1px solid var(--line);width:50%;height:20px;}
-  .tree li::after{right:auto;left:50%;border-left:1px solid var(--line);}
-  .tree li:only-child{padding-top:20px;}
-  .tree li:only-child::before,.tree li:only-child::after{display:none;}
-  .tree li:first-child::before,.tree li:last-child::after{border:0 none;}
-  .tree li:last-child::before{border-right:1px solid var(--line);}
-  .tree ul ul::before{content:'';position:absolute;top:0;left:50%;border-left:1px solid var(--line);width:0;height:20px;}
-  .tree>ul{padding-top:0;}
-  .tree>ul>li{padding-top:0;}
-  .tree>ul>li::before,.tree>ul>li::after{display:none;}
-  li.basechild::after{border-left-style:dashed;}
+  /* ---- the ladder: one grid, three columns, spine always centre ---- */
+  .ladder{display:grid;grid-template-columns:max-content max-content max-content;
+    column-gap:var(--gap);row-gap:calc(var(--drop) + var(--stub));align-items:start;}
 
+  .flank{display:flex;gap:var(--gap);align-items:flex-start;position:relative;align-self:start;}
+  .flank.pre{justify-self:end;}
+  .flank.post{justify-self:start;}
+  .spine{position:relative;align-self:stretch;width:var(--couple);display:flex;flex-direction:column;}
+  .tail{flex:1 1 auto;position:relative;min-height:0;}
+
+  /* vertical stub up from a card to the sibling bar */
+  .spine::before,.slot::before{content:'';position:absolute;left:50%;top:calc(-1 * var(--stub));
+    height:var(--stub);border-left:1px solid var(--line);}
+  /* vertical drop, from the bottom of the couple down past anything hanging
+     beside it, to the next generation's sibling bar */
+  .tail::after{content:'';position:absolute;left:50%;top:0;bottom:calc(-1 * var(--drop));
+    border-left:1px solid var(--line);}
+  .spine.top::before{display:none;}
+  .slot.base::before{border-left-style:dashed;}
+
+  /* the horizontal sibling bar. Each flank draws its half, reaching to the spine centre;
+     --fh / --lh are half the width of the first / last slot, set by measure() */
+  .flank::after{content:'';position:absolute;top:calc(-1 * var(--stub));height:0;border-top:1px solid var(--line);}
+  .flank.pre::after{left:var(--fh,0px);right:calc(-1 * (var(--gap) + var(--sh)));}
+  .flank.post::after{left:calc(-1 * (var(--gap) + var(--sh)));right:var(--lh,0px);}
+  .flank.bare::after{display:none;}
+
+  /* ---- branch blocks: short collateral lines, drawn as a small centred tree ---- */
+  .branch ul{display:flex;justify-content:center;padding:22px 0 0;margin:0;list-style:none;position:relative;}
+  .branch li{position:relative;padding:20px 6px 0;list-style:none;display:flex;flex-direction:column;align-items:center;}
+  .branch li::before,.branch li::after{content:'';position:absolute;top:0;right:50%;
+    border-top:1px solid var(--line);width:50%;height:20px;}
+  .branch li::after{right:auto;left:50%;border-left:1px solid var(--line);}
+  .branch li:only-child{padding-top:0;}
+  .branch li:only-child::before,.branch li:only-child::after{display:none;}
+  .branch li:first-child::before{border:0 none;}
+  .branch li:last-child::after{border-top:0 none;}
+  .branch ul ul::before{content:'';position:absolute;top:0;left:50%;border-left:1px solid var(--line);width:0;height:22px;}
+  .branch > ul{padding-top:0;}
+  .branch > ul > li{padding-top:0;}
+  .branch li.basechild::after{border-left-style:dashed;}
+  /* a branch root's own plate matches the sovereign width, so its marriage bar
+     sits on the centre line of the block and the stub above it lands true */
+  .branch > ul > li > .couple > .card.kin{width:var(--sov);}
+
+  /* ---- plates ---- */
   .couple{display:flex;align-items:stretch;}
   .marr{width:14px;align-self:center;height:6px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .solo .marr{display:none;}
-
-  /* Stacked Kin Group for a narrower tree */
-  .kin-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+  .couple.solo .marr{display:none;}
 
   .card{background:var(--surface);border:1px solid var(--border);padding:6px 8px;text-align:left;
     box-shadow:0 1px 0 rgba(255,252,242,.7) inset,0 1px 5px rgba(90,70,35,.09);}
-  .card.sov{width:158px;border-left:3px solid var(--blue-mid);border-radius:2px 4px 4px 2px;}
-  .card.con{width:118px;background:var(--maroon-bg);border:1px solid var(--maroon-bd);border-left:3px solid var(--maroon-bd);}
-  .card.kin{width:118px;background:#efe9da;border-left:3px solid #c3b391;}
-  .card.kin.base{border-left-style:dashed;}
-  .card.kin.couch{border-left-color:#2f5d3a;}
-  .card.kin.ramp{border-left-color:#8a2a2a;}
-  .card.kin.chor{border-left-color:#5a4a8a;}
+  .card.sov{width:var(--sov);border-left:3px solid var(--blue-mid);border-radius:2px 4px 4px 2px;}
+  .card.con{width:var(--con);background:var(--maroon-bg);border:1px solid var(--maroon-bd);border-left:3px solid var(--maroon-bd);}
+  .card.kin{width:var(--kin);background:#efe9da;border-left:3px solid #c3b391;}
+  .spine .card.kin{width:var(--sov);}
+  .card.wide,.spine .card.wide{width:var(--couple);}
+  .card.live{background:#eef4f6;border-left-color:#3a6a7a;}
+  .card.base{border-left-style:dashed;}
+  .card.couch{border-left-color:#2f5d3a;}
+  .card.ramp{border-left-color:#8a2a2a;}
+  .card.chor{border-left-color:#5a4a8a;}
 
-  .ord{display:block;font-family:'Cinzel',serif;font-size:10px;font-weight:700;letter-spacing:.22em;
+  .ord{display:block;font-family:'Cinzel',serif;font-size:9.5px;font-weight:700;letter-spacing:.20em;
     color:var(--maroon);text-transform:uppercase;margin-bottom:3px;}
   .nm{display:block;font-family:'Cinzel',serif;font-size:15px;font-weight:600;letter-spacing:.03em;
     line-height:1.2;color:var(--blue-deep);}
   .nm.sm{font-size:12.5px;font-weight:500;color:var(--dim);letter-spacing:.04em;}
-  .epi{display:block;font-family:'Cinzel',serif;font-size:11.5px;font-style:italic;color:var(--mauve);margin-top:1px;}
+  .epi{display:block;font-family:'Cinzel',serif;font-size:11.5px;font-style:italic;color:var(--mauve);margin-top:1px;line-height:1.25;}
   .dt{display:block;font-size:10.5px;color:var(--dim);margin-top:2px;}
   .rg{display:block;font-size:11px;color:var(--text);margin-top:3px;padding-top:3px;border-top:1px solid var(--border);}
-  .tag{display:block;font-size:10px;font-style:italic;color:var(--ghost);margin-top:3px;}
-  .he{display:inline-block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;
-    color:#4a6a4a;margin-top:4px;margin-right:6px;}
+  .tag{display:block;font-size:10px;font-style:italic;color:var(--ghost);margin-top:3px;line-height:1.3;}
   .ban{display:inline-block;font-family:'Cinzel',serif;font-size:9px;font-weight:700;letter-spacing:.18em;
     text-transform:uppercase;margin-top:4px;}
-  .b-couch{color:#2f5d3a;} .b-ramp{color:#8a2a2a;} .b-chorus{color:#5a4a8a;}
+  .b-couch{color:#2f5d3a;} .b-ramp{color:#8a2a2a;} .b-chor{color:#5a4a8a;}
 
-  .wed{display:block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--ghost);}
+  .wed{display:block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ghost);}
   .cn{display:block;font-family:'Cinzel',serif;font-size:13px;font-weight:500;color:var(--maroon);line-height:1.25;margin-top:2px;}
   .ch{display:block;font-size:11px;color:var(--dim);margin-top:2px;}
-  .rl{display:block;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--ghost);margin-top:3px;}
+
 </style>
 </head>
 <body>
@@ -103,352 +135,475 @@
     <button onclick="zoom(-.1)">&minus;</button>
     <button onclick="zoom(.1)">+</button>
     <button onclick="setZoom(1)">100%</button>
-    <button onclick="setZoom(.4)">Fit</button>
-    <span id="zl" style="font-family:Cinzel,serif;font-size:12px;color:#5a4c38">100%</span>
+    <button onclick="fit()">Fit width</button>
+    <span id="zl">100%</span>
     <span class="key">
       <span><i style="background:#2f4f8c"></i>Sovereign</span>
-      <span><i style="background:#96334a"></i>Consort</span>
-      <span><i style="background:#c3b391"></i>Non-Sovereign</span>
+      <span><i style="background:#c3b391"></i>Never reigned</span>
+      <span><i style="background:#3a6a7a"></i>Living</span>
+      <span><i style="background:#2f5d3a"></i>Couchant</span>
+      <span><i style="background:#8a2a2a"></i>Rampant</span>
+      <span><i style="background:#5a4a8a"></i>Chorus</span>
     </span>
   </div>
 </header>
 
-<div class="viewport" id="vp"><div class="canvas" id="canvas"><div class="stage" id="stage"><div class="tree">
-<ul>
-<li><div class="couple"><div class="card sov" id="root"><span class="ord">First of the Line</span><span class="nm">Orrin I</span><span class="epi">the Unifier</span><span class="dt">b. 29 BU &middot; d. 100</span><span class="rg">r. 1 – 71 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Maerys</span><span class="ch">of Bramblefold</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Second of the Line</span><span class="nm">Maelor I</span><span class="epi">the Lettered</span><span class="dt">b. 12 AU &middot; d. 148</span><span class="rg">r. 71 – 160 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Lyrielle</span><span class="ch">House Verdayne</span></div></div>
-<ul>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Prince Adrian</span><span class="dt">b. 110 AU</span><span class="dt">d. 149 AU (38)</span></div>
-    <div class="card kin"><span class="nm sm">Prince Aemar</span><span class="dt">b. 117 AU</span><span class="dt">d. 156 AU (38)</span></div>
-  </div>
-</li>
-<li><div class="couple"><div class="card sov"><span class="ord">Third of the Line</span><span class="nm">Corwin I</span><span class="epi">the Autumn King</span><span class="dt">b. 128 AU &middot; d. 77</span><span class="rg">r. 160 – 205 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Ryssa</span><span class="ch">House Dreymoor</span></div></div>
-<ul>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Prince Alden</span><span class="dt">b. 164 AU</span><span class="dt">d. 193 AU (29)</span></div>
-  </div>
-</li>
-<li><div class="couple"><div class="card sov"><span class="ord">Fourth of the Line</span><span class="nm">Aemrys I</span><span class="epi">the Unlucky</span><span class="dt">b. 165 AU &middot; d. 84</span><span class="rg">r. 205 – 249 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Adira</span><span class="ch">House Zalhemir</span></div></div>
-<ul>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Valera</span><span class="dt">b. 198 AU</span><span class="dt">d. 266 AU (68)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Iseult</span><span class="dt">b. 202 AU</span><span class="dt">d. 279 AU (76)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Rhiannon</span><span class="dt">b. 207 AU</span><span class="dt">d. 287 AU (79)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Vespera</span><span class="dt">b. 209 AU</span><span class="dt">d. 294 AU (85)</span></div>
-  </div>
-</li>
-<li><div class="couple"><div class="card sov"><span class="ord">Fifth of the Line</span><span class="nm">Lucan I</span><span class="epi">the Copper King</span><span class="dt">b. 213 AU &middot; d. 68</span><span class="rg">r. 249 – 281 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Vaelene</span><span class="ch">House Maridane</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Sixth of the Line</span><span class="nm">Aenor</span><span class="epi">the Beleaguered</span><span class="dt">b. 249 AU &middot; d. 36</span><span class="rg">r. 281 – 285 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Hedda</span><span class="ch">House Varrengard</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Eighth of the Line</span><span class="nm">Orrin II</span><span class="epi">the True</span><span class="dt">b. 273 AU &middot; d. 53</span><span class="rg">r. 288 – 326 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Wenna</span><span class="ch">of Greyquay</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Ninth of the Line</span><span class="nm">Maelor II</span><span class="epi">the Lawgiver</span><span class="dt">b. 296 AU &middot; d. 94</span><span class="rg">r. 326 – 390 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Cassia</span><span class="ch">House Carmivelle</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Tenth of the Line</span><span class="nm">Rylan I</span><span class="epi">the Long-Summer King</span><span class="dt">b. 335 AU &middot; d. 141</span><span class="rg">r. 390 – 476 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Elsbeth</span><span class="ch">House Fairweather</span></div></div>
-<ul>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Rhosyn</span><span class="dt">b. 430 AU</span><span class="dt">d. 502 AU (72)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Livia</span><span class="dt">b. 434 AU</span><span class="dt">d. 514 AU (80)</span></div>
-  </div>
-</li>
-<li><div class="couple"><div class="card sov"><span class="ord">Eleventh of the Line</span><span class="nm">Corwin II</span><span class="epi">the All-Patron</span><span class="dt">b. 440 AU &middot; d. 76</span><span class="rg">r. 476 – 516 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Anariel</span><span class="ch">House Sylvaris</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Twelfth of the Line</span><span class="nm">Aemrys II</span><span class="epi">the Forum Father</span><span class="dt">b. 492 AU &middot; d. 170</span><span class="rg">r. 516 – 662 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Sable</span><span class="ch">House Dreymoor</span></div></div>
-<ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Edwyn</span><span class="dt">b. 540 AU</span><span class="dt">d. 648 AU (108)</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Thirteenth of the Line</span><span class="nm">Lucan II</span><span class="epi">the Lean King</span><span class="dt">b. 630 AU &middot; d. 71</span><span class="rg">r. 662 – 701 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Sahrine</span><span class="ch">House Anmarid</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Fourteenth of the Line</span><span class="nm">Darian I</span><span class="epi">the Sea-Taken</span><span class="dt">b. 670 AU &middot; d. 46</span><span class="rg">r. 701 – 716 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Corysande</span><span class="ch">House Maridane</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Nineteenth of the Line</span><span class="nm">Queen Serica</span><span class="epi">the Undoubted</span><span class="dt">b. 696 AU &middot; d. 35</span><span class="rg">r. 729 – 731 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Lord Gareth</span><span class="ch">House Merewyn</span></div></div>
-<ul>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Crown Prince Soryn</span><span class="dt">b. 713 AU</span><span class="dt">d. 731 AU (18)</span></div>
-    <div class="card kin"><span class="nm sm">Prince Darian</span><span class="dt">b. 715 AU</span><span class="dt">d. 731 AU (16)</span></div>
-  </div>
-</li>
-<li><div class="couple"><div class="card sov"><span class="ord">Twenty-Second of the Line</span><span class="nm">Orrin III</span><span class="epi">the Winged Lion</span><span class="dt">b. 722 AU &middot; d. 60</span><span class="rg">r. 737 – 782 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Soraya</span><span class="ch">House Almerra</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Twenty-Third of the Line</span><span class="nm">Soryn II</span><span class="epi">the Second Sire</span><span class="dt">b. 748 AU &middot; d. 126</span><span class="rg">r. 782 – 874 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Marisol</span><span class="ch">House Calvessar</span></div></div>
-<ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Evrard</span><span class="dt">b. 790 AU</span><span class="dt">d. 861 AU (70)</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Twenty-Fourth of the Line</span><span class="nm">Aldric II</span><span class="epi">the Chronicler</span><span class="dt">b. 840 AU &middot; d. 99</span><span class="rg">r. 874 – 939 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Edda</span><span class="ch">House Granholm</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Twenty-Fifth of the Line</span><span class="nm">Rylan III</span><span class="epi">the Quiet</span><span class="dt">b. 895 AU &middot; d. 131</span><span class="rg">r. 939 – 1026 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Eydis</span><span class="ch">House Vyrskald</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Twenty-Sixth of the Line</span><span class="nm">Tavian</span><span class="epi">the Pathbuilder</span><span class="dt">b. 985 AU &middot; d. 76</span><span class="rg">r. 1026 – 1061 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Kasumi</span><span class="ch">of the Noble Crane Clan</span></div></div></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Talwyn</span><span class="dt">b. 998 AU</span><span class="dt">d. 1070 AU (72)</span></div>
-  </div>
-</li>
-<li><div class="couple"><div class="card sov"><span class="ord">Twenty-Seventh of the Line</span><span class="nm">Aemrys III</span><span class="epi">the Enduring</span><span class="dt">b. 1020 AU &middot; d. 53</span><span class="rg">r. 1061 – 1073 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Camilla</span><span class="ch">House Rubellis</span></div></div>
-<ul>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Cerys</span><span class="dt">b. 1052 AU</span><span class="dt">d. 1063 AU (11)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Corinne</span><span class="dt">b. 1055 AU</span><span class="dt">d. 1064 AU (9)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Evanthe</span><span class="dt">b. 1057 AU</span><span class="dt">d. 1062 AU (4)</span></div>
-  </div>
-</li>
-<li><div class="couple"><div class="card sov"><span class="ord">Twenty-Eighth of the Line</span><span class="nm">Maelor III</span><span class="epi">the Sunrise King</span><span class="dt">b. 1060 AU &middot; d. 103</span><span class="rg">r. 1073 – 1163 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Rosamund</span><span class="ch">House Fairweather</span></div></div>
-<ul>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Prince Berwyn</span><span class="dt">b. 1123 AU</span><span class="dt">d. 1158 AU (35)</span></div>
-  </div>
-</li>
-<li><div class="couple"><div class="card sov"><span class="ord">Twenty-Ninth of the Line</span><span class="nm">Theron</span><span class="epi">the Pleasant</span><span class="dt">b. 1128 AU &middot; d. 80</span><span class="rg">r. 1163 – 1208 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Elowen</span><span class="ch">House Aldermere</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Thirtieth of the Line</span><span class="nm">Corwin III</span><span class="epi">the Warden</span><span class="dt">b. 1173 AU &middot; d. 80</span><span class="rg">r. 1208 – 1253 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Maerwen</span><span class="ch">House Dreymoor</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Thirty-First of the Line</span><span class="nm">Hallard</span><span class="epi">the Pirate&#x27;s Bane</span><span class="dt">b. 1218 AU &middot; d. 79</span><span class="rg">r. 1253 – 1297 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Nadira</span><span class="ch">House Zalhemir</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Thirty-Second of the Line</span><span class="nm">Darian II</span><span class="epi">the Harbormaster</span><span class="dt">b. 1268 AU &middot; d. 72</span><span class="rg">r. 1297 – 1340 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Isaure</span><span class="ch">House Vaelorin</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Thirty-Third of the Line</span><span class="nm">Queen Rynelle</span><span class="epi">the Remembered</span><span class="dt">b. 1316 AU &middot; d. 40</span><span class="rg">r. 1340 – 1356 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Bran</span><span class="ch">House Granholm</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Thirty-Fourth of the Line</span><span class="nm">Aldric III</span><span class="epi">the Far-Seeking</span><span class="dt">b. 1338 AU &middot; d. 66</span><span class="rg">r. 1356 – 1404 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Sigrun</span><span class="ch">House Halvorren</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Thirty-Fifth of the Line</span><span class="nm">Aemrys IV</span><span class="epi">the Mercurial</span><span class="dt">b. 1375 AU &middot; d. 68</span><span class="rg">r. 1404 – 1443 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Liriene</span><span class="ch">House Maravest</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Thirty-Sixth of the Line</span><span class="nm">Aldred</span><span class="dt">b. 1417 AU &middot; age 56</span><span class="rg">r. 1443 AU –</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Isabelle</span><span class="ch">House Paverelle</span></div></div>
-<ul>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Crown Prince Darian</span><span class="dt">b. 1444 AU</span><span class="dt">age 29</span></div>
-    <div class="card kin"><span class="nm sm">Princess Lyanna</span><span class="dt">b. 1446 AU</span><span class="dt">age 27</span></div>
-    <div class="card kin"><span class="nm sm">Prince Corwin</span><span class="dt">b. 1450 AU</span><span class="dt">age 23</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Valera</span><span class="dt">b. 1420 AU</span><span class="dt">d. 1441 AU (20)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Corinne</span><span class="dt">b. 1380 AU</span><span class="dt">d. 1432 AU (52)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Merryn</span><span class="dt">b. 1342 AU</span><span class="dt">d. 1400 AU (57)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Saeryn</span><span class="dt">b. 1320 AU</span><span class="dt">d. 1390 AU (70)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Vespera</span><span class="dt">b. 1272 AU</span><span class="dt">d. 1331 AU (58)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Alyra</span><span class="dt">b. 1221 AU</span><span class="dt">d. 1289 AU (68)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Cerys</span><span class="dt">b. 1177 AU</span><span class="dt">d. 1244 AU (67)</span></div>
-    <div class="card kin"><span class="nm sm">Prince Renard</span><span class="dt">b. 1182 AU</span><span class="dt">d. 1205 AU (22)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Danae</span><span class="dt">b. 1132 AU</span><span class="dt">d. 1196 AU (63)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Rhiannon</span><span class="dt">b. 1137 AU</span><span class="dt">d. 1210 AU (73)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Prince Aemar</span><span class="dt">b. 1062 AU</span><span class="dt">d. 1062 AU (0)</span></div>
-  </div>
-</li>
-</ul></li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Orrelle</span><span class="dt">b. 902 AU</span><span class="dt">d. 967 AU (64)</span></div>
-  </div>
-</li>
-</ul></li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Lysara</span><span class="dt">b. 798 AU</span><span class="dt">d. 873 AU (74)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Nerissa</span><span class="dt">b. 752 AU</span><span class="dt">d. 820 AU (67)</span></div>
-    <div class="card kin"><span class="nm sm">Prince Maerus</span><span class="dt">b. 756 AU</span><span class="dt">d. 770 AU (13)</span></div>
-  </div>
-</li>
-</ul></li>
-<li><div class="couple"><div class="card sov"><span class="ord">Fifteenth of the Line</span><span class="nm">Soryn I</span><span class="epi">the Boy King</span><span class="dt">b. 707 AU &middot; d. 12</span><span class="rg">r. 716 – 720 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Greta</span><span class="ch">House Granholm</span></div></div></li>
-</ul></li>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Prince Edrys</span><span class="dt">b. 671 AU</span><span class="dt">d. 715 AU (44)</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Twentieth of the Line</span><span class="nm">Lucan III</span><span class="epi">the Honeytongued</span><span class="dt">b. 690 AU &middot; d. 46</span><span class="rg">r. 731 – 736 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Ceridwen</span><span class="ch">House Aldermere</span></div></div>
-<ul>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Prince Aemar</span><span class="dt">b. 723 AU</span><span class="dt">d. 736 AU (12)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Vespera</span><span class="dt">b. 726 AU</span><span class="dt">d. 736 AU (10)</span></div>
-  </div>
-</li>
-</ul></li>
-</ul></li>
-<li><div class="couple"><div class="card sov"><span class="ord">Sixteenth of the Line</span><span class="nm">Daric II</span><span class="epi">the Unseen</span><span class="dt">b. 673 AU &middot; d. 49</span><span class="rg">r. 720 – 722 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Ylva</span><span class="ch">House Hallenskar</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Seventeenth of the Line</span><span class="nm">Rylan II</span><span class="epi">the Eloper</span><span class="dt">b. 694 AU &middot; abdicated at 31</span><span class="rg">r. 722 – 725 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Nami</span><span class="ch">of Isokaze</span></div></div></li>
-<li><div class="couple"><div class="card sov"><span class="ord">Eighteenth of the Line</span><span class="nm">Aldric I</span><span class="epi">the Nine-Day King</span><span class="dt">b. 697 AU &middot; d. 32</span><span class="rg">r. 725 – 729 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Vittoria</span><span class="ch">House Carmivelle</span></div></div>
-<ul>
-<li><div class="couple solo"><div class="card kin"><span class="nm sm">Mara Pell</span><span class="dt">b. 698 AU</span><span class="dt">d. 753 AU (55)</span></div></div>
-<ul>
-<li><div class="couple"><div class="card sov"><span class="ord">Twenty-First of the Line</span><span class="nm">Wyllem</span><span class="epi">the Bastard</span><span class="dt">b. 717 AU &middot; d. 20</span><span class="rg">r. 736 – 737 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Brya</span><span class="ch">of Redwatch</span></div></div></li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Crown Prince Severin</span><span class="dt">b. 714 AU</span><span class="dt">d. 731 AU (17)</span></div>
-    <div class="card kin"><span class="nm sm">Prince Selwyn</span><span class="dt">b. 715 AU</span><span class="dt">d. 731 AU (16)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Verena</span><span class="dt">b. 722 AU</span><span class="dt">d. 784 AU (62)</span></div>
-  </div>
-</li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Prince Anselm</span><span class="dt">b. 545 AU</span><span class="dt">d. 641 AU (96)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Corinne</span><span class="dt">b. 550 AU</span><span class="dt">d. 665 AU (115)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Elyra</span><span class="dt">b. 495 AU</span><span class="dt">d. 560 AU (64)</span></div>
-    <div class="card kin"><span class="nm sm">Prince Alveryn</span><span class="dt">b. 499 AU</span><span class="dt">d. 550 AU (51)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Yssara</span><span class="dt">b. 446 AU</span><span class="dt">d. 527 AU (81)</span></div>
-    <div class="card kin"><span class="nm sm">Prince Wystan</span><span class="dt">b. 451 AU</span><span class="dt">d. 519 AU (67)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Evanthe</span><span class="dt">b. 340 AU</span><span class="dt">d. 420 AU (80)</span></div>
-    <div class="card kin"><span class="nm sm">Prince Torrin</span><span class="dt">b. 344 AU</span><span class="dt">d. 388 AU (44)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Saeryn</span><span class="dt">b. 300 AU</span><span class="dt">d. 367 AU (66)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Danae</span><span class="dt">b. 303 AU</span><span class="dt">d. 372 AU (68)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Merryn</span><span class="dt">b. 253 AU</span><span class="dt">d. 320 AU (66)</span></div>
-  </div>
-</li>
-<li><div class="couple"><div class="card sov"><span class="ord">Seventh of the Line</span><span class="nm">Daric I</span><span class="epi">the Open-Handed</span><span class="dt">b. 265 AU &middot; d. 23</span><span class="rg">r. 285 – 288 AU</span></div><div class="marr"></div><div class="card con"><span class="wed">Wedded</span><span class="cn">Sygrid</span><span class="ch">House Hallenskar</span></div></div>
-<ul>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Alyra</span><span class="dt">b. 287 AU</span><span class="dt">d. 348 AU (60)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Nerissa</span><span class="dt">b. 267 AU</span><span class="dt">d. 331 AU (63)</span></div>
-  </div>
-</li>
-</ul></li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Cerys</span><span class="dt">b. 168 AU</span><span class="dt">d. 236 AU (67)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Orrelle</span><span class="dt">b. 132 AU</span><span class="dt">d. 201 AU (68)</span></div>
-  </div>
-</li>
-</ul></li>
-<li>
-  <div class="kin-group">
-    <div class="card kin"><span class="nm sm">Princess Alessa</span><span class="dt">b. 15 AU</span><span class="dt">d. 84 AU (69)</span></div>
-    <div class="card kin"><span class="nm sm">Prince Oswyn</span><span class="dt">b. 18 AU</span><span class="dt">d. 93 AU (74)</span></div>
-    <div class="card kin"><span class="nm sm">Princess Elyn</span><span class="dt">b. 22 AU</span><span class="dt">d. 101 AU (79)</span></div>
-  </div>
-</li>
-</ul></li>
-</ul>
-</div></div></div></div>
+<div class="viewport" id="vp"><div class="canvas" id="canvas"><div class="stage" id="stage">
+  <div class="ladder" id="ladder"></div>
+</div></div></div>
+
 
 <script>
-var z=1,
-    st=document.getElementById('stage'),
-    cv=document.getElementById('canvas'),
-    vp=document.getElementById('vp'),
-    zl=document.getElementById('zl');
+/* ------------------------------------------------------------------
+   DATA
+   One entry per link in the reigning line. Entries follow the doc's
+   Genealogical Reference directly:
+
+     s       : the person on the spine — a sovereign, or the Caelric who
+               carried the line forward — with their consort
+     older   : this person's children BORN BEFORE the next entry's spine
+               person, oldest first
+     younger : this person's children born after them
+
+   The children are drawn on the row below, flanking their sibling who
+   carries the line on. To add a child, drop them into the right list on
+   their parent's entry and the row sorts itself out.
+
+   Person keys:
+     n name · e epithet · o ordinal · d dates · r reign
+     tg note · bn banner (couch|ramp|chor)
+     lv living · bs baseborn · c consort · br branch
+   A branch is {p:person, k:[branch,...]} — a small centred sub-tree.
+------------------------------------------------------------------ */
+
+var BAN = {couch:'Couchant', ramp:'Rampant', chor:'Chorus'};
+
+var LINE = [
+
+/* 1 — Orrin I */
+{older:[], s:{o:'First of the Line', n:'Orrin I', e:'the Unifier',
+  d:'b. 29 BU – 71 AU (100)', r:'r. 1 – 71 AU',
+  c:{n:'Maerys', h:'of Bramblefold', d:'b. 27 BU – 68 AU (94)', w:'Wedded 6 BU'}},
+ younger:[
+  {n:'Princess Alessa', d:'b. 15 – 84 AU (69)'},
+  {n:'Prince Oswyn', d:'b. 18 – 93 AU (74)'},
+  {n:'Princess Elyn', d:'b. 22 – 101 AU (79)'}
+ ]},
+
+/* 2 — Maelor I */
+{older:[
+  {n:'Prince Adrian', d:'b. 110 – 149 AU (38)'},
+  {n:'Prince Aemar', d:'b. 117 – 156 AU (38)'}
+ ],
+ s:{o:'Second of the Line', n:'Maelor I', e:'the Lettered', d:'b. 12 – 160 AU (148)',
+  r:'r. 71 – 160 AU',
+  c:{n:'Lyrielle', h:'House Verdayne', d:'b. 25 – 166 AU (140)', w:'Wedded 108 AU'}},
+ younger:[{n:'Princess Orrelle', d:'b. 132 – 201 AU (68)'}]},
+
+/* 3 — Corwin I */
+{older:[{n:'Prince Alden', d:'b. 164 – 193 AU (29)'}],
+ s:{o:'Third of the Line', n:'Corwin I', e:'the Autumn King', d:'b. 128 – 205 AU (77)',
+  r:'r. 160 – 205 AU',
+  c:{n:'Ryssa', h:'House Dreymoor', d:'b. 142 – 209 AU (67)', w:'Wedded 163 AU'}},
+ younger:[{n:'Princess Cerys', d:'b. 168 – 236 AU (67)'}]},
+
+/* 4 — Aemrys I */
+{older:[
+  {n:'Princess Valera', d:'b. 198 – 266 AU (68)'},
+  {n:'Princess Iseult', d:'b. 202 – 279 AU (76)'},
+  {n:'Princess Rhiannon', d:'b. 207 – 287 AU (79)'},
+  {n:'Princess Vespera', d:'b. 209 – 294 AU (85)'}
+ ],
+ s:{o:'Fourth of the Line', n:'Aemrys I', e:'the Unlucky', d:'b. 165 – 249 AU (84)',
+  r:'r. 205 – 249 AU',
+  c:{n:'Adira', h:'House Zalhemir', d:'b. 172 – 253 AU (80)', w:'Wedded 196 AU'}},
+ younger:[]},
+
+/* 5 — Lucan I, with the Daric I branch */
+{older:[],
+ s:{o:'Fifth of the Line', n:'Lucan I', e:'the Copper King', d:'b. 213 – 281 AU (68)',
+  r:'r. 249 – 281 AU',
+  c:{n:'Vaelene', h:'House Maridane', d:'b. 225 – 290 AU (64)', w:'Wedded 247 AU'}},
+ younger:[
+  {n:'Princess Merryn', d:'b. 253 – 320 AU (66)'},
+  {br:{p:{o:'Seventh of the Line', n:'Daric I', e:'the Open-Handed', d:'b. 265 – 288 AU (23)',
+      r:'r. 285 – 288 AU',
+      c:{n:'Sygrid', h:'House Hallenskar', d:'b. 266 – 329 AU (63)', w:'Wedded 285 AU'}},
+    k:[{p:{n:'Princess Alyra', d:'b. 287 – 348 AU (60)'}}]}},
+  {n:'Princess Nerissa', d:'b. 267 – 331 AU (63)'}
+ ]},
+
+/* 6 — Aenor */
+{older:[],
+ s:{o:'Sixth of the Line', n:'Aenor', e:'the Beleaguered', d:'b. 249 – 285 AU (36)',
+  r:'r. 281 – 285 AU',
+  c:{n:'Hedda', h:'House Varrengard', d:'b. 250 – 314 AU (64)', w:'Wedded 271 AU'}},
+ younger:[]},
+
+/* 7 — Orrin II */
+{older:[],
+ s:{o:'Eighth of the Line', n:'Orrin II', e:'the True', d:'b. 273 – 326 AU (53)',
+  r:'r. 288 – 326 AU',
+  c:{n:'Wenna', h:'of Greyquay', d:'b. 272 – 355 AU (83)', w:'Wedded 289 AU'}},
+ younger:[
+  {n:'Princess Saeryn', d:'b. 300 – 367 AU (66)'},
+  {n:'Princess Danae', d:'b. 303 – 372 AU (68)'}
+ ]},
+
+/* 8 — Maelor II */
+{older:[],
+ s:{o:'Ninth of the Line', n:'Maelor II', e:'the Lawgiver', d:'b. 296 – 390 AU (94)',
+  r:'r. 326 – 390 AU',
+  c:{n:'Cassia', h:'House Carmivelle', d:'b. 300 – 382 AU (82)', w:'Wedded 332 AU'}},
+ younger:[
+  {n:'Princess Evanthe', d:'b. 340 – 420 AU (80)'},
+  {n:'Prince Torrin', d:'b. 344 – 388 AU (44)'}
+ ]},
+
+/* 9 — Rylan I */
+{older:[
+  {n:'Princess Rhosyn', d:'b. 430 – 502 AU (72)'},
+  {n:'Princess Livia', d:'b. 434 – 514 AU (80)'}
+ ],
+ s:{o:'Tenth of the Line', n:'Rylan I', e:'the Long-Summer King',
+  d:'b. 335 – 476 AU (141)', r:'r. 390 – 476 AU',
+  c:{n:'Elsbeth', h:'House Fairweather', d:'b. 350 – 469 AU (119)', w:'Wedded 428 AU'}},
+ younger:[
+  {n:'Princess Yssara', d:'b. 446 – 527 AU (81)'},
+  {n:'Prince Wystan', d:'b. 451 – 519 AU (67)'}
+ ]},
+
+/* 10 — Corwin II */
+{older:[],
+ s:{o:'Eleventh of the Line', n:'Corwin II', e:'the All-Patron', d:'b. 440 – 516 AU (76)',
+  r:'r. 476 – 516 AU',
+  c:{n:'Anariel', h:'House Sylvaris', d:'b. 400 – 790 AU (390)', w:'Wedded 488 AU'}},
+ younger:[
+  {n:'Princess Elyra', d:'b. 495 – 560 AU (64)'},
+  {n:'Prince Alveryn', d:'b. 499 – 550 AU (51)'}
+ ]},
+
+/* 11 — Aemrys II */
+{older:[],
+ s:{o:'Twelfth of the Line', n:'Aemrys II', e:'the Forum Father', d:'b. 492 – 662 AU (170)',
+  r:'r. 516 – 662 AU',
+  c:{n:'Sable', h:'House Dreymoor', d:'b. 505 – 590 AU (85)', w:'Wedded 535 AU'}},
+ younger:[
+  {n:'Prince Anselm', d:'b. 545 – 641 AU (96)'},
+  {n:'Princess Corinne', d:'b. 550 – 665 AU (115)'}
+ ]},
+
+/* — Prince Edwyn, a bridge on the spine */
+{older:[],
+ s:{n:'Prince Edwyn Caelric', d:'b. 540 – 648 AU (108)', tg:'father of Lucan II',
+  c:{n:'Caela', h:'House Fairweather', d:'b. 550 – 655 AU (104)', w:'Wedded 625 AU'}},
+ younger:[]},
+
+/* 12 — Lucan II, with the two branches of the War of Lions */
+{older:[],
+ s:{o:'Thirteenth of the Line', n:'Lucan II', e:'the Lean King', d:'b. 630 – 701 AU (71)',
+  r:'r. 662 – 701 AU',
+  c:{n:'Sahrine', h:'House Anmarid', d:'b. 644 – 705 AU (61)', w:'Wedded 668 AU'}},
+ younger:[
+  {br:{p:{n:'Prince Edrys Caelric', d:'b. 671 – 715 AU (44)', tg:'father of Lucan III',
+      c:{n:'Iseult', h:'House Verdayne', d:'b. 672 – 738 AU (66)', w:'Wedded 689 AU'}},
+    k:[{p:{o:'Twentieth of the Line', n:'Lucan III', e:'the Honeytongued', d:'b. 690 – 736 AU (46)',
+        r:'r. 731 – 736 AU', bn:'chor',
+        c:{n:'Ceridwen', h:'House Aldermere', d:'b. 693 – 736 AU (42)', w:'Wedded 721 AU'}},
+      k:[
+       {p:{n:'Prince Aemar', d:'b. 723 – 736 AU (12)'}},
+       {p:{n:'Princess Vespera', d:'b. 726 – 736 AU (10)'}}
+      ]}]}},
+
+  {br:{p:{o:'Sixteenth of the Line', n:'Daric II', e:'the Unseen', d:'b. 673 – 722 AU (49)',
+      r:'r. 720 – 722 AU', bn:'ramp',
+      c:{n:'Ylva', h:'House Hallenskar', d:'b. 675 – 744 AU (69)', w:'Wedded 693 AU'}},
+    k:[
+     {p:{o:'Seventeenth of the Line', n:'Rylan II', e:'the Eloper', d:'b. 694 – 771 AU (77)',
+       r:'r. 722 – 725 AU (abdicated)', bn:'ramp',
+       tg:'wedded Nami of Isokaze'}},
+     {p:{o:'Eighteenth of the Line', n:'Aldric I', e:'the Hasty', d:'b. 697 – 729 AU (32)',
+       r:'r. 725 – 729 AU', bn:'ramp',
+       c:{n:'Vittoria', h:'House Carmivelle', d:'b. 698 – 758 AU (59)', w:'Wedded 713 AU'}},
+      k:[
+       {p:{n:'Crown Prince Severin', d:'b. 714 – 731 AU (17)'}},
+       {p:{n:'Prince Selwyn', d:'b. 715 – 731 AU (16)'}},
+       {p:{o:'Twenty-First of the Line', n:'Wyllem', e:'the Bastard', d:'b. 717 – 737 AU (20)',
+         r:'r. 736 – 737 AU', bn:'ramp', bs:true,
+         tg:'baseborn, by Mara Pell &middot; wedded Brya of Redwatch'}},
+       {p:{n:'Princess Verena', d:'b. 722 – 784 AU (62)'}}
+      ]}
+    ]}}
+ ]},
+
+/* 13 — Darian I */
+{older:[],
+ s:{o:'Fourteenth of the Line', n:'Darian I', e:'the Sea-Taken', d:'b. 670 – 716 AU (46)',
+  r:'r. 701 – 716 AU',
+  c:{n:'Corysande', h:'House Maridane', d:'b. 676 – 717 AU (40)', w:'Wedded 695 AU'}},
+ younger:[
+  {o:'Fifteenth of the Line', n:'Soryn I', e:'the Boy King', d:'b. 707 – 720 AU (12)',
+   r:'r. 716 – 720 AU',
+   tg:'wedded Greta of House Granholm'}
+ ]},
+
+/* 14 — Serica */
+{older:[
+  {n:'Crown Prince Soryn', d:'b. 713 – 731 AU (18)'},
+  {n:'Prince Darian', d:'b. 715 – 731 AU (16)'}
+ ],
+ s:{o:'Nineteenth of the Line', n:'Queen Serica', e:'the Undoubted',
+  d:'b. 696 – 731 AU (35)', r:'r. 729 – 731 AU', bn:'couch',
+  c:{n:'Gareth Merewyn', h:'King Consort', d:'b. 695 – 731 AU (36)', w:'Wedded 712 AU'}},
+ younger:[]},
+
+/* 15 — Orrin III */
+{older:[],
+ s:{o:'Twenty-Second of the Line', n:'Orrin III', e:'the Winged Lion', d:'b. 722 – 782 AU (60)',
+  r:'r. 737 – 782 AU', bn:'couch',
+  c:{n:'Soraya', h:'House Almerra', d:'b. 725 – 799 AU (74)', w:'Wedded 744 AU'}},
+ younger:[
+  {n:'Princess Nerissa', d:'b. 752 – 820 AU (67)'},
+  {n:'Prince Maerus', d:'b. 756 – 770 AU (13)'}
+ ]},
+
+/* 16 — Soryn II */
+{older:[],
+ s:{o:'Twenty-Third of the Line', n:'Soryn II', e:'the Second Sire', d:'b. 748 – 874 AU (126)',
+  r:'r. 782 – 874 AU',
+  c:{n:'Marisol', h:'House Calvessar', d:'b. 755 – 835 AU (79)', w:'Wedded 787 AU'}},
+ younger:[{n:'Princess Lysara', d:'b. 798 – 873 AU (74)'}]},
+
+/* — Prince Evrard, a bridge on the spine */
+{older:[],
+ s:{n:'Prince Evrard Caelric', d:'b. 790 – 861 AU (70)', tg:'father of Aldric II',
+  c:{n:'Alyne', h:'House Verdayne', d:'b. 804 – 872 AU (67)', w:'Wedded 835 AU'}},
+ younger:[]},
+
+/* 17 — Aldric II */
+{older:[],
+ s:{o:'Twenty-Fourth of the Line', n:'Aldric II', e:'the Chronicler', d:'b. 840 – 939 AU (99)',
+  r:'r. 874 – 939 AU',
+  c:{n:'Edda', h:'House Granholm', d:'b. 858 – 1004 AU (146)', w:'Wedded 891 AU'}},
+ younger:[{n:'Princess Orrelle', d:'b. 902 – 967 AU (64)'}]},
+
+/* 18 — Rylan III */
+{older:[
+  {o:'Twenty-Sixth of the Line', n:'Tavian', e:'the Pathbuilder', d:'b. 985 – 1061 AU (76)',
+   r:'r. 1026 – 1061 AU',
+   tg:'wedded Kasumi of the Noble Crane Clan'},
+  {n:'Princess Talwyn', d:'b. 998 – 1070 AU (72)'}
+ ],
+ s:{o:'Twenty-Fifth of the Line', n:'Rylan III', e:'the Quiet', d:'b. 895 – 1026 AU (131)',
+  r:'r. 939 – 1026 AU',
+  c:{n:'Eydis', h:'House Vyrskald', d:'b. 897 – 1049 AU (152)', w:'Wedded 984 AU'}},
+ younger:[]},
+
+/* 19 — Aemrys III */
+{older:[
+  {n:'Princess Cerys', d:'b. 1052 – 1063 AU (11)'},
+  {n:'Princess Corinne', d:'b. 1055 – 1064 AU (9)'},
+  {n:'Princess Evanthe', d:'b. 1057 – 1062 AU (4)'}
+ ],
+ s:{o:'Twenty-Seventh of the Line', n:'Aemrys III', e:'the Enduring', d:'b. 1020 – 1073 AU (53)',
+  r:'r. 1061 – 1073 AU',
+  c:{n:'Camilla', h:'House Rubellis', d:'b. 1028 – 1062 AU (34)', w:'Wedded 1050 AU'}},
+ younger:[
+  {n:'Prince Aemar', d:'b. 1062 – 1062 AU (0)'}
+ ]},
+
+/* 20 — Maelor III */
+{older:[{n:'Prince Berwyn', d:'b. 1123 – 1158 AU (35)'}],
+ s:{o:'Twenty-Eighth of the Line', n:'Maelor III', e:'the Sunrise King',
+  d:'b. 1060 – 1163 AU (103)', r:'r. 1073 – 1163 AU',
+  c:{n:'Rosamund', h:'House Fairweather', d:'b. 1072 – 1178 AU (106)', w:'Wedded 1120 AU'}},
+ younger:[
+  {n:'Princess Danae', d:'b. 1132 – 1196 AU (63)'},
+  {n:'Princess Rhiannon', d:'b. 1137 – 1210 AU (73)'}
+ ]},
+
+/* 21 — Theron */
+{older:[],
+ s:{o:'Twenty-Ninth of the Line', n:'Theron', e:'the Pleasant', d:'b. 1128 – 1208 AU (80)',
+  r:'r. 1163 – 1208 AU',
+  c:{n:'Elowen', h:'House Aldermere', d:'b. 1140 – 1214 AU (73)', w:'Wedded 1165 AU'}},
+ younger:[
+  {n:'Princess Cerys', d:'b. 1177 – 1244 AU (67)'},
+  {n:'Prince Renard', d:'b. 1182 – 1205 AU (22)'}
+ ]},
+
+/* 22 — Corwin III */
+{older:[],
+ s:{o:'Thirtieth of the Line', n:'Corwin III', e:'the Warden', d:'b. 1173 – 1253 AU (80)',
+  r:'r. 1208 – 1253 AU',
+  c:{n:'Maerwen', h:'House Dreymoor', d:'b. 1188 – 1262 AU (74)', w:'Wedded 1214 AU'}},
+ younger:[{n:'Princess Alyra', d:'b. 1221 – 1289 AU (68)'}]},
+
+/* 23 — Hallard */
+{older:[],
+ s:{o:'Thirty-First of the Line', n:'Hallard', e:'the Pirate\u2019s Bane', d:'b. 1218 – 1297 AU (79)',
+  r:'r. 1253 – 1297 AU',
+  c:{n:'Nadira', h:'House Zalhemir', d:'b. 1233 – 1304 AU (70)', w:'Wedded 1263 AU'}},
+ younger:[{n:'Princess Vespera', d:'b. 1272 – 1331 AU (58)'}]},
+
+/* 24 — Darian II */
+{older:[],
+ s:{o:'Thirty-Second of the Line', n:'Darian II', e:'the Harbormaster', d:'b. 1268 – 1340 AU (72)',
+  r:'r. 1297 – 1340 AU',
+  c:{n:'Isaure', h:'House Vaelorin', d:'b. 1282 – 1349 AU (66)', w:'Wedded 1312 AU'}},
+ younger:[{n:'Princess Saeryn', d:'b. 1320 – 1390 AU (70)'}]},
+
+/* 25 — Rynelle */
+{older:[],
+ s:{o:'Thirty-Third of the Line', n:'Queen Rynelle', e:'the Remembered', d:'b. 1316 – 1356 AU (40)',
+  r:'r. 1340 – 1356 AU',
+  c:{n:'Bran of House Granholm', h:'King Consort', d:'b. 1310 – 1374 AU (64)', w:'Wedded 1336 AU'}},
+ younger:[{n:'Princess Merryn', d:'b. 1342 – 1400 AU (57)'}]},
+
+/* 26 — Aldric III */
+{older:[],
+ s:{o:'Thirty-Fourth of the Line', n:'Aldric III', e:'the Far-Seeking', d:'b. 1338 – 1404 AU (66)',
+  r:'r. 1356 – 1404 AU',
+  c:{n:'Sigrun', h:'House Halvorren', d:'b. 1349 – 1416 AU (67)', w:'Wedded 1371 AU'}},
+ younger:[{n:'Princess Corinne', d:'b. 1380 – 1432 AU (52)'}]},
+
+/* 27 — Aemrys IV */
+{older:[],
+ s:{o:'Thirty-Fifth of the Line', n:'Aemrys IV', e:'the Mercurial', d:'b. 1375 – 1443 AU (68)',
+  r:'r. 1404 – 1443 AU',
+  c:{n:'Liriene', h:'House Maravest', d:'b. 1388 – 1454 AU (66)', w:'Wedded 1413 AU'}},
+ younger:[{n:'Princess Valera', d:'b. 1420 – 1441 AU (20)'}]},
+
+/* 28 — Aldred */
+{older:[],
+ s:{o:'Thirty-Sixth of the Line', n:'Aldred', d:'b. 1417 AU · age 56', r:'r. 1443 AU –', lv:true,
+  c:{n:'Isabelle', h:'House Paverelle', d:'b. 1417 – 1466 AU (49)', w:'Wedded 1442 AU'}},
+ younger:[
+  {n:'Princess Lyanna', d:'b. 1446 AU · age 27', lv:true},
+  {n:'Prince Corwin', d:'b. 1450 AU · age 23', lv:true}
+ ]},
+
+/* the heir apparent */
+{older:[],
+ s:{n:'Crown Prince Darian Caelric', d:'b. 1444 AU · age 29', lv:true, wide:true,
+  tg:'heir apparent'},
+ younger:[]}
+];
+
+/* ------------------------------------------------------------------ RENDER */
+
+function marks(p){
+  var h = '';
+  if(p.tg) h += '<span class="tag">' + p.tg + '</span>';
+  if(p.bn) h += '<span class="ban b-' + p.bn + '">' + BAN[p.bn] + '</span>';
+  return h;
+}
+
+function plate(p){
+  var cls = 'card ' + (p.o ? 'sov' : 'kin');
+  if(p.lv) cls += ' live';
+  if(p.bs) cls += ' base';
+  if(p.bn) cls += ' ' + p.bn;
+  if(p.wide) cls += ' wide';
+  var h = '<div class="' + cls + '">';
+  if(p.o)  h += '<span class="ord">' + p.o + '</span>';
+  h += '<span class="nm' + (p.o ? '' : ' sm') + '">' + p.n + '</span>';
+  if(p.e) h += '<span class="epi">' + p.e + '</span>';
+  if(p.d) h += '<span class="dt">' + p.d + '</span>';
+  if(p.r) h += '<span class="rg">' + p.r + '</span>';
+  return h + marks(p) + '</div>';
+}
+
+function consort(c){
+  var h = '<div class="card con">';
+  if(c.w) h += '<span class="wed">' + c.w + '</span>';
+  h += '<span class="cn">' + c.n + '</span>';
+  if(c.h) h += '<span class="ch">' + c.h + '</span>';
+  if(c.d) h += '<span class="dt">' + c.d + '</span>';
+  return h + '</div>';
+}
+
+function couple(p){
+  if(!p.c) return '<div class="couple solo">' + plate(p) + '</div>';
+  return '<div class="couple">' + plate(p) + '<div class="marr"></div>' + consort(p.c) + '</div>';
+}
+
+function bnode(x){
+  var h = '<li' + (x.p.bs ? ' class="basechild"' : '') + '>' + couple(x.p);
+  if(x.k && x.k.length) h += '<ul>' + x.k.map(bnode).join('') + '</ul>';
+  return h + '</li>';
+}
+
+function slot(item){
+  if(item.br) return '<div class="slot"><div class="branch"><ul>' + bnode(item.br) + '</ul></div></div>';
+  return '<div class="slot' + (item.bs ? ' base' : '') + '">' + couple(item) + '</div>';
+}
+
+function build(){
+  var h = '';
+  for(var i = 0; i < LINE.length; i++){
+    var g = LINE[i];
+    /* a row holds one sibling set, so the plates flanking this row's spine are
+       the other children of the row above */
+    var up = LINE[i - 1] || {older:[], younger:[]};
+    var sc = 'spine' + (i === 0 ? ' top' : '') + (i === LINE.length - 1 ? ' end' : '');
+    h += '<div class="flank pre">' + up.older.map(slot).join('') + '</div>';
+    h += '<div class="' + sc + '">' + couple(g.s)
+       + (i === LINE.length - 1 ? '' : '<div class="tail"></div>') + '</div>';
+    h += '<div class="flank post">' + up.younger.map(slot).join('') + '</div>';
+  }
+  document.getElementById('ladder').innerHTML = h;
+}
+
+/* the only thing CSS can't work out on its own: how far in the first and last
+   slot's centres sit, since a branch block is wider than a plain plate */
+function measure(){
+  var fl = document.querySelectorAll('.flank');
+  for(var i = 0; i < fl.length; i++){
+    var f = fl[i], s = f.children;
+    if(!s.length){ f.classList.add('bare'); continue; }
+    f.classList.remove('bare');
+    f.style.setProperty('--fh', (s[0].offsetWidth / 2) + 'px');
+    f.style.setProperty('--lh', (s[s.length - 1].offsetWidth / 2) + 'px');
+  }
+}
+
+/* ------------------------------------------------------------------ ZOOM */
+
+var z = 1,
+    st = document.getElementById('stage'),
+    cv = document.getElementById('canvas'),
+    vp = document.getElementById('vp'),
+    zl = document.getElementById('zl');
 
 function ap(recentre){
-  st.style.transform='scale('+z+')';
-  zl.textContent=Math.round(z*100)+'%';
-  cv.style.width =(st.offsetWidth *z)+'px';
-  cv.style.height=(st.offsetHeight*z)+'px';
-  if(recentre!==false) centre();
+  st.style.transform = 'scale(' + z + ')';
+  zl.textContent = Math.round(z * 100) + '%';
+  cv.style.width  = (st.offsetWidth  * z) + 'px';
+  cv.style.height = (st.offsetHeight * z) + 'px';
+  if(recentre !== false) centre();
 }
 function centre(){
-  var r=document.getElementById('root');
+  var r = document.querySelector('.spine');
   if(!r) return;
-  var x=(r.offsetLeft+r.offsetWidth/2)*z;
-  vp.scrollLeft=Math.max(0,x-vp.clientWidth/2);
-  vp.scrollTop=0;
+  var x = (r.offsetLeft + r.offsetWidth / 2) * z;
+  vp.scrollLeft = Math.max(0, x - vp.clientWidth / 2);
 }
-function zoom(d){z=Math.min(2,Math.max(.15,Math.round((z+d)*100)/100));ap();}
-function setZoom(v){z=v;ap();}
+function zoom(d){ z = Math.min(2, Math.max(.15, Math.round((z + d) * 100) / 100)); ap(); }
+function setZoom(v){ z = v; ap(); }
+function fit(){
+  var pad = 56;
+  z = Math.min(1, Math.max(.15, (vp.clientWidth - pad) / st.offsetWidth));
+  z = Math.round(z * 100) / 100;
+  ap();
+}
 
+build();
+measure();
 ap();
-window.addEventListener('load',function(){ap();});
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){ap();});
-window.addEventListener('resize',function(){ap(false);});
+window.addEventListener('load', function(){ measure(); ap(); });
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ measure(); ap(); });
+window.addEventListener('resize', function(){ measure(); ap(false); });
 </script>
 </body>
 </html>
